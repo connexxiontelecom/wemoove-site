@@ -3,17 +3,23 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="keywords" content="Ride Sharing, Ride Share, Car Pool, Car Pooling, Ride Finding, Find Ride, Transport Company">
   <link rel="shortcut icon" href="images/app_icon.png" type="image/x-icon" />
+  <meta name="author" content="Connexxion Telecom">
+  <link rel="stylesheet" href="assets/css/plugins.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+<!--  <link rel="stylesheet" href="assets/css/colors/aqua.css">-->
+  <link rel="preload" href="assets/css/fonts/thicccboi.css" as="style" onload="this.rel='stylesheet'">
   <title>{{title}}</title>
 </head>
-<body data-scroll-animation="true">
+<body>
 {{> preloader}}
-  <div class="body_wrapper">
+  <div class="content-wrapper">
     {{> header}}
     {{{body}}}
   </div>
-  <!-- Back to top button -->
-  <a id="back-to-top" title="Back to Top"></a>
-{{> scripts}}
+  {{> footer}}
+  {{> progress}}
+  {{> scripts}}
 </body>
 </html>
