@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/connexxtel/wemoove-site/
+    - export DEPLOYPATH=/home/wemooveadmin/wemoove-site/
     - /bin/cp -R * $DEPLOYPATH
