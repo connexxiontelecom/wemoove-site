@@ -10,6 +10,7 @@ let aboutRouter = require("./routes/about");
 let howItWorksRouter = require("./routes/howItWorks");
 let ourOfferingsRouter = require("./routes/offerings");
 let safetyRouter = require("./routes/safety");
+let privacyPolicyRouter = require("./routes/privacyPolicy");
 
 let app = express();
 
@@ -35,6 +36,7 @@ app.use("/about", aboutRouter);
 app.use("/how-it-works", howItWorksRouter);
 app.use("/our-offerings", ourOfferingsRouter);
 app.use("/safety", safetyRouter);
+app.use("/privacy-policy", privacyPolicyRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
