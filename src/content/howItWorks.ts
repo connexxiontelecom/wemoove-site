@@ -27,11 +27,11 @@ export const howItWorks = {
       },
       {
         title: "Choose your ride",
-        body: "Pick Standard or Executives. On Standard, ride Solo with the car to yourself, or Shared to split the fare with riders going your way. Your fare is shown before you book, and you pay from your WeMoove wallet.",
+        body: "Pick Standard, Premium or Executive. On Standard, ride Solo with the car to yourself, or Shared to split the fare with riders going your way. Your fare is shown before you book, and you pay by card or from your WeMoove wallet.",
       },
       {
         title: "Meet your driver",
-        body: "We match you with a nearby driver. You’ll see their name, photo, car and plate number, and can follow them on the map as they arrive.",
+        body: "We match you with a nearby driver. You’ll see their name, photo, rating, car and plate number, and can call or chat with them in the app as they arrive.",
       },
       {
         title: "Ride & rate",

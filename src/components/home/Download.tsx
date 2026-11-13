@@ -22,7 +22,7 @@ export function Download() {
               alt={download.screenshot.alt}
               fill
               sizes="262px"
-              className="bg-white object-contain object-top"
+              className="bg-white object-cover"
             />
           </PhoneFrame>
         </div>

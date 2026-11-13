@@ -12,8 +12,7 @@ type StepVisualProps = {
 /** A real app screenshot when the step has one, otherwise the coded illustration. */
 export function StepVisual({ step, index, variant }: StepVisualProps) {
   if (!step.screenshot) return <StepScreen step={index} />;
-  // Phone: fit the full width (the app's white bottom sheet fills any space below).
-  // Card: crop to the drop-off and the "Finding you a driver" sheet.
+  // Phone: the screen fills the frame. Card: a crop chosen per screenshot in src/content/home.ts.
   return (
     <div className="absolute inset-0 bg-white">
       <Image
@@ -21,7 +20,8 @@ export function StepVisual({ step, index, variant }: StepVisualProps) {
         alt={step.screenshot.alt}
         fill
         sizes={variant === "phone" ? "262px" : "320px"}
-        className={variant === "phone" ? "object-contain object-top" : "object-cover object-[center_73%]"}
+        className="object-cover"
+        style={variant === "card" ? { objectPosition: step.screenshot.cardFocus ?? "center top" } : undefined}
       />
     </div>
   );

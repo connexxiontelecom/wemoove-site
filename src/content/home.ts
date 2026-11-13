@@ -5,7 +5,8 @@ import type { IconName } from "@/components/ui/Icon";
  * Values in [SQUARE_BRACKETS] are PLACEHOLDERS.
  */
 
-export type Screenshot = { src: string; alt: string };
+/** An app screen (375×812 from Figma). `cardFocus` picks the part shown in short mobile crops. */
+export type Screenshot = { src: string; alt: string; cardFocus?: string };
 export type HowStep = { title: string; body: string; screenshot?: Screenshot };
 export type MoreRide = { name: string; body: string; icon: IconName };
 export type ModeRow = { label: string; value: string };
@@ -55,14 +56,20 @@ export const home = {
     steps: [
       {
         title: "Book",
-        body: "Set your pickup and destination, then choose Solo or Shared. You see your fare before you confirm.",
+        body: "Set your pickup and destination, then choose your ride. On Standard, ride Solo or Shared. You see your fare before you confirm.",
+        screenshot: {
+          src: "/assets/img/app/choose-ride.jpg",
+          alt: "Choosing a ride in the WeMoove app: Executive, Premium, Standard, Bike Delivery and Truck Delivery",
+          cardFocus: "center 62%",
+        },
       },
       {
         title: "Get matched",
         body: "We match you with a nearby verified driver. On Shared, we also match riders heading your way.",
         screenshot: {
-          src: "/assets/img/app/finding-driver.jpg",
-          alt: "The WeMoove app finding a driver for a trip from Mpape to Maitama",
+          src: "/assets/img/app/driver-found.jpg",
+          alt: "Driver found: the driver's name, rating, car and plate number, with call and chat buttons",
+          cardFocus: "center 88%",
         },
       },
       {
@@ -71,7 +78,7 @@ export const home = {
       },
       {
         title: "Pay",
-        body: "Pay the fare you saw when you booked from your WeMoove wallet. No haggling, no surprises. Then rate your ride.",
+        body: "Pay the fare you saw when you booked, by card or from your WeMoove wallet. No haggling, no surprises. Then rate your ride."
       },
     ] satisfies HowStep[],
   },
@@ -110,8 +117,13 @@ export const home = {
       title: "More ways to move",
       items: [
         {
-          name: "Executives",
-          body: "A premium car for meetings, events and when you want to arrive in comfort.",
+          name: "Executive",
+          body: "Our top tier, for meetings, events and when you want to arrive in style.",
+          icon: "car",
+        },
+        {
+          name: "Premium",
+          body: "A step up from Standard, with a more comfortable car.",
           icon: "car",
         },
         {
@@ -157,8 +169,11 @@ export const home = {
     ] satisfies SafetyFeature[],
     /** [APP_SCREENSHOT] slots: set `src` to a real screenshot in /public to replace a placeholder. */
     screenshots: [
-      { alt: "Sharing a live trip in the WeMoove app", src: null },
-      { alt: "The in-app SOS screen", src: null },
+      {
+        alt: "Driver found screen showing the driver's name, rating, car and plate number",
+        src: "/assets/img/app/driver-found.jpg",
+      },
+      { alt: "An in-app call from your driver", src: "/assets/img/app/incoming-call.png" },
     ] as { alt: string; src: string | null }[],
   },
 
@@ -180,8 +195,8 @@ export const home = {
     title: "Your next ride is one tap away.",
     body: "Download WeMoove and ride Solo or Shared across Abuja.",
     screenshot: {
-      src: "/assets/img/app/finding-driver.jpg",
-      alt: "The WeMoove app finding a driver in Abuja",
+      src: "/assets/img/app/pick-route.png",
+      alt: "Picking a pickup and drop-off location in the WeMoove app",
     } satisfies Screenshot,
     stickyCta: "Get the app",
   },

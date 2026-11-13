@@ -21,7 +21,7 @@ export const offerings = {
       comingSoon: false,
       paragraphs: [
         "WeMoove offers you a convenient ride sharing platform popularly known as “ALONG” in Nigerian pidgin parlance. Instead of walking to a bus stop and struggling for a ride, you book from where you are.",
-        "Choose Standard and ride Solo with the car to yourself, or Shared to split the fare with riders going your way. For something more premium, choose Executives.",
+        "Choose Standard and ride Solo with the car to yourself, or Shared to split the fare with riders going your way. For more comfort, choose Premium or Executive.",
       ],
     },
     {

@@ -70,7 +70,7 @@ export function RideModes() {
 
         <div id="more-rides" className="mt-16">
           <h3 className="text-2xl font-extrabold">{rideModes.more.title}</h3>
-          <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {rideModes.more.items.map((item) => (
               <li key={item.name} className="flex gap-4 rounded-2xl border border-line bg-white p-6">
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand text-ink">
