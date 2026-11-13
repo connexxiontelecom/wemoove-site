@@ -38,7 +38,7 @@ export function CarScene({ variant }: CarSceneProps) {
       <rect x={x0 + 118} y="196" width="18" height="4" rx="2" className="fill-white" opacity={0.5} />
       <rect x={x0 + 198} y="196" width="18" height="4" rx="2" className="fill-white" opacity={0.5} />
       <rect x={x0 + 112} y="206" width="76" height="16" rx="8" className="fill-white stroke-brand" strokeWidth={2} />
-      <image href="/images/logox.png" x={x0 + 120} y="209" width="60" height="12" />
+      <image href="/brand/01_Logo/Horizontal/WeMoove_Logo_Horizontal_Color.svg" x={x0 + 130} y="207" width="40" height="15" />
       {/* Lights */}
       <rect x={x1 - 14} y="196" width="14" height="8" rx="3" className="fill-brand" />
       <rect x={x0 - 2} y="198" width="10" height="7" rx="3" className="fill-pin" />

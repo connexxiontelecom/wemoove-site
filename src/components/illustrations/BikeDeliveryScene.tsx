@@ -8,7 +8,7 @@ export function BikeDeliveryScene() {
       {/* Delivery box */}
       <rect x="92" y="122" width="88" height="74" rx="8" className="fill-brand stroke-ink" strokeWidth={3} />
       <rect x="92" y="122" width="88" height="16" rx="6" className="fill-ink" opacity={0.12} />
-      <image href="/images/white-logo.png" x="100" y="152" width="72" height="15" />
+      <image href="/brand/01_Logo/Horizontal/WeMoove_Logo_Horizontal_Black.svg" x="99" y="146" width="74" height="27" />
       <rect x="120" y="196" width="34" height="10" className="fill-ink" />
 
       {/* Bike frame */}

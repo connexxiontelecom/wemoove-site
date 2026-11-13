@@ -28,3 +28,18 @@ On cPanel ("Setup Node.js App"):
 4. Add `NEXT_PUBLIC_SITE_URL` (the live domain, e.g. https://example.com) as an environment variable.
    Note that `NEXT_PUBLIC_*` values are baked in at build time, so set it before building too.
 5. Restart the app. cPanel sets `PORT` automatically.
+
+## Brand assets
+
+The full WeMoove logo kit lives in `public/brand/` (SVG and PNG for every version).
+Which version to use:
+
+| Background | Use |
+|---|---|
+| White / light | `01_Logo/Horizontal/WeMoove_Logo_Horizontal_Color.svg` (navbar) |
+| Dark | `01_Logo/Horizontal/WeMoove_Logo_Horizontal_Reversed.svg` (footer) |
+| Amber, or one-colour print | `..._Black` versions |
+| Small square spaces | `03_Icon/` (the pin) |
+
+The browser tab icon (`src/app/icon.svg`), home-screen icon (`src/app/apple-icon.png`) and
+link-preview image (`src/app/opengraph-image.png`) are copies from this kit.

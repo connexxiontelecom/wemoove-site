@@ -12,7 +12,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 lg:px-8">
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-12">
           <div className="col-span-2 lg:col-span-3">
-            <Image src="/images/white-logo.png" alt="WeMoove" width={128} height={26} className="h-auto w-32" />
+            <Image src="/brand/01_Logo/Horizontal/WeMoove_Logo_Horizontal_Reversed.svg" alt="WeMoove" width={1046} height={386} unoptimized className="h-16 w-auto" />
             <p className="mt-4 max-w-xs">{site.footer.blurb}</p>
           </div>
 

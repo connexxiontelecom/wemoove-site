@@ -55,7 +55,7 @@ export function Navbar() {
       </a>
       <nav aria-label="Main" className="mx-auto flex h-[72px] max-w-7xl items-center gap-4 px-6 lg:px-8">
         <Link href="/" className="mr-auto flex min-h-11 items-center" onClick={close}>
-          <Image src="/images/logox.png" alt="WeMoove home" width={128} height={26} preload fetchPriority="high" className="h-auto w-32" />
+          <Image src="/brand/01_Logo/Horizontal/WeMoove_Logo_Horizontal_Color.svg" alt="WeMoove home" width={1046} height={386} unoptimized preload fetchPriority="high" className="h-14 w-auto" />
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">

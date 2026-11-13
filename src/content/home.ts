@@ -193,7 +193,7 @@ export const home = {
         body: "Documents, food and small packages, picked up by a WeMoove rider and taken straight to the door.",
         points: ["For documents, food and small packages", "Picked up by a WeMoove rider", "Follow your delivery in the app"],
         scene: "bike",
-        photo: "/assets/img/services/bike-delivery.jpg",
+        photo: "/assets/img/services/bike-delivery-v2.jpg",
         photoAlt: "A smiling WeMoove rider in an amber WeMoove vest and helmet on a motorbike with a WeMoove delivery box, on a street in Abuja",
       },
       {
@@ -206,7 +206,7 @@ export const home = {
         body: "Furniture, stock and bulky items moved by truck, booked from the same app you ride with.",
         points: ["For furniture, stock and bulky items", "Booked in the same app as your rides", "Fare shown upfront"],
         scene: "truck",
-        photo: "/assets/img/services/truck-delivery.jpg",
+        photo: "/assets/img/services/truck-delivery-v2.jpg",
         photoAlt: "A WeMoove truck parked outside a building while a worker in a WeMoove vest carries a parcel to the door",
       },
     ] satisfies MoreWayService[],

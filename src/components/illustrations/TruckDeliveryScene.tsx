@@ -8,7 +8,7 @@ export function TruckDeliveryScene() {
       {/* Cargo box */}
       <rect x="140" y="104" width="214" height="128" rx="8" className="fill-white stroke-ink" strokeWidth={3} />
       <rect x="140" y="196" width="214" height="22" className="fill-brand" />
-      <image href="/images/logox.png" x="170" y="138" width="154" height="31" />
+      <image href="/brand/01_Logo/Horizontal/WeMoove_Logo_Horizontal_Color.svg" x="172" y="118" width="150" height="55" />
       <text x="247" y="190" textAnchor="middle" className="fill-muted text-[11px] font-bold tracking-[0.2em]">
         TRUCK DELIVERY
       </text>
