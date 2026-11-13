@@ -1,4 +1,4 @@
-import { StepScreen } from "@/components/home/StepScreen";
+import Image from "next/image";
 import { PhoneFrame } from "@/components/ui/PhoneFrame";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 import { home } from "@/content/home";
@@ -17,7 +17,13 @@ export function Download() {
         </div>
         <div className="flex justify-center md:-mb-40">
           <PhoneFrame size="md" className="translate-y-10 md:translate-y-0">
-            <StepScreen step={0} />
+            <Image
+              src={download.screenshot.src}
+              alt={download.screenshot.alt}
+              fill
+              sizes="262px"
+              className="bg-white object-contain object-top"
+            />
           </PhoneFrame>
         </div>
       </div>

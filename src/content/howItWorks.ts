@@ -26,8 +26,8 @@ export const howItWorks = {
         body: "Open the app, sign in and enter your destination in the “Where to” box. Your pickup is set from your location, or you can choose another pickup point.",
       },
       {
-        title: "Choose Solo or Shared",
-        body: "Solo gives you the car to yourself. Shared matches you with riders going your way, so you split the fare. Your fare is shown before you book.",
+        title: "Choose your ride",
+        body: "Pick Standard or Executives. On Standard, ride Solo with the car to yourself, or Shared to split the fare with riders going your way. Your fare is shown before you book, and you pay from your WeMoove wallet.",
       },
       {
         title: "Meet your driver",

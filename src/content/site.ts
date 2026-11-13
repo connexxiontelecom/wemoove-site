@@ -66,8 +66,8 @@ export const site = {
         items: [
           { label: "Ride", href: "/#ride-modes" },
           { label: "Drive & Earn", href: "/#drive" },
+          { label: "Deliveries", href: "/#more-rides" },
           { label: "Interstate", comingSoon: true },
-          { label: "Deliveries", comingSoon: true },
         ],
       },
       {

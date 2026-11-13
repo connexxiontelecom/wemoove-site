@@ -3,7 +3,7 @@
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useCallback, useState } from "react";
 import { HowItWorksStep } from "@/components/home/HowItWorksStep";
-import { StepScreen } from "@/components/home/StepScreen";
+import { StepVisual } from "@/components/home/StepVisual";
 import { PhoneFrame } from "@/components/ui/PhoneFrame";
 import { home } from "@/content/home";
 
@@ -30,13 +30,13 @@ export function HowItWorks() {
                 <AnimatePresence mode="wait" initial={false}>
                   <m.div
                     key={active}
-                    className="h-full"
+                    className="relative h-full"
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12 }}
                     transition={{ duration: reduceMotion ? 0 : 0.25 }}
                   >
-                    <StepScreen step={active} />
+                    <StepVisual step={howItWorks.steps[active]} index={active} variant="phone" />
                   </m.div>
                 </AnimatePresence>
               </PhoneFrame>

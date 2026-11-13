@@ -2,7 +2,7 @@
 
 import { useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { StepScreen } from "@/components/home/StepScreen";
+import { StepVisual } from "@/components/home/StepVisual";
 import type { HowStep } from "@/content/home";
 
 type HowItWorksStepProps = {
@@ -36,8 +36,8 @@ export function HowItWorksStep({ step, index, active, onActive }: HowItWorksStep
           <p className="mt-2 max-w-md text-lg text-muted">{step.body}</p>
         </div>
         {/* Mobile: small illustration under each step */}
-        <div className="col-start-2 h-56 max-w-xs overflow-hidden rounded-2xl bg-map md:hidden">
-          <StepScreen step={index} />
+        <div className="relative col-start-2 h-56 max-w-xs overflow-hidden rounded-2xl bg-map md:hidden">
+          <StepVisual step={step} index={index} variant="card" />
         </div>
       </div>
     </li>

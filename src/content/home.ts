@@ -5,7 +5,9 @@ import type { IconName } from "@/components/ui/Icon";
  * Values in [SQUARE_BRACKETS] are PLACEHOLDERS.
  */
 
-export type HowStep = { title: string; body: string };
+export type Screenshot = { src: string; alt: string };
+export type HowStep = { title: string; body: string; screenshot?: Screenshot };
+export type MoreRide = { name: string; body: string; icon: IconName };
 export type ModeRow = { label: string; value: string };
 export type RideModeCard = {
   id: "solo" | "shared";
@@ -29,7 +31,7 @@ export const home = {
       "Book a car to yourself, or share the trip with people heading your way. Same safe ride, smarter price.",
     driveLink: "Drive with WeMoove →",
     estimator: {
-      title: "Estimate your fare",
+      title: "Estimate a Standard ride",
       pickupLabel: "Pickup",
       destinationLabel: "Destination",
       solo: "Solo",
@@ -58,6 +60,10 @@ export const home = {
       {
         title: "Get matched",
         body: "We match you with a nearby verified driver. On Shared, we also match riders heading your way.",
+        screenshot: {
+          src: "/assets/img/app/finding-driver.jpg",
+          alt: "The WeMoove app finding a driver for a trip from Mpape to Maitama",
+        },
       },
       {
         title: "Ride",
@@ -65,14 +71,16 @@ export const home = {
       },
       {
         title: "Pay",
-        body: "Pay the fare you saw when you booked. No haggling, no surprises. Then rate your ride.",
+        body: "Pay the fare you saw when you booked from your WeMoove wallet. No haggling, no surprises. Then rate your ride.",
       },
     ] satisfies HowStep[],
   },
 
   rideModes: {
-    eyebrow: "Solo or Shared",
+    eyebrow: "Choose your ride",
     title: "Your trip, your choice.",
+    intro: "On a Standard ride, choose Solo or Shared.",
+    modeLabel: "Standard ride",
     cta: "Get the app",
     modes: [
       {
@@ -98,6 +106,26 @@ export const home = {
         ],
       },
     ] satisfies RideModeCard[],
+    more: {
+      title: "More ways to move",
+      items: [
+        {
+          name: "Executives",
+          body: "A premium car for meetings, events and when you want to arrive in comfort.",
+          icon: "car",
+        },
+        {
+          name: "Bike Delivery",
+          body: "Send small parcels and documents across Abuja by bike.",
+          icon: "bike",
+        },
+        {
+          name: "Truck Delivery",
+          body: "Move bigger and heavier loads with a truck.",
+          icon: "truck",
+        },
+      ] satisfies MoreRide[],
+    },
   },
 
   safety: {
@@ -151,6 +179,10 @@ export const home = {
   download: {
     title: "Your next ride is one tap away.",
     body: "Download WeMoove and ride Solo or Shared across Abuja.",
+    screenshot: {
+      src: "/assets/img/app/finding-driver.jpg",
+      alt: "The WeMoove app finding a driver in Abuja",
+    } satisfies Screenshot,
     stickyCta: "Get the app",
   },
 } as const;

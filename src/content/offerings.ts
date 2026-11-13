@@ -20,7 +20,8 @@ export const offerings = {
       icon: "car",
       comingSoon: false,
       paragraphs: [
-        "WeMoove offers you a convenient ride sharing platform popularly known as “ALONG” in Nigerian pidgin parlance. Instead of walking to a bus stop and struggling for a ride, you book from where you are. Ride Solo with the car to yourself, or ride Shared and split the fare with riders going your way.",
+        "WeMoove offers you a convenient ride sharing platform popularly known as “ALONG” in Nigerian pidgin parlance. Instead of walking to a bus stop and struggling for a ride, you book from where you are.",
+        "Choose Standard and ride Solo with the car to yourself, or Shared to split the fare with riders going your way. For something more premium, choose Executives.",
       ],
     },
     {
@@ -34,9 +35,9 @@ export const offerings = {
     {
       title: "WeMoove Deliveries",
       icon: "truck",
-      comingSoon: true,
+      comingSoon: false,
       paragraphs: [
-        "WeMoove Deliveries will be an affordable and safe mini-courier and delivery platform. Unlike our ride service, WeMoove Deliveries will move items, keeping them safe from sender to receiver.",
+        "Send items across Abuja from the same app. Choose Bike Delivery for small parcels and documents, or Truck Delivery for bigger and heavier loads, and track them from sender to receiver.",
       ],
     },
     {

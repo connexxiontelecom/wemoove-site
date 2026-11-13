@@ -25,6 +25,7 @@ export function RideModes() {
         <h2 id="modes-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
           {rideModes.title}
         </h2>
+        <p className="mt-3 text-lg text-muted">{rideModes.intro}</p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {rideModes.modes.map((mode) => (
@@ -36,7 +37,12 @@ export function RideModes() {
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-paper text-ink">
                   <Icon name={mode.id === "solo" ? "car" : "share"} className="h-6 w-6" />
                 </span>
-                <h3 className="text-3xl font-extrabold">{mode.name}</h3>
+                <div>
+                  <p className={`text-sm font-semibold text-muted ${subtle[mode.id]} ${mode.id === "shared" ? "group-hover:text-ink group-focus-within:text-ink group-active:text-ink" : ""}`}>
+                    {rideModes.modeLabel}
+                  </p>
+                  <h3 className="text-3xl font-extrabold leading-tight">{mode.name}</h3>
+                </div>
               </div>
               <p className={`mt-4 text-lg font-semibold ${subtle[mode.id]}`}>{mode.tagline}</p>
 
@@ -60,6 +66,23 @@ export function RideModes() {
               </a>
             </article>
           ))}
+        </div>
+
+        <div id="more-rides" className="mt-16">
+          <h3 className="text-2xl font-extrabold">{rideModes.more.title}</h3>
+          <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+            {rideModes.more.items.map((item) => (
+              <li key={item.name} className="flex gap-4 rounded-2xl border border-line bg-white p-6">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand text-ink">
+                  <Icon name={item.icon} className="h-6 w-6" />
+                </span>
+                <div>
+                  <p className="text-lg font-bold">{item.name}</p>
+                  <p className="mt-1 text-muted">{item.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
