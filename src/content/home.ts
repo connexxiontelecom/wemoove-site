@@ -74,11 +74,21 @@ export const home = {
       },
       {
         title: "Ride",
-        body: "Follow your trip on the map and share it live with someone you trust.",
+        body: "Follow your trip on the map, share your ride details with someone you trust, or report the ride if anything feels wrong.",
+        screenshot: {
+          src: "/assets/img/app/driving.jpg",
+          alt: "Driving to destination screen with the route, driver details, and options to share ride details or report the ride",
+          cardFocus: "center 92%",
+        },
       },
       {
         title: "Pay",
-        body: "Pay the fare you saw when you booked, by card or from your WeMoove wallet. No haggling, no surprises. Then rate your ride."
+        body: "Pay the fare you saw when you booked, by card or from your WeMoove wallet. No haggling, no surprises. Then rate your driver and add a tip if you like.",
+        screenshot: {
+          src: "/assets/img/app/ride-review.png",
+          alt: "Ride review screen with a star rating, a comment and tip options",
+          cardFocus: "center 42%",
+        },
       },
     ] satisfies HowStep[],
   },

@@ -36,7 +36,7 @@ export function HowItWorksStep({ step, index, active, onActive }: HowItWorksStep
           <p className="mt-2 max-w-md text-lg text-muted">{step.body}</p>
         </div>
         {/* Mobile: small illustration under each step */}
-        <div className="relative col-start-2 h-56 max-w-xs overflow-hidden rounded-2xl bg-map md:hidden">
+        <div className="relative col-start-2 h-56 max-w-xs overflow-hidden rounded-2xl bg-map ring-1 ring-line md:hidden">
           <StepVisual step={step} index={index} variant="card" />
         </div>
       </div>
