@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
+import type { ReactNode } from "react";
 import { Card } from "@/components/ui/Card";
 import { Toggle } from "@/components/ui/Toggle";
 import { AREAS, type Area } from "@/content/areas";
@@ -14,6 +15,8 @@ type FareEstimatorProps = {
   onPickupChange: (area: Area) => void;
   onDestinationChange: (area: Area) => void;
   onModeChange: (mode: RideMode) => void;
+  /** Optional full-bleed content above the form (the live map on mobile). */
+  header?: ReactNode;
 };
 
 const copy = home.hero.estimator;
@@ -31,6 +34,7 @@ export function FareEstimator({
   onPickupChange,
   onDestinationChange,
   onModeChange,
+  header,
 }: FareEstimatorProps) {
   const reduceMotion = useReducedMotion();
   const quote = getQuote(pickup, destination);
@@ -44,7 +48,8 @@ export function FareEstimator({
         (showSavings ? ` ${copy.savingsPrefix} ${formatNaira(quote.savings)}.` : "");
 
   return (
-    <Card className="w-full max-w-md p-5 sm:p-6">
+    <Card className="w-full max-w-md overflow-hidden p-5 sm:p-6">
+      {header && <div className="-mx-5 -mt-5 mb-5 sm:-mx-6 sm:-mt-6">{header}</div>}
       <h2 className="text-lg font-bold">{copy.title}</h2>
 
       <div className="mt-4 grid grid-cols-2 gap-3">

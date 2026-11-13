@@ -56,6 +56,7 @@ export const home = {
       savingsPrefix: "You save",
       savingsSuffix: "by tagging along",
       cta: "Get the app to book",
+      mapLabel: "Live route preview",
       defaultPickup: "Wuse",
       defaultDestination: "Gwarinpa",
     },

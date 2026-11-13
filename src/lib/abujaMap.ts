@@ -47,14 +47,14 @@ export const EDGES: Edge[] = [
 
 /** Background roads that are drawn but never routed on. */
 export const DECOR_ROADS: Point[][] = [
-  [p(0, 100), p(38, 72), p(70, 40), p(120, 18)],
-  [p(240, 120), p(200, 140), p(165, 150)],
-  [p(240, 300), p(210, 255)],
-  [p(0, 360), p(40, 330)],
-  [p(90, 305), p(110, 360), p(130, 430)],
-  [p(146, 272), p(152, 340), p(162, 430)],
-  [p(0, 210), p(60, 205), p(98, 190)],
-  [p(165, 150), p(170, 100), p(185, 40)],
+  [p(-140, 120), p(0, 100), p(38, 72), p(70, 40), p(150, -60)],
+  [p(380, 110), p(240, 120), p(200, 140), p(165, 150)],
+  [p(380, 330), p(240, 300), p(210, 255)],
+  [p(-140, 380), p(0, 360), p(40, 330)],
+  [p(90, 305), p(110, 360), p(140, 520)],
+  [p(146, 272), p(152, 340), p(170, 520)],
+  [p(-140, 214), p(0, 210), p(60, 205), p(98, 190)],
+  [p(165, 150), p(170, 100), p(200, -60)],
 ];
 
 export function edgePoints(e: Edge): Point[] {
@@ -127,4 +127,25 @@ export function pointAt(points: Point[], t: number): { x: number; y: number; ang
 
 export function toPath(points: Point[]): string {
   return `M${points.map((pt) => `${pt.x} ${pt.y}`).join(" L")}`;
+}
+
+export type ViewBox = { x: number; y: number; w: number; h: number };
+
+/**
+ * A viewBox that frames the whole trip (route, tags and ETA chip) at the given aspect ratio,
+ * used by the compact mobile map. Never zooms in further than `minWidth` units.
+ */
+export function fitViewBox(points: Point[], aspect: number, minWidth = 130): ViewBox {
+  const xs = points.map((pt) => pt.x);
+  const ys = points.map((pt) => pt.y);
+  const pad = 14;
+  const minX = Math.min(...xs) - pad;
+  const maxX = Math.max(...xs) + pad;
+  const minY = Math.min(...ys) - pad;
+  const maxY = Math.max(...ys) + pad;
+  const w = Math.max(maxX - minX, (maxY - minY) * aspect, minWidth);
+  const h = w / aspect;
+  const cx = (minX + maxX) / 2;
+  const cy = (minY + maxY) / 2;
+  return { x: cx - w / 2, y: cy - h / 2, w, h };
 }

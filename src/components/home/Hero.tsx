@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FareEstimator } from "@/components/home/FareEstimator";
 import { HeroPhone } from "@/components/home/HeroPhone";
+import { RideMap } from "@/components/home/RideMap";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 import type { Area } from "@/content/areas";
 import { home } from "@/content/home";
@@ -54,6 +55,20 @@ export function Hero() {
               onPickupChange={setPickup}
               onDestinationChange={setDestination}
               onModeChange={setMode}
+              header={
+                // Phones only: the live map sits inside the card so it reacts right where people tap.
+                <div
+                  role="img"
+                  aria-label={`${hero.estimator.mapLabel}: ${pickup} to ${destination}${mode === "shared" ? ", shared ride" : ""}.`}
+                  className="relative aspect-[16/10] bg-map md:hidden"
+                >
+                  <RideMap pickup={pickup} destination={destination} mode={mode} variant="card" />
+                  <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-ink shadow-sm">
+                    <span className="h-1.5 w-1.5 rounded-full bg-route motion-safe:animate-pulse" aria-hidden="true" />
+                    {hero.estimator.mapLabel}
+                  </span>
+                </div>
+              }
             />
           </div>
 
@@ -68,7 +83,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="flex justify-center motion-safe:animate-float-in md:justify-end lg:justify-center">
+        <div className="hidden justify-center motion-safe:animate-float-in md:flex md:justify-end lg:justify-center">
           <HeroPhone pickup={pickup} destination={destination} mode={mode} />
         </div>
       </div>
