@@ -206,7 +206,8 @@ export const home = {
         body: "Furniture, stock and bulky items moved by truck, booked from the same app you ride with.",
         points: ["For furniture, stock and bulky items", "Booked in the same app as your rides", "Fare shown upfront"],
         scene: "truck",
-        photo: null, // [SERVICE_PHOTO]
+        photo: "/assets/img/services/truck-delivery.jpg",
+        photoAlt: "A WeMoove truck parked outside a building while a worker in a WeMoove vest carries a parcel to the door",
       },
     ] satisfies MoreWayService[],
   },
