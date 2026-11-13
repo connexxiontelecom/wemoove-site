@@ -169,7 +169,8 @@ export const home = {
         body: "Our top tier for the trips that matter: client meetings, events, and when you simply want to arrive in style.",
         points: ["Our most premium cars", "Great for meetings, events and airport trips", "Booked in the same app, fare shown upfront"],
         scene: "executive",
-        photo: null, // [SERVICE_PHOTO] e.g. "/assets/img/services/executive.jpg"
+        photo: "/assets/img/services/executive.jpg",
+        photoAlt: "A smiling man in a suit driving a large black luxury sedan along a palm-lined avenue in Abuja at golden hour",
       },
       {
         id: "premium",
