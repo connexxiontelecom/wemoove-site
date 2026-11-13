@@ -181,7 +181,8 @@ export const home = {
         body: "More comfort than Standard for everyday trips, when a little extra space and a nicer car make the difference.",
         points: ["More comfortable cars", "Ideal for everyday trips that matter", "Fare shown before you book"],
         scene: "premium",
-        photo: null, // [SERVICE_PHOTO]
+        photo: "/assets/img/services/premium.jpg",
+        photoAlt: "A smiling man in a suit at the wheel of a clean black sedan on a palm-lined street in Abuja",
       },
       {
         id: "bike",
