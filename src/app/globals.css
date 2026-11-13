@@ -13,6 +13,14 @@
   --color-map: #f1eee6; /* phone map background */
   --color-save: #13795b; /* savings text, 5.4:1 on white */
 
+  /* Hero map (matches the app's map screens) */
+  --color-route: #4f2fe0; /* trip route */
+  --color-pin: #c2410c; /* pickup and drop-off tags, white text 5.2:1 */
+  --color-park: #d3e8cc;
+  --color-water: #c4ddef;
+  --color-road-edge: #d9d3c4;
+  --color-map-label: #5b6170;
+
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
   /* Page-load entrance. Pure CSS so the content shows before JavaScript loads

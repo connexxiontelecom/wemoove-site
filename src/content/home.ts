@@ -45,8 +45,16 @@ export const home = {
       defaultDestination: "Gwarinpa",
     },
     phone: {
-      solo: "Solo · 1 seat",
-      shared: "Shared · 3 riders",
+      time: "9:41",
+      rideName: "Standard",
+      solo: "Solo",
+      shared: "Shared",
+      soloSeats: "1 seat",
+      sharedSeats: "3 riders",
+      select: "Select ride",
+      pickupTag: "Pickup",
+      dropoffTag: "Drop-off",
+      minutes: "min",
     },
   },
 
