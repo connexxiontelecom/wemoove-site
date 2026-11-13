@@ -27,8 +27,9 @@ export const site = {
   },
 
   stores: {
-    appStore: "[APP_STORE_URL]", // PLACEHOLDER
-    playStore: "[PLAY_STORE_URL]", // PLACEHOLDER
+    /** Set to the App Store URL once the listing is approved. While null, the badge shows "Coming soon". */
+    appStore: null as string | null,
+    playStore: "https://play.google.com/store/apps/details?id=com.connexxion.weemove.wemoove_v2",
   },
 
   driverSignupUrl: "[DRIVER_SIGNUP_URL]", // PLACEHOLDER

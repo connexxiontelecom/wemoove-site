@@ -26,20 +26,29 @@ const styles: Record<Tone, { primary: string; secondary: string }> = {
 
 export function StoreBadges({ tone = "light", className = "" }: StoreBadgesProps) {
   const base = "inline-flex min-h-12 items-center gap-2 rounded-full px-5 font-semibold transition-colors";
+  const { appStore, playStore } = site.stores;
   return (
     <div className={`flex flex-wrap gap-3 ${className}`}>
-      <a href={site.stores.appStore} className={`${base} ${styles[tone].primary}`}>
-        <Icon name="apple" />
-        <span>
-          <span className="sr-only">Download on the </span>App Store
-        </span>
-      </a>
-      <a href={site.stores.playStore} className={`${base} ${styles[tone].secondary}`}>
+      <a href={playStore} className={`${base} ${styles[tone].primary}`}>
         <Icon name="googlePlay" />
         <span>
           <span className="sr-only">Get it on </span>Google Play
         </span>
       </a>
+      {appStore ? (
+        <a href={appStore} className={`${base} ${styles[tone].secondary}`}>
+          <Icon name="apple" />
+          <span>
+            <span className="sr-only">Download on the </span>App Store
+          </span>
+        </a>
+      ) : (
+        <span className={`${base} cursor-default ${styles[tone].secondary.replace(/hover:\S+/g, "")}`}>
+          <Icon name="apple" />
+          App Store
+          <span className="rounded-full bg-current/10 px-2 py-0.5 text-xs font-bold">Coming soon</span>
+        </span>
+      )}
     </div>
   );
 }
