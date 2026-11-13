@@ -21,6 +21,8 @@ export type MoreWayService = {
   scene: "executive" | "premium" | "bike" | "truck";
   /** Real photo path in /public. When set it replaces the illustration. */
   photo: string | null;
+  /** Describes the photo for screen readers. */
+  photoAlt?: string;
 };
 export type ModeRow = { label: string; value: string };
 export type RideModeCard = {
@@ -191,7 +193,8 @@ export const home = {
         body: "Documents, food and small packages, picked up by a WeMoove rider and taken straight to the door.",
         points: ["For documents, food and small packages", "Picked up by a WeMoove rider", "Follow your delivery in the app"],
         scene: "bike",
-        photo: null, // [SERVICE_PHOTO] a WeMoove rider in uniform, e.g. "/assets/img/services/bike-delivery.jpg"
+        photo: "/assets/img/services/bike-delivery.jpg",
+        photoAlt: "A smiling WeMoove rider in an amber WeMoove vest and helmet on a motorbike with a WeMoove delivery box, on a street in Abuja",
       },
       {
         id: "truck",
