@@ -3,6 +3,7 @@ import { DriveEarn } from "@/components/home/DriveEarn";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { MobileGetAppBar } from "@/components/home/MobileGetAppBar";
+import { MoreWays } from "@/components/home/MoreWays";
 import { RideModes } from "@/components/home/RideModes";
 import { Safety } from "@/components/home/Safety";
 import { home } from "@/content/home";
@@ -16,6 +17,7 @@ export default function HomePage() {
       <Hero />
       <HowItWorks />
       <RideModes />
+      <MoreWays />
       <Safety />
       <DriveEarn />
       <Download />

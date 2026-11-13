@@ -21,6 +21,11 @@
   --color-road-edge: #d9d3c4;
   --color-map-label: #5b6170;
 
+  /* "More ways to move" illustrations */
+  --color-skin: #8a5a3c;
+  --color-cardboard: #c99a68;
+  --color-premium: #34435c; /* Premium car body */
+
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
   /* Page-load entrance. Pure CSS so the content shows before JavaScript loads

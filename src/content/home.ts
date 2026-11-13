@@ -8,7 +8,20 @@ import type { IconName } from "@/components/ui/Icon";
 /** An app screen (375×812 from Figma). `cardFocus` picks the part shown in short mobile crops. */
 export type Screenshot = { src: string; alt: string; cardFocus?: string };
 export type HowStep = { title: string; body: string; screenshot?: Screenshot };
-export type MoreRide = { name: string; body: string; icon: IconName };
+export type MoreWayService = {
+  id: string;
+  name: string;
+  kind: "Ride" | "Delivery";
+  icon: IconName;
+  /** One-liner shown in the selector. */
+  short: string;
+  tagline: string;
+  body: string;
+  points: string[];
+  scene: "executive" | "premium" | "bike" | "truck";
+  /** Real photo path in /public. When set it replaces the illustration. */
+  photo: string | null;
+};
 export type ModeRow = { label: string; value: string };
 export type RideModeCard = {
   id: "solo" | "shared";
@@ -131,31 +144,68 @@ export const home = {
         ],
       },
     ] satisfies RideModeCard[],
-    more: {
-      title: "More ways to move",
-      items: [
-        {
-          name: "Executive",
-          body: "Our top tier, for meetings, events and when you want to arrive in style.",
-          icon: "car",
-        },
-        {
-          name: "Premium",
-          body: "A step up from Standard, with a more comfortable car.",
-          icon: "car",
-        },
-        {
-          name: "Bike Delivery",
-          body: "Send small parcels and documents across Abuja by bike.",
-          icon: "bike",
-        },
-        {
-          name: "Truck Delivery",
-          body: "Move bigger and heavier loads with a truck.",
-          icon: "truck",
-        },
-      ] satisfies MoreRide[],
+  },
+
+  moreWays: {
+    eyebrow: "More ways to move",
+    title: "One app for every trip, and every parcel.",
+    body: "Beyond Standard, WeMoove gets you there in more comfort, and gets your things across Abuja too.",
+    cta: "Get the app",
+    comingNext: {
+      label: "Coming next",
+      title: "WeMoove Interstate",
+      body: "Safe, regulated rides between cities in private vehicles.",
     },
+    services: [
+      {
+        id: "executive",
+        name: "Executive",
+        kind: "Ride",
+        icon: "car",
+        short: "Our top tier",
+        tagline: "Arrive like you mean it.",
+        body: "Our top tier for the trips that matter: client meetings, events, and when you simply want to arrive in style.",
+        points: ["Our most premium cars", "Great for meetings, events and airport trips", "Booked in the same app, fare shown upfront"],
+        scene: "executive",
+        photo: null, // [SERVICE_PHOTO] e.g. "/assets/img/services/executive.jpg"
+      },
+      {
+        id: "premium",
+        name: "Premium",
+        kind: "Ride",
+        icon: "car",
+        short: "A step up from Standard",
+        tagline: "A step up, without the splurge.",
+        body: "More comfort than Standard for everyday trips, when a little extra space and a nicer car make the difference.",
+        points: ["More comfortable cars", "Ideal for everyday trips that matter", "Fare shown before you book"],
+        scene: "premium",
+        photo: null, // [SERVICE_PHOTO]
+      },
+      {
+        id: "bike",
+        name: "Bike Delivery",
+        kind: "Delivery",
+        icon: "bike",
+        short: "Small parcels, fast",
+        tagline: "Small parcels, moving fast across Abuja.",
+        body: "Documents, food and small packages, picked up by a WeMoove rider and taken straight to the door.",
+        points: ["For documents, food and small packages", "Picked up by a WeMoove rider", "Follow your delivery in the app"],
+        scene: "bike",
+        photo: null, // [SERVICE_PHOTO] a WeMoove rider in uniform, e.g. "/assets/img/services/bike-delivery.jpg"
+      },
+      {
+        id: "truck",
+        name: "Truck Delivery",
+        kind: "Delivery",
+        icon: "truck",
+        short: "Big loads, handled",
+        tagline: "Big loads, handled.",
+        body: "Furniture, stock and bulky items moved by truck, booked from the same app you ride with.",
+        points: ["For furniture, stock and bulky items", "Booked in the same app as your rides", "Fare shown upfront"],
+        scene: "truck",
+        photo: null, // [SERVICE_PHOTO]
+      },
+    ] satisfies MoreWayService[],
   },
 
   safety: {
