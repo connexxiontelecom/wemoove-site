@@ -36,6 +36,17 @@ export const ride = {
     note: "Estimates are a guide. The app shows your exact fare before you confirm.",
   },
 
+  safety: {
+    title: "Safe on every ride, Solo or Shared.",
+    link: "More about safety",
+    href: "/safety",
+    points: [
+      { icon: "user", title: "Know your driver", body: "Name, photo, rating, car and plate number before pickup." },
+      { icon: "share", title: "Share your trip", body: "Let someone you trust follow your ride live." },
+      { icon: "flag", title: "Report a ride", body: "Flag anything that feels wrong, right from the trip screen." },
+    ],
+  },
+
   faq: {
     eyebrow: "Questions",
     title: "Rider FAQs",

@@ -1,8 +1,8 @@
-import { HowItWorks } from "@/components/home/HowItWorks";
 import { RideModes } from "@/components/home/RideModes";
 import { RideHero } from "@/components/ride/RideHero";
 import { RideOptions } from "@/components/ride/RideOptions";
 import { RidePlanner } from "@/components/ride/RidePlanner";
+import { RideSafety } from "@/components/ride/RideSafety";
 import { FaqSection } from "@/components/ui/FaqSection";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 import { ride } from "@/content/ride";
@@ -21,7 +21,7 @@ export default function RidePage() {
       <RideOptions />
       <RideModes />
       <RidePlanner />
-      <HowItWorks />
+      <RideSafety />
       <FaqSection id="ride-faq-title" eyebrow={ride.faq.eyebrow} title={ride.faq.title} items={ride.faq.items} />
       <section id="download" aria-labelledby="ride-cta-title" className="scroll-mt-24 bg-brand">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center lg:py-20">
