@@ -35,7 +35,9 @@ export function ServiceVisual({ service }: { service: MoreWayService }) {
       >
         {service.scene === "bike" && <BikeDeliveryScene />}
         {service.scene === "truck" && <TruckDeliveryScene />}
-        {(service.scene === "executive" || service.scene === "premium") && <CarScene variant={service.scene} />}
+        {(service.scene === "standard" || service.scene === "executive" || service.scene === "premium") && (
+          <CarScene variant={service.scene} />
+        )}
       </m.g>
     </svg>
   );

@@ -1,13 +1,13 @@
 import { Wheel } from "@/components/illustrations/Wheel";
 
 type CarSceneProps = {
-  /** "executive" is a long black saloon, "premium" a slate saloon. */
-  variant: "executive" | "premium";
+  /** "executive" is a long black saloon, "premium" a slate saloon, "standard" an amber WeMoove car. */
+  variant: "standard" | "executive" | "premium";
 };
 
 /** Side view of a WeMoove car with a driver and a WeMoove door sticker. */
 export function CarScene({ variant }: CarSceneProps) {
-  const body = variant === "executive" ? "fill-ink" : "fill-premium";
+  const body = variant === "executive" ? "fill-ink" : variant === "premium" ? "fill-premium" : "fill-brand stroke-ink";
   const long = variant === "executive";
   const x0 = long ? 84 : 104;
   const x1 = long ? 412 : 392;
@@ -18,6 +18,7 @@ export function CarScene({ variant }: CarSceneProps) {
       <path
         d={`M${x0} 232 C${x0 - 6} 208 ${x0 + 2} 192 ${x0 + 30} 188 L${x0 + 92} 182 C${x0 + 118} 150 ${x0 + 148} 136 ${x0 + 188} 136 L${x1 - 112} 136 C${x1 - 82} 136 ${x1 - 62} 156 ${x1 - 44} 182 L${x1 - 14} 190 C${x1} 194 ${x1 + 6} 212 ${x1} 232 Z`}
         className={body}
+        strokeWidth={3}
       />
       {/* Windows */}
       <path

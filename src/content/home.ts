@@ -18,7 +18,7 @@ export type MoreWayService = {
   tagline: string;
   body: string;
   points: string[];
-  scene: "executive" | "premium" | "bike" | "truck";
+  scene: "standard" | "executive" | "premium" | "bike" | "truck";
   /** Real photo path in /public. When set it replaces the illustration. */
   photo: string | null;
   /** Describes the photo for screen readers. */
@@ -152,7 +152,7 @@ export const home = {
   moreWays: {
     eyebrow: "More ways to move",
     title: "One app for every trip, and every parcel.",
-    body: "Beyond Standard, WeMoove gets you there in more comfort, and gets your things across Abuja too.",
+    body: "From everyday rides to a little extra comfort, WeMoove gets you there, and gets your things across Abuja too.",
     cta: "Get the app",
     comingNext: {
       label: "Coming next",
@@ -160,6 +160,18 @@ export const home = {
       body: "Safe, regulated rides between cities in private vehicles.",
     },
     services: [
+      {
+        id: "standard",
+        name: "Standard",
+        kind: "Ride",
+        icon: "car",
+        short: "Everyday rides, Solo or Shared",
+        tagline: "Your everyday ride, your way.",
+        body: "Our everyday ride around Abuja. Have the car to yourself with Solo, or go Shared with people heading your way and pay less.",
+        points: ["Ride Solo, or go Shared and pay less", "Verified drivers on every trip", "Fare shown before you book"],
+        scene: "standard",
+        photo: null,
+      },
       {
         id: "executive",
         name: "Executive",
