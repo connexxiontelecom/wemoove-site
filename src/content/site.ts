@@ -32,8 +32,6 @@ export const site = {
     playStore: "https://play.google.com/store/apps/details?id=com.connexxion.weemove.wemoove_v2",
   },
 
-  driverSignupUrl: "[DRIVER_SIGNUP_URL]", // PLACEHOLDER
-
   social: [
     { label: "WeMoove on X", href: "[X_URL]", icon: "x" }, // PLACEHOLDER
     { label: "WeMoove on Facebook", href: "[FACEBOOK_URL]", icon: "facebook" }, // PLACEHOLDER
@@ -42,7 +40,7 @@ export const site = {
 
   nav: [
     { label: "Ride", href: "/#ride-modes" },
-    { label: "Drive & Earn", href: "/#drive" },
+    { label: "Drive & Earn", href: "/drive" },
     { label: "Safety", href: "/safety" },
     { label: "About", href: "/about" },
   ] satisfies NavLink[],
@@ -66,7 +64,7 @@ export const site = {
         title: "Services",
         items: [
           { label: "Ride", href: "/#ride-modes" },
-          { label: "Drive & Earn", href: "/#drive" },
+          { label: "Drive & Earn", href: "/drive" },
           { label: "Deliveries", href: "/#more-rides" },
           { label: "Interstate", comingSoon: true },
         ],
@@ -83,5 +81,5 @@ export const site = {
   },
 
   /** Every public page, used for sitemap.xml. */
-  routes: ["/", "/about", "/how-it-works", "/our-offerings", "/safety", "/privacy-policy"],
+  routes: ["/", "/drive", "/about", "/how-it-works", "/our-offerings", "/safety", "/privacy-policy"],
 } as const;

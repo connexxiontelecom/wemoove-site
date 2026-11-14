@@ -77,7 +77,7 @@ export function Hero() {
             style={rise(4).style}
           >
             <StoreBadges />
-            <SectionLink href="/#drive" className="inline-flex min-h-11 items-center font-bold text-ink underline-offset-4 hover:underline">
+            <SectionLink href="/drive" className="inline-flex min-h-11 items-center font-bold text-ink underline-offset-4 hover:underline">
               {hero.driveLink}
             </SectionLink>
           </div>

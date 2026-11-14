@@ -274,7 +274,7 @@ export const home = {
     resultLabel: "Estimated weekly earnings",
     resultSuffix: "/week",
     disclaimer: "Estimate only. Actual earnings vary.",
-    cta: "Sign up to drive",
+    cta: "How to start driving",
     defaultHours: 6,
     defaultDays: 5,
   },
