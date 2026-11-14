@@ -7,7 +7,8 @@ import type { IconName } from "@/components/ui/Icon";
 
 export type NavLink = { label: string; href: string };
 export type FooterItem = { label: string; href?: string; comingSoon?: boolean };
-export type SocialLink = { label: string; href: string; icon: IconName };
+/** `href: null` hides the icon until the account exists. */
+export type SocialLink = { label: string; href: string | null; icon: IconName };
 
 const EMAIL = "info@connexxiontelecom.com";
 
@@ -33,9 +34,9 @@ export const site = {
   },
 
   social: [
-    { label: "WeMoove on X", href: "[X_URL]", icon: "x" }, // PLACEHOLDER
-    { label: "WeMoove on Facebook", href: "[FACEBOOK_URL]", icon: "facebook" }, // PLACEHOLDER
-    { label: "WeMoove on Instagram", href: "[INSTAGRAM_URL]", icon: "instagram" }, // PLACEHOLDER
+    { label: "WeMoove on X", href: null, icon: "x" }, // Add the X profile URL when available
+    { label: "WeMoove on Facebook", href: null, icon: "facebook" }, // Add the Facebook page URL when available
+    { label: "WeMoove on Instagram", href: "https://www.instagram.com/wemoove_cnx/", icon: "instagram" },
   ] satisfies SocialLink[],
 
   nav: [

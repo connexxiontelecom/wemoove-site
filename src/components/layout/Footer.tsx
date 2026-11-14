@@ -4,6 +4,9 @@ import { CopyrightYear } from "@/components/layout/CopyrightYear";
 import { Icon } from "@/components/ui/Icon";
 import { site } from "@/content/site";
 
+/** Only accounts that exist (href set in site.ts). */
+const socialLinks = site.social.flatMap((s) => (s.href ? [{ ...s, href: s.href }] : []));
+
 const linkClass = "inline-flex min-h-11 items-center hover:text-white";
 
 export function Footer() {
@@ -68,11 +71,13 @@ export function Footer() {
             © <CopyrightYear /> {site.name}. All rights reserved.
           </p>
           <ul className="flex gap-2">
-            {site.social.map((s) => (
+            {socialLinks.map((s) => (
               <li key={s.icon}>
                 <a
                   href={s.href}
-                  aria-label={s.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${s.label} (opens in a new tab)`}
                   className="inline-flex h-11 w-11 items-center justify-center rounded-full text-white hover:bg-white/10"
                 >
                   <Icon name={s.icon} />

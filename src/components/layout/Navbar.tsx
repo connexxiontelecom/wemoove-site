@@ -9,6 +9,9 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { site } from "@/content/site";
 
+/** Only accounts that exist (href set in site.ts). */
+const socialLinks = site.social.flatMap((s) => (s.href ? [{ ...s, href: s.href }] : []));
+
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -127,11 +130,13 @@ export function Navbar() {
               </a>
             </div>
             <ul className="mt-4 flex gap-2">
-              {site.social.map((s) => (
+              {socialLinks.map((s) => (
                 <li key={s.icon}>
                   <a
                     href={s.href}
-                    aria-label={s.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${s.label} (opens in a new tab)`}
                     className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink"
                   >
                     <Icon name={s.icon} />
