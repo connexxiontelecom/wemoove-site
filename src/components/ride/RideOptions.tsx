@@ -17,19 +17,19 @@ export function RideOptions() {
     <section aria-labelledby="options-title" className="bg-white">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <p className="font-bold text-muted">{options.eyebrow}</p>
-          <h2 id="options-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <p data-reveal className="font-bold text-muted">{options.eyebrow}</p>
+          <h2 id="options-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
             {options.title}
           </h2>
         </div>
 
-        <ul className="mt-12 grid gap-6 lg:grid-cols-3">
+        <ul data-reveal-stagger className="mt-12 grid gap-6 lg:grid-cols-3">
           {rides.map((r) => {
             const standard = r.id === "standard";
             return (
               <li
                 key={r.id}
-                className={`flex flex-col overflow-hidden rounded-3xl border ${standard ? "border-brand bg-brand/10 ring-2 ring-brand" : "border-line bg-paper"}`}
+                className={`flex flex-col overflow-hidden rounded-3xl border transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/10 ${standard ? "border-brand bg-brand/10 ring-2 ring-brand" : "border-line bg-paper"}`}
               >
                 <div className="relative aspect-[16/10]">
                   {r.photo && (

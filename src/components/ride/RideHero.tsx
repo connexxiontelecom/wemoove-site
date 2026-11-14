@@ -30,7 +30,7 @@ export function RideHero() {
 
         <div className="relative mx-auto w-full max-w-[540px]">
           <div className="relative aspect-[4/3] rotate-1 overflow-hidden rounded-[32px] shadow-2xl shadow-ink/20 ring-4 ring-white">
-            <Image src={hero.photo.src} alt={hero.photo.alt} fill preload sizes="(min-width: 1024px) 540px, 100vw" className="object-cover" />
+            <Image src={hero.photo.src} alt={hero.photo.alt} fill preload sizes="(min-width: 1024px) 540px, 100vw" className="animate-settle object-cover" />
           </div>
           {hero.chips.map((chip, i) => (
             <p

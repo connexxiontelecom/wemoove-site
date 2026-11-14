@@ -21,14 +21,14 @@ export function RidePlanner() {
     <section id="plan" aria-labelledby="plan-title" className="scroll-mt-24 bg-night text-white">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <p className="font-bold text-brand">{planner.eyebrow}</p>
-          <h2 id="plan-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <p data-reveal className="font-bold text-brand">{planner.eyebrow}</p>
+          <h2 id="plan-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
             {planner.title}
           </h2>
-          <p className="mt-4 text-lg text-white/80">{planner.body}</p>
+          <p data-reveal className="mt-4 text-lg text-white/80">{planner.body}</p>
         </div>
 
-        <div className="mt-12 grid items-center gap-8 lg:grid-cols-[minmax(0,28rem)_1fr]">
+        <div data-reveal-stagger className="mt-12 grid items-center gap-8 lg:grid-cols-[minmax(0,28rem)_1fr]">
           <div className="order-2 text-ink lg:order-1">
             <FareEstimator
               pickup={pickup}

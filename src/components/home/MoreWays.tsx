@@ -44,14 +44,14 @@ export function MoreWays() {
     <section id="more-rides" aria-labelledby="more-title" className="bg-brand/15">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="max-w-3xl">
-          <p className="font-bold text-muted">{moreWays.eyebrow}</p>
-          <h2 id="more-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <p data-reveal className="font-bold text-muted">{moreWays.eyebrow}</p>
+          <h2 id="more-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
             {moreWays.title}
           </h2>
-          <p className="mt-4 text-lg text-muted">{moreWays.body}</p>
+          <p data-reveal className="mt-4 text-lg text-muted">{moreWays.body}</p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[320px_1fr] lg:gap-8">
+        <div data-reveal-stagger className="mt-12 grid gap-6 lg:grid-cols-[320px_1fr] lg:gap-8">
           <div className="flex min-w-0 flex-col gap-6">
           {/* Selector: a scrolling row on mobile, a vertical list on desktop */}
           <div
@@ -100,7 +100,7 @@ export function MoreWays() {
               <Icon name="map" className="h-4 w-4" />
               {moreWays.comingNext.label}
             </p>
-            <p className="mt-2 text-lg font-bold">{moreWays.comingNext.title}</p>
+            <p data-reveal className="mt-2 text-lg font-bold">{moreWays.comingNext.title}</p>
             <p className="mt-1 text-muted">{moreWays.comingNext.body}</p>
           </div>
           </div>
@@ -129,7 +129,7 @@ export function MoreWays() {
               >
                 <div>
                   <h3 className="text-2xl font-extrabold md:text-3xl">{service.tagline}</h3>
-                  <p className="mt-3 text-lg text-muted">{service.body}</p>
+                  <p data-reveal className="mt-3 text-lg text-muted">{service.body}</p>
                   <a
                     href="#download"
                     className="mt-6 inline-flex min-h-11 items-center rounded-full bg-brand px-6 font-semibold text-ink transition-colors hover:bg-brand-strong"

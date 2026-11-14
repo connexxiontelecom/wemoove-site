@@ -48,7 +48,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b bg-white transition-colors ${scrolled ? "border-line" : "border-transparent"}`}
+      className={`nav-elevate sticky top-0 z-40 border-b bg-white transition-colors ${scrolled ? "border-line" : "border-transparent"}`}
     >
       <a
         href="#main"

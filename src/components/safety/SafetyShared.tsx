@@ -14,12 +14,12 @@ export function SafetyShared() {
     <section aria-labelledby="shared-title" className="bg-brand/15">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 md:grid-cols-2 lg:px-8 lg:py-20">
         <div>
-          <p className="font-bold text-muted">{shared.eyebrow}</p>
-          <h2 id="shared-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <p data-reveal className="font-bold text-muted">{shared.eyebrow}</p>
+          <h2 id="shared-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-4xl">
             {shared.title}
           </h2>
-          <p className="mt-4 text-lg text-muted">{shared.body}</p>
-          <ul className="mt-6 grid gap-2.5">
+          <p data-reveal className="mt-4 text-lg text-muted">{shared.body}</p>
+          <ul data-reveal-stagger className="mt-6 grid gap-2.5">
             {shared.points.map((point) => (
               <li key={point} className="flex items-start gap-3 font-semibold">
                 <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-save text-white">
@@ -31,7 +31,7 @@ export function SafetyShared() {
           </ul>
         </div>
 
-        <div className="rounded-3xl border border-line bg-white p-6 shadow-xl shadow-ink/5">
+        <div data-reveal="zoom" className="rounded-3xl border border-line bg-white p-6 shadow-xl shadow-ink/5">
           <svg viewBox="0 0 360 150" className="w-full" aria-hidden="true">
             <path d="M20 120 C70 98 110 60 182 58 S290 92 340 40" fill="none" className="stroke-line" strokeWidth={14} strokeLinecap="round" />
             <path

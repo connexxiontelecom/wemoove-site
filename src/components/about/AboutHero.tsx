@@ -23,7 +23,7 @@ export function AboutHero() {
 
         <div className="relative mx-auto h-[340px] w-full max-w-[520px] sm:h-[440px]">
           <div className="absolute left-0 top-0 h-[72%] w-[78%] -rotate-2 overflow-hidden rounded-3xl shadow-2xl shadow-ink/20 ring-4 ring-white">
-            <Image src={main.src} alt={main.alt} fill preload sizes="(min-width: 1024px) 400px, 78vw" className="object-cover" />
+            <Image src={main.src} alt={main.alt} fill preload sizes="(min-width: 1024px) 400px, 78vw" className="animate-settle object-cover" />
           </div>
           <div className="absolute bottom-0 right-0 h-[46%] w-[52%] rotate-3 overflow-hidden rounded-3xl shadow-2xl shadow-ink/20 ring-4 ring-white">
             <Image src={second.src} alt={second.alt} fill sizes="(min-width: 1024px) 270px, 52vw" className="object-cover" />

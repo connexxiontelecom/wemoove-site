@@ -8,12 +8,12 @@ export function OfferingsComing() {
   return (
     <section aria-labelledby="coming-title" className="bg-night text-white">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
-        <p className="font-bold text-brand">{coming.eyebrow}</p>
-        <h2 id="coming-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+        <p data-reveal className="font-bold text-brand">{coming.eyebrow}</p>
+        <h2 id="coming-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
           {coming.title}
         </h2>
 
-        <ul className="mt-12 grid gap-6 md:grid-cols-2">
+        <ul data-reveal-stagger className="mt-12 grid gap-6 md:grid-cols-2">
           {coming.items.map((item) => (
             <li key={item.name} className="flex flex-col rounded-3xl border border-dashed border-white/25 bg-white/5 p-6 sm:p-8">
               <div className="flex items-start justify-between gap-4">

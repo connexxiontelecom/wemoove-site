@@ -13,6 +13,7 @@ export function OfferingTileCard({ tile, large = false, className = "" }: Offeri
         src={tile.photo}
         alt={tile.photoAlt}
         fill
+        preload={large}
         sizes={large ? "(min-width: 1024px) 640px, 100vw" : "(min-width: 1024px) 320px, 100vw"}
         className="-z-10 object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none"
       />

@@ -8,13 +8,13 @@ export function SafetyTips() {
     <section id="tips" aria-labelledby="tips-title" className="scroll-mt-24 bg-white">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <p className="font-bold text-muted">{tips.eyebrow}</p>
-          <h2 id="tips-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <p data-reveal className="font-bold text-muted">{tips.eyebrow}</p>
+          <h2 id="tips-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
             {tips.title}
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div data-reveal-stagger className="mt-12 grid gap-6 md:grid-cols-2">
           {tips.groups.map((group, g) => (
             <div key={group.title} className={`rounded-3xl p-6 sm:p-8 ${g === 0 ? "bg-night text-white" : "border border-line bg-paper"}`}>
               <h3 className="flex items-center gap-3 text-xl font-bold">

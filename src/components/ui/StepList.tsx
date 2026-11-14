@@ -10,7 +10,7 @@ export function StepList({ title, steps }: StepListProps) {
   return (
     <section className="mt-16">
       <h2 className="mb-8 text-3xl font-bold md:text-4xl">{title}</h2>
-      <ol className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <ol data-reveal-stagger className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {steps.map((step, i) => (
           <li key={step.title}>
             <span

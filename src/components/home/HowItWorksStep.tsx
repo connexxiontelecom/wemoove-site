@@ -33,7 +33,7 @@ export function HowItWorksStep({ step, index, active, onActive }: HowItWorksStep
         </span>
         <div>
           <h3 className="text-2xl font-bold md:text-3xl">{step.title}</h3>
-          <p className="mt-2 max-w-md text-lg text-muted">{step.body}</p>
+          <p data-reveal className="mt-2 max-w-md text-lg text-muted">{step.body}</p>
         </div>
         {/* Mobile: the full app screen in a small phone frame (same 375×812 shape, so nothing is cropped) */}
         <div className="col-start-2 w-[200px] rounded-[30px] bg-night p-1.5 shadow-xl shadow-ink/20 md:hidden">

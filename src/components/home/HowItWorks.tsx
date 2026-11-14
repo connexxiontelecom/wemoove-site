@@ -17,8 +17,8 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" aria-labelledby="how-title" className="bg-white">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-        <p className="font-bold text-muted">{howItWorks.eyebrow}</p>
-        <h2 id="how-title" className="mt-2 max-w-2xl text-3xl font-extrabold tracking-tight md:text-5xl">
+        <p data-reveal className="font-bold text-muted">{howItWorks.eyebrow}</p>
+        <h2 id="how-title" data-reveal className="mt-2 max-w-2xl text-3xl font-extrabold tracking-tight md:text-5xl">
           {howItWorks.title}
         </h2>
 

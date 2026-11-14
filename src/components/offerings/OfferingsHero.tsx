@@ -22,7 +22,7 @@ export function OfferingsHero() {
           <p className="text-lg text-muted">{hero.body}</p>
         </div>
 
-        <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:auto-rows-[290px] lg:grid-cols-4">
+        <ul data-reveal-stagger className="mt-12 grid gap-4 md:grid-cols-2 lg:auto-rows-[290px] lg:grid-cols-4">
           {tiles.map((tile, i) => (
             <OfferingTileCard key={tile.id} tile={tile} large={i === 0} className={`${layout[i]} ${i === 0 ? "md:col-span-2" : ""}`} />
           ))}

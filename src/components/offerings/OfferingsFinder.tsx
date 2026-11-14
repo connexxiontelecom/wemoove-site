@@ -10,12 +10,12 @@ export function OfferingsFinder() {
     <section aria-labelledby="finder-title" className="bg-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 lg:grid-cols-[1fr_1.6fr] lg:px-8 lg:py-28">
         <div>
-          <p className="font-bold text-muted">{finder.eyebrow}</p>
-          <h2 id="finder-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <p data-reveal className="font-bold text-muted">{finder.eyebrow}</p>
+          <h2 id="finder-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
             {finder.title}
           </h2>
         </div>
-        <ul className="divide-y divide-line border-y border-line">
+        <ul data-reveal-stagger className="divide-y divide-line border-y border-line">
           {finder.needs.map((n) => (
             <li key={n.need}>
               <SectionLink

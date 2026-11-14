@@ -19,10 +19,10 @@ export default function OfferingsPage() {
       <OfferingsComing />
       <section aria-labelledby="offerings-cta-title" className="bg-brand">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center lg:py-20">
-          <h2 id="offerings-cta-title" className="text-3xl font-extrabold tracking-tight md:text-5xl">
+          <h2 id="offerings-cta-title" data-reveal className="text-3xl font-extrabold tracking-tight md:text-5xl">
             {offerings.cta.title}
           </h2>
-          <p className="mt-3 text-lg text-ink/80">{offerings.cta.body}</p>
+          <p data-reveal className="mt-3 text-lg text-ink/80">{offerings.cta.body}</p>
           <StoreBadges tone="brand" className="mt-8 justify-center" />
         </div>
       </section>

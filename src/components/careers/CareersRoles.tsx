@@ -10,13 +10,13 @@ export function CareersRoles() {
   return (
     <section id="roles" aria-labelledby="roles-title" className="scroll-mt-24 bg-white">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
-        <p className="font-bold text-muted">{roles.eyebrow}</p>
-        <h2 id="roles-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+        <p data-reveal className="font-bold text-muted">{roles.eyebrow}</p>
+        <h2 id="roles-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
           {roles.title}
         </h2>
 
         {roles.items.length > 0 ? (
-          <ul className="mt-10 divide-y divide-line border-y border-line">
+          <ul data-reveal-stagger className="mt-10 divide-y divide-line border-y border-line">
             {roles.items.map((role) => (
               <li key={role.title} className="flex flex-wrap items-center gap-4 py-6">
                 <div className="min-w-0 flex-1">
@@ -42,7 +42,7 @@ export function CareersRoles() {
             ))}
           </ul>
         ) : (
-          <div className="mt-10 flex flex-col items-start gap-6 rounded-3xl border-2 border-dashed border-line bg-paper p-8 sm:flex-row sm:items-center sm:p-10">
+          <div data-reveal="zoom" className="mt-10 flex flex-col items-start gap-6 rounded-3xl border-2 border-dashed border-line bg-paper p-8 sm:flex-row sm:items-center sm:p-10">
             <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand text-ink">
               <Icon name="mail" className="h-7 w-7" />
             </span>
@@ -61,11 +61,11 @@ export function CareersRoles() {
         )}
 
         <div className="mt-20">
-          <p className="font-bold text-muted">{apply.eyebrow}</p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight md:text-3xl">{apply.title}</h2>
-          <ol className="mt-8 grid gap-4 md:grid-cols-3">
+          <p data-reveal className="font-bold text-muted">{apply.eyebrow}</p>
+          <h2 data-reveal className="mt-2 text-2xl font-extrabold tracking-tight md:text-3xl">{apply.title}</h2>
+          <ol data-reveal-stagger className="mt-8 grid gap-4 md:grid-cols-3">
             {apply.steps.map((step, i) => (
-              <li key={step.title} className="rounded-3xl bg-paper p-6 ring-1 ring-line">
+              <li key={step.title} className="rounded-3xl bg-paper p-6 ring-1 ring-line transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/10">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand font-extrabold">{i + 1}</span>
                 <h3 className="mt-4 text-lg font-bold">{step.title}</h3>
                 <p className="mt-1 text-muted">{step.body}</p>

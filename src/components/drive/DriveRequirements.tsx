@@ -9,7 +9,7 @@ const { requirements, safety } = drive;
 export function DriveRequirements() {
   return (
     <section aria-labelledby="requirements-title" className="bg-white">
-      <div className="mx-auto grid max-w-6xl gap-6 px-6 py-20 lg:grid-cols-[1.4fr_1fr] lg:px-8 lg:py-28">
+      <div data-reveal-stagger className="mx-auto grid max-w-6xl gap-6 px-6 py-20 lg:grid-cols-[1.4fr_1fr] lg:px-8 lg:py-28">
         <div className="rounded-3xl border border-line bg-paper p-6 sm:p-10">
           <p className="font-bold text-muted">{requirements.eyebrow}</p>
           <h2 id="requirements-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-4xl">

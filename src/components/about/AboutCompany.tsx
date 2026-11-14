@@ -11,11 +11,11 @@ export function AboutCompany() {
     <section aria-labelledby="company-title" className="bg-white">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 lg:grid-cols-[1.2fr_1fr] lg:px-8 lg:py-28">
         <div>
-          <p className="font-bold text-muted">{company.eyebrow}</p>
-          <h2 id="company-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <p data-reveal className="font-bold text-muted">{company.eyebrow}</p>
+          <h2 id="company-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-4xl">
             {company.title}
           </h2>
-          <p className="mt-4 text-lg text-muted">{company.body}</p>
+          <p data-reveal className="mt-4 text-lg text-muted">{company.body}</p>
           <a
             href={company.cta.href}
             target="_blank"
@@ -28,7 +28,7 @@ export function AboutCompany() {
           </a>
         </div>
 
-        <div className="overflow-hidden rounded-3xl border border-line bg-paper">
+        <div data-reveal="right" className="overflow-hidden rounded-3xl border border-line bg-paper">
           <div className="flex items-center gap-4 bg-brand p-6">
             <Image src="/brand/03_Icon/WeMoove_Icon_Color.svg" alt="" width={56} height={56} unoptimized className="h-14 w-14 rounded-2xl bg-white p-1.5" />
             <p>

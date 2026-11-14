@@ -11,8 +11,8 @@ export function AboutServices() {
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="font-bold text-muted">{services.eyebrow}</p>
-            <h2 id="services-title" className="mt-2 max-w-xl text-3xl font-extrabold tracking-tight md:text-4xl">
+            <p data-reveal className="font-bold text-muted">{services.eyebrow}</p>
+            <h2 id="services-title" data-reveal className="mt-2 max-w-xl text-3xl font-extrabold tracking-tight md:text-4xl">
               {services.title}
             </h2>
           </div>
@@ -21,7 +21,7 @@ export function AboutServices() {
           </SectionLink>
         </div>
 
-        <ul className="-mx-6 mt-10 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-2 lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0">
+        <ul data-reveal-stagger className="-mx-6 mt-10 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-2 lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0">
           {services.items.map((item) => (
             <li
               key={item.name}

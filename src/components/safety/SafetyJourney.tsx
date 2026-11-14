@@ -8,8 +8,8 @@ export function SafetyJourney() {
     <section aria-labelledby="journey-title" className="bg-paper">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <p className="font-bold text-muted">{journey.eyebrow}</p>
-          <h2 id="journey-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <p data-reveal className="font-bold text-muted">{journey.eyebrow}</p>
+          <h2 id="journey-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
             {journey.title}
           </h2>
         </div>

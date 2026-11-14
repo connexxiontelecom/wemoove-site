@@ -8,12 +8,12 @@ export function DriveSteps() {
     <section aria-labelledby="steps-title" className="bg-night text-white">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <p className="font-bold text-brand">{steps.eyebrow}</p>
-          <h2 id="steps-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <p data-reveal className="font-bold text-brand">{steps.eyebrow}</p>
+          <h2 id="steps-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
             {steps.title}
           </h2>
         </div>
-        <ol className="relative mt-14 grid gap-10 md:grid-cols-4 md:gap-6">
+        <ol data-reveal-stagger className="relative mt-14 grid gap-10 md:grid-cols-4 md:gap-6">
           {steps.items.map((step, i) => (
             <li key={step.title} className="relative flex gap-5 md:block">
               {/* Connector to the next step: down on phones, across on desktop */}

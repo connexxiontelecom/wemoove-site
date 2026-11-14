@@ -25,7 +25,7 @@ const styles: Record<Tone, { primary: string; secondary: string }> = {
 };
 
 export function StoreBadges({ tone = "light", className = "" }: StoreBadgesProps) {
-  const base = "inline-flex min-h-12 items-center gap-2 rounded-full px-5 font-semibold transition-colors";
+  const base = "inline-flex min-h-12 items-center gap-2 rounded-full px-5 font-semibold transition-[color,background-color,scale,translate] duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97]";
   const { appStore, playStore } = site.stores;
   return (
     <div className={`flex flex-wrap gap-3 ${className}`}>

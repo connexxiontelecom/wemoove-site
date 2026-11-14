@@ -8,7 +8,7 @@ const action = "inline-flex min-h-12 items-center gap-2 rounded-full px-5 font-s
 export function SafetyHelp() {
   return (
     <section id="help" aria-labelledby="help-title" className="scroll-mt-24 bg-paper">
-      <div className="mx-auto grid max-w-6xl gap-6 px-6 py-20 lg:grid-cols-[1.3fr_1fr] lg:px-8 lg:py-24">
+      <div data-reveal-stagger className="mx-auto grid max-w-6xl gap-6 px-6 py-20 lg:grid-cols-[1.3fr_1fr] lg:px-8 lg:py-24">
         <div className="rounded-3xl border border-line bg-white p-6 sm:p-10">
           <p className="font-bold text-muted">{help.eyebrow}</p>
           <h2 id="help-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-4xl">

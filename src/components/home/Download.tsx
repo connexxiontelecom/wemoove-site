@@ -9,13 +9,13 @@ export function Download() {
     <section id="download" aria-labelledby="download-title" className="overflow-hidden bg-brand">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-20 md:grid-cols-[1.3fr_1fr] md:py-20 lg:px-8">
         <div className="text-center md:text-left">
-          <h2 id="download-title" className="text-4xl font-extrabold tracking-tight text-ink md:text-6xl">
+          <h2 id="download-title" data-reveal className="text-4xl font-extrabold tracking-tight text-ink md:text-6xl">
             {download.title}
           </h2>
-          <p className="mt-4 text-lg font-medium text-ink">{download.body}</p>
+          <p data-reveal className="mt-4 text-lg font-medium text-ink">{download.body}</p>
           <StoreBadges tone="brand" className="mt-8 justify-center md:justify-start" />
         </div>
-        <div className="flex justify-center md:-mb-40">
+        <div data-reveal="zoom" className="flex justify-center md:-mb-40">
           <PhoneFrame size="md" className="translate-y-10 md:translate-y-0">
             <Image
               src={download.screenshot.src}

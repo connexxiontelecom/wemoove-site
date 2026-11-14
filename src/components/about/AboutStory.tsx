@@ -9,13 +9,13 @@ export function AboutStory() {
     <section aria-labelledby="story-title" className="bg-white">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <p className="font-bold text-muted">{story.eyebrow}</p>
-          <h2 id="story-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <p data-reveal className="font-bold text-muted">{story.eyebrow}</p>
+          <h2 id="story-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
             {story.title}
           </h2>
         </div>
 
-        <ol className="relative mt-14 grid gap-6 md:grid-cols-3">
+        <ol data-reveal-stagger className="relative mt-14 grid gap-6 md:grid-cols-3">
           {/* Connecting line behind the step icons on desktop */}
           <div className="absolute left-8 right-8 top-[52px] hidden h-0.5 bg-line md:block" aria-hidden="true" />
           {story.beats.map((beat, i) => {
@@ -40,7 +40,7 @@ export function AboutStory() {
           })}
         </ol>
 
-        <blockquote className="mx-auto mt-20 max-w-3xl text-center">
+        <blockquote data-reveal="zoom" className="mx-auto mt-20 max-w-3xl text-center">
           <span className="block text-6xl font-extrabold leading-none text-brand" aria-hidden="true">
             “
           </span>

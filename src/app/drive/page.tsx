@@ -25,10 +25,10 @@ export default function DrivePage() {
       <FaqSection id="faq-title" eyebrow={drive.faq.eyebrow} title={drive.faq.title} items={drive.faq.items} />
       <section aria-labelledby="drive-cta-title" className="bg-brand">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center lg:py-20">
-          <h2 id="drive-cta-title" className="text-3xl font-extrabold tracking-tight md:text-5xl">
+          <h2 id="drive-cta-title" data-reveal className="text-3xl font-extrabold tracking-tight md:text-5xl">
             {drive.cta.title}
           </h2>
-          <p className="mt-3 text-lg text-ink/80">{drive.cta.body}</p>
+          <p data-reveal className="mt-3 text-lg text-ink/80">{drive.cta.body}</p>
           <StoreBadges tone="brand" className="mt-8 justify-center" />
         </div>
       </section>

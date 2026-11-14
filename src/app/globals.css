@@ -74,3 +74,112 @@ html {
   background-image: radial-gradient(var(--color-line) 1.2px, transparent 1.2px);
   background-size: 22px 22px;
 }
+
+/* ------------------------------------------------------------------ */
+/* Motion system. Everything below is skipped for prefers-reduced-motion. */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Scroll reveals (driven by RevealObserver). Hidden only once JS is ready and only below the fold. */
+  .reveal-ready :is([data-reveal], [data-reveal-stagger] > *):not(.reveal-done) {
+    transition:
+      opacity 0.7s var(--ease-out-soft),
+      transform 0.9s var(--ease-out-expo),
+      filter 0.7s var(--ease-out-soft);
+    transition-delay: calc(var(--reveal-i, 0) * 90ms);
+  }
+  .reveal-ready :is([data-reveal], [data-reveal-stagger] > *):not(.is-revealed) {
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
+  }
+  .reveal-ready [data-reveal="zoom"]:not(.is-revealed) {
+    transform: scale(0.94);
+    filter: blur(6px);
+  }
+  .reveal-ready [data-reveal="left"]:not(.is-revealed) {
+    transform: translate3d(-48px, 0, 0);
+  }
+  .reveal-ready [data-reveal="right"]:not(.is-revealed) {
+    transform: translate3d(48px, 0, 0);
+  }
+  .reveal-ready [data-reveal="fade"]:not(.is-revealed) {
+    transform: none;
+  }
+
+  /* Page heroes: the photo settles in with a slow zoom-out. */
+  .animate-settle {
+    animation: settle 1.4s var(--ease-out-expo) both;
+  }
+  @keyframes settle {
+    from {
+      transform: scale(1.08);
+      opacity: 0.6;
+    }
+  }
+
+  /* Navbar gains a soft shadow once the page scrolls (where scroll-driven animations are supported). */
+  @supports (animation-timeline: scroll()) {
+    .nav-elevate {
+      animation: nav-elevate linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 120px;
+    }
+    @keyframes nav-elevate {
+      to {
+        box-shadow: 0 10px 30px -12px rgb(11 11 15 / 0.18);
+      }
+    }
+  }
+
+  /* Page transitions between routes (React <ViewTransition default="page"> in the root layout). */
+  ::view-transition-old(.page) {
+    animation: page-out 180ms ease-in both;
+  }
+  ::view-transition-new(.page) {
+    animation: page-in 420ms var(--ease-out-expo) 60ms both;
+  }
+  @keyframes page-out {
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+      filter: blur(2px);
+    }
+  }
+  @keyframes page-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+      filter: blur(3px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Consecutive revealed siblings (eyebrow → title → lead) stagger automatically. */
+  .reveal-ready [data-reveal] + [data-reveal] {
+    --reveal-i: 1;
+  }
+  .reveal-ready [data-reveal] + [data-reveal] + [data-reveal] {
+    --reveal-i: 2;
+  }
+  /* List children stagger by position (capped so long lists don't keep the last item waiting). */
+  [data-reveal-stagger] > :nth-child(2) { --reveal-i: 1; }
+  [data-reveal-stagger] > :nth-child(3) { --reveal-i: 2; }
+  [data-reveal-stagger] > :nth-child(4) { --reveal-i: 3; }
+  [data-reveal-stagger] > :nth-child(5) { --reveal-i: 4; }
+  [data-reveal-stagger] > :nth-child(6) { --reveal-i: 5; }
+  [data-reveal-stagger] > :nth-child(n + 7) { --reveal-i: 6; }
+}

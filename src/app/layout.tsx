@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { ViewTransition } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/ui/MotionProvider";
+import { RevealObserver } from "@/components/ui/RevealObserver";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -36,14 +38,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-NG" className={`${jakarta.variable} antialiased`}>
+    <html lang="en-NG" data-scroll-behavior="smooth" className={`${jakarta.variable} antialiased`}>
       <body className="flex min-h-screen flex-col font-sans">
         <MotionProvider>
           <Navbar />
           <main id="main" className="flex-1">
-            {children}
+            {/* Route changes cross-fade and lift (see "Page transitions" in globals.css). */}
+            <ViewTransition default="page">{children}</ViewTransition>
           </main>
           <Footer />
+          <RevealObserver />
         </MotionProvider>
       </body>
     </html>

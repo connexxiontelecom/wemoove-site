@@ -20,7 +20,7 @@ type ButtonLinkProps = {
 
 /** A link styled as a rounded-full button. Internal paths use next/link (via SectionLink). */
 export function ButtonLink({ href, children, variant = "brand", className = "", onClick }: ButtonLinkProps) {
-  const classes = `inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 font-semibold transition-colors ${variants[variant]} ${className}`;
+  const classes = `inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 font-semibold transition-[color,background-color,scale] duration-200 active:scale-[0.97] ${variants[variant]} ${className}`;
   if (href.startsWith("/")) {
     return (
       <SectionLink href={href} className={classes} onClick={onClick}>

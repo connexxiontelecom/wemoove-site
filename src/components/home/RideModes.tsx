@@ -21,13 +21,13 @@ export function RideModes() {
   return (
     <section id="ride-modes" aria-labelledby="modes-title" className="bg-paper">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-        <p className="font-bold text-muted">{rideModes.eyebrow}</p>
-        <h2 id="modes-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+        <p data-reveal className="font-bold text-muted">{rideModes.eyebrow}</p>
+        <h2 id="modes-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
           {rideModes.title}
         </h2>
-        <p className="mt-3 text-lg text-muted">{rideModes.intro}</p>
+        <p data-reveal className="mt-3 text-lg text-muted">{rideModes.intro}</p>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div data-reveal-stagger className="mt-12 grid gap-6 md:grid-cols-2">
           {rideModes.modes.map((mode) => (
             <article
               key={mode.id}

@@ -8,14 +8,14 @@ export function CareersTeams() {
     <section aria-labelledby="teams-title" className="bg-paper">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <p className="font-bold text-muted">{teams.eyebrow}</p>
-          <h2 id="teams-title" className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <p data-reveal className="font-bold text-muted">{teams.eyebrow}</p>
+          <h2 id="teams-title" data-reveal className="mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
             {teams.title}
           </h2>
         </div>
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2">
+        <ul data-reveal-stagger className="mt-12 grid gap-4 sm:grid-cols-2">
           {teams.items.map((team, i) => (
-            <li key={team.title} className="flex gap-5 rounded-3xl border border-line bg-white p-6 sm:p-7">
+            <li key={team.title} className="flex gap-5 rounded-3xl border border-line bg-white p-6 sm:p-7 transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/10">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ink text-brand">
                 <Icon name={team.icon} className="h-6 w-6" />
               </span>

@@ -34,7 +34,7 @@ export function DriveHero() {
 
         <div className="relative mx-auto w-full max-w-[520px]">
           <div className="relative aspect-[4/3] overflow-hidden rounded-[32px] shadow-2xl shadow-ink/50 ring-1 ring-white/10">
-            <Image src={hero.photo.src} alt={hero.photo.alt} fill preload sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
+            <Image src={hero.photo.src} alt={hero.photo.alt} fill preload sizes="(min-width: 1024px) 520px, 100vw" className="animate-settle object-cover" />
           </div>
 
           {/* Mock trip request card */}
