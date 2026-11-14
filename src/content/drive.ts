@@ -1,3 +1,4 @@
+import type { Faq } from "@/components/ui/FaqSection";
 import type { IconName } from "@/components/ui/Icon";
 
 /**
@@ -8,7 +9,6 @@ import type { IconName } from "@/components/ui/Icon";
 
 type Benefit = { icon: IconName; title: string; body: string };
 type Requirement = { title: string; body: string };
-type Faq = { q: string; a: string };
 
 export const drive = {
   pageName: "Drive with WeMoove",

@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, animate, m, useInView, useReducedMotion } from "framer-motion";
-import { useEffect, useId, useMemo, useRef } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { MapTag } from "@/components/home/MapTag";
 import { AREAS, type Area } from "@/content/areas";
 import { home } from "@/content/home";
@@ -26,6 +26,8 @@ const CARD_ASPECT = 16 / 10;
 const MIN_CARD_WIDTH = 200;
 /** Card width (in map units) at which markers are drawn at their natural size. */
 const CARD_REFERENCE_WIDTH = 290;
+/** On-screen card width (px) the numbers above are tuned for. Wider cards show more of the map. */
+const CARD_BASE_PX = 340;
 const ROADS = [
   ...DECOR_ROADS.map((pts) => ({ d: toPath(pts), major: false })),
   ...EDGES.map((e) => ({ d: toPath(edgePoints(e)), major: e.major })),
@@ -44,6 +46,19 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
   const inView = useInView(svgRef);
   const patternId = `streets-${useId().replace(/:/g, "")}`;
   const isCard = variant === "card";
+
+  // Card: wider than a phone card → show more of the city (and let markers grow a little, not 1:1 with width).
+  const [cardScale, setCardScale] = useState(1);
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!isCard || !svg) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const next = Math.max(1, Math.round((entry.contentRect.width / CARD_BASE_PX) ** 0.6 * 4) / 4);
+      setCardScale((prev) => (prev === next ? prev : next));
+    });
+    observer.observe(svg);
+    return () => observer.disconnect();
+  }, [isCard]);
 
   const quote = getQuote(pickup, destination);
   const hasRoute = quote !== null;
@@ -72,22 +87,24 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
             { x: from.x + 70 * scale, y: from.y + 30 * scale },
           ];
       // Reserve ~44px of headroom for the "Live route preview" label.
-      const first = fitViewBox(pts, CARD_ASPECT, MIN_CARD_WIDTH);
+      const minWidth = MIN_CARD_WIDTH * cardScale;
+      const first = fitViewBox(pts, CARD_ASPECT, minWidth);
       const topY = Math.min(...pts.map((pt) => pt.y));
-      return fitViewBox([...pts, { x: first.x + first.w / 2, y: topY - 44 * (first.w / 340) }], CARD_ASPECT, MIN_CARD_WIDTH);
+      return fitViewBox([...pts, { x: first.x + first.w / 2, y: topY - 44 * (first.w / (CARD_BASE_PX * cardScale)) }], CARD_ASPECT, minWidth);
     };
     // Two passes: marker size depends on zoom, and zoom depends on marker size.
+    const reference = CARD_REFERENCE_WIDTH * cardScale;
     const pass1 = framed(1);
-    const vb = framed(pass1.w / CARD_REFERENCE_WIDTH);
+    const vb = framed(pass1.w / reference);
     return {
       viewBox: `${vb.x.toFixed(1)} ${vb.y.toFixed(1)} ${vb.w.toFixed(1)} ${vb.h.toFixed(1)}`,
-      k: vb.w / CARD_REFERENCE_WIDTH,
+      k: vb.w / reference,
     };
-  }, [isCard, hasRoute, route, from, to, mid]);
+  }, [isCard, hasRoute, route, from, to, mid, cardScale]);
 
   // Phone: tags flip below pins near the top so they never hide under the address bar.
   // Card: on short trips (ends under ~110px apart) the drop-off tag goes below and the chip moves left.
-  const pxPerUnit = isCard ? 340 / (k * CARD_REFERENCE_WIDTH) : 1;
+  const pxPerUnit = isCard ? CARD_BASE_PX / (k * CARD_REFERENCE_WIDTH) : 1;
   const close = isCard && Math.hypot(to.x - from.x, to.y - from.y) * pxPerUnit < 110;
   const pickupBelow = !isCard && from.y < 110;
   const dropBelow = isCard ? close : to.y < 110;

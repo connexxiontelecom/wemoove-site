@@ -39,7 +39,7 @@ export const site = {
   ] satisfies SocialLink[],
 
   nav: [
-    { label: "Ride", href: "/#ride-modes" },
+    { label: "Ride", href: "/ride" },
     { label: "Drive & Earn", href: "/drive" },
     { label: "Safety", href: "/safety" },
     { label: "About", href: "/about" },
@@ -63,7 +63,7 @@ export const site = {
       {
         title: "Services",
         items: [
-          { label: "Ride", href: "/#ride-modes" },
+          { label: "Ride", href: "/ride" },
           { label: "Drive & Earn", href: "/drive" },
           { label: "Deliveries", href: "/#more-rides" },
           { label: "Interstate", comingSoon: true },
@@ -81,5 +81,5 @@ export const site = {
   },
 
   /** Every public page, used for sitemap.xml. */
-  routes: ["/", "/drive", "/about", "/how-it-works", "/our-offerings", "/safety", "/privacy-policy"],
+  routes: ["/", "/ride", "/drive", "/about", "/how-it-works", "/our-offerings", "/safety", "/privacy-policy"],
 } as const;
