@@ -27,8 +27,8 @@ export const site = {
   },
 
   stores: {
-    /** Set to the App Store URL once the listing is approved. While null, the badge shows "Coming soon". */
-    appStore: null as string | null,
+    /** App Store listing. Set to null to show a "Coming soon" badge instead. */
+    appStore: "https://apps.apple.com/us/app/wemoove-v2/id6816731658" as string | null,
     playStore: "https://play.google.com/store/apps/details?id=com.connexxion.weemove.wemoove_v2",
   },
 
