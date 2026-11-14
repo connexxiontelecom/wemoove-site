@@ -170,7 +170,8 @@ export const home = {
         body: "Our everyday ride around Abuja. Have the car to yourself with Solo, or go Shared with people heading your way and pay less.",
         points: ["Ride Solo, or go Shared and pay less", "Verified drivers on every trip", "Fare shown before you book"],
         scene: "standard",
-        photo: null,
+        photo: "/assets/img/services/standard.jpg",
+        photoAlt: "A smiling driver with his arm on the open window of a silver Toyota Corolla on a tree-lined street in Abuja",
       },
       {
         id: "executive",
