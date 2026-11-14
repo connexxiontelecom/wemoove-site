@@ -1,4 +1,9 @@
-import { PageBanner } from "@/components/layout/PageBanner";
+import { SafetyHelp } from "@/components/safety/SafetyHelp";
+import { SafetyHero } from "@/components/safety/SafetyHero";
+import { SafetyJourney } from "@/components/safety/SafetyJourney";
+import { SafetyShared } from "@/components/safety/SafetyShared";
+import { SafetyTips } from "@/components/safety/SafetyTips";
+import { StoreBadges } from "@/components/ui/StoreBadges";
 import { safety } from "@/content/safety";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -11,14 +16,20 @@ export const metadata = pageMetadata({
 export default function SafetyPage() {
   return (
     <>
-      <PageBanner title={safety.pageName} />
-      <div className="mx-auto max-w-4xl px-6 py-16 lg:px-8 lg:py-24">
-        {safety.paragraphs.map((p) => (
-          <p key={p} className="mb-4 text-lg text-muted">
-            {p}
-          </p>
-        ))}
-      </div>
+      <SafetyHero />
+      <SafetyJourney />
+      <SafetyShared />
+      <SafetyTips />
+      <SafetyHelp />
+      <section aria-labelledby="safety-cta-title" className="bg-brand">
+        <div className="mx-auto max-w-3xl px-6 py-16 text-center lg:py-20">
+          <h2 id="safety-cta-title" className="text-3xl font-extrabold tracking-tight md:text-5xl">
+            {safety.cta.title}
+          </h2>
+          <p className="mt-3 text-lg text-ink/80">{safety.cta.body}</p>
+          <StoreBadges tone="brand" className="mt-8 justify-center" />
+        </div>
+      </section>
     </>
   );
 }
