@@ -42,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-screen flex-col font-sans">
         <MotionProvider>
           <Navbar />
-          <main id="main" className="flex-1">
+          <main id="main" className="flex-1 overflow-x-clip">
             {/* Route changes cross-fade and lift (see "Page transitions" in globals.css). */}
             <ViewTransition default="page">{children}</ViewTransition>
           </main>

@@ -75,12 +75,12 @@ export const site = {
         items: [
           { label: "Safety", href: "/safety" },
           { label: "Privacy Policy", href: "/privacy-policy" },
-          { label: "Contact", href: `mailto:${EMAIL}` },
+          { label: "Contact", href: "/contact" },
         ],
       },
     ] satisfies { title: string; items: FooterItem[] }[],
   },
 
   /** Every public page, used for sitemap.xml. */
-  routes: ["/", "/ride", "/drive", "/about", "/how-it-works", "/our-offerings", "/careers", "/safety", "/privacy-policy"],
+  routes: ["/", "/ride", "/drive", "/about", "/how-it-works", "/our-offerings", "/careers", "/contact", "/safety", "/privacy-policy"],
 } as const;
