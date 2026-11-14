@@ -3,6 +3,7 @@
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 import { Card } from "@/components/ui/Card";
+import { Icon } from "@/components/ui/Icon";
 import { Toggle } from "@/components/ui/Toggle";
 import { AREAS, type Area } from "@/content/areas";
 import { home } from "@/content/home";
@@ -21,7 +22,8 @@ type FareEstimatorProps = {
 
 const copy = home.hero.estimator;
 const selectClass =
-  "mt-1.5 block min-h-12 w-full rounded-xl border border-line bg-white px-3 font-semibold text-ink focus-visible:border-ink";
+  "block min-h-12 w-full cursor-pointer appearance-none truncate rounded-xl border border-line bg-white pl-3.5 pr-10 font-semibold text-ink focus-visible:border-ink";
+const chevronClass = "pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted";
 
 function isArea(value: string): value is Area {
   return (AREAS as readonly string[]).includes(value);
@@ -57,31 +59,37 @@ export function FareEstimator({
           <label htmlFor="fare-pickup" className="text-sm font-semibold text-muted">
             {copy.pickupLabel}
           </label>
-          <select
-            id="fare-pickup"
-            value={pickup}
-            onChange={(e) => isArea(e.target.value) && onPickupChange(e.target.value)}
-            className={selectClass}
-          >
-            {AREAS.map((area) => (
-              <option key={area}>{area}</option>
-            ))}
-          </select>
+          <div className="relative mt-1.5">
+            <select
+              id="fare-pickup"
+              value={pickup}
+              onChange={(e) => isArea(e.target.value) && onPickupChange(e.target.value)}
+              className={selectClass}
+            >
+              {AREAS.map((area) => (
+                <option key={area}>{area}</option>
+              ))}
+            </select>
+            <Icon name="chevronDown" className={chevronClass} />
+          </div>
         </div>
         <div>
           <label htmlFor="fare-destination" className="text-sm font-semibold text-muted">
             {copy.destinationLabel}
           </label>
-          <select
-            id="fare-destination"
-            value={destination}
-            onChange={(e) => isArea(e.target.value) && onDestinationChange(e.target.value)}
-            className={selectClass}
-          >
-            {AREAS.map((area) => (
-              <option key={area}>{area}</option>
-            ))}
-          </select>
+          <div className="relative mt-1.5">
+            <select
+              id="fare-destination"
+              value={destination}
+              onChange={(e) => isArea(e.target.value) && onDestinationChange(e.target.value)}
+              className={selectClass}
+            >
+              {AREAS.map((area) => (
+                <option key={area}>{area}</option>
+              ))}
+            </select>
+            <Icon name="chevronDown" className={chevronClass} />
+          </div>
         </div>
       </div>
 
