@@ -17,7 +17,10 @@ export const site = {
   tagline: "Convenient & Safe Ride Sharing",
   description:
     "WeMoove is a safe, convenient ride sharing app in Abuja. Book a car to yourself, or tag along with riders going your way and pay less.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  // NEXT_PUBLIC_SITE_URL wins (set it on cPanel). On Vercel previews, fall back to the deployment's own URL.
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : "http://localhost:3000"),
   company: "Connexxion Telecom",
 
   contact: {
