@@ -56,7 +56,7 @@ export const site = {
           { label: "About", href: "/about" },
           { label: "How it works", href: "/how-it-works" },
           { label: "Our offerings", href: "/our-offerings" },
-          { label: "Career", comingSoon: true },
+          { label: "Careers", href: "/careers" },
           { label: "Blog", comingSoon: true },
         ],
       },
@@ -81,5 +81,5 @@ export const site = {
   },
 
   /** Every public page, used for sitemap.xml. */
-  routes: ["/", "/ride", "/drive", "/about", "/how-it-works", "/our-offerings", "/safety", "/privacy-policy"],
+  routes: ["/", "/ride", "/drive", "/about", "/how-it-works", "/our-offerings", "/careers", "/safety", "/privacy-policy"],
 } as const;
