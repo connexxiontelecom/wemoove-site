@@ -2,7 +2,7 @@
 
 import { AnimatePresence, m } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
+import { SectionLink } from "@/components/ui/SectionLink";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
@@ -54,20 +54,20 @@ export function Navbar() {
         Skip to content
       </a>
       <nav aria-label="Main" className="mx-auto flex h-[72px] max-w-7xl items-center gap-4 px-6 lg:px-8">
-        <Link href="/" className="mr-auto flex min-h-11 items-center" onClick={close}>
+        <SectionLink href="/" className="mr-auto flex min-h-11 items-center" onClick={close}>
           <Image src="/brand/01_Logo/Horizontal/WeMoove_Logo_Horizontal_Color.svg" alt="WeMoove home" width={1046} height={386} unoptimized preload fetchPriority="high" className="h-14 w-auto" />
-        </Link>
+        </SectionLink>
 
         <ul className="hidden items-center gap-1 lg:flex">
           {site.nav.map((link) => (
             <li key={link.href}>
-              <Link
+              <SectionLink
                 href={link.href}
                 aria-current={pathname === link.href ? "page" : undefined}
                 className="inline-flex min-h-11 items-center rounded-full px-4 font-semibold text-muted transition-colors hover:text-ink aria-[current=page]:text-ink"
               >
                 {link.label}
-              </Link>
+              </SectionLink>
             </li>
           ))}
         </ul>
@@ -103,7 +103,7 @@ export function Navbar() {
             <ul className="flex flex-col">
               {site.nav.map((link, i) => (
                 <li key={link.href} className="border-b border-line">
-                  <Link
+                  <SectionLink
                     ref={i === 0 ? firstLink : undefined}
                     href={link.href}
                     onClick={close}
@@ -111,7 +111,7 @@ export function Navbar() {
                     className="flex min-h-16 items-center text-2xl font-bold"
                   >
                     {link.label}
-                  </Link>
+                  </SectionLink>
                 </li>
               ))}
             </ul>

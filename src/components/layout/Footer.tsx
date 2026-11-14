@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { SectionLink } from "@/components/ui/SectionLink";
 import { CopyrightYear } from "@/components/layout/CopyrightYear";
 import { Icon } from "@/components/ui/Icon";
 import { site } from "@/content/site";
@@ -24,9 +24,9 @@ export function Footer() {
                   <li key={item.label}>
                     {item.href ? (
                       item.href.startsWith("/") ? (
-                        <Link href={item.href} className={linkClass}>
+                        <SectionLink href={item.href} className={linkClass}>
                           {item.label}
-                        </Link>
+                        </SectionLink>
                       ) : (
                         <a href={item.href} className={linkClass}>
                           {item.label}

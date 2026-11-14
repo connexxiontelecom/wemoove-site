@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { SectionLink } from "@/components/ui/SectionLink";
 import { useState } from "react";
 import { FareEstimator } from "@/components/home/FareEstimator";
 import { HeroPhone } from "@/components/home/HeroPhone";
@@ -77,9 +77,9 @@ export function Hero() {
             style={rise(4).style}
           >
             <StoreBadges />
-            <Link href="/#drive" className="inline-flex min-h-11 items-center font-bold text-ink underline-offset-4 hover:underline">
+            <SectionLink href="/#drive" className="inline-flex min-h-11 items-center font-bold text-ink underline-offset-4 hover:underline">
               {hero.driveLink}
-            </Link>
+            </SectionLink>
           </div>
         </div>
 
