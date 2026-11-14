@@ -1,5 +1,7 @@
-import { PageBanner } from "@/components/layout/PageBanner";
-import { Icon } from "@/components/ui/Icon";
+import { OfferingsComing } from "@/components/offerings/OfferingsComing";
+import { OfferingsFinder } from "@/components/offerings/OfferingsFinder";
+import { OfferingsHero } from "@/components/offerings/OfferingsHero";
+import { StoreBadges } from "@/components/ui/StoreBadges";
 import { offerings } from "@/content/offerings";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -12,29 +14,18 @@ export const metadata = pageMetadata({
 export default function OfferingsPage() {
   return (
     <>
-      <PageBanner title={offerings.pageName} />
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-2 lg:px-8 lg:py-24">
-        {offerings.items.map((item) => (
-          <section key={item.title}>
-            <span className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand/20 text-ink">
-              <Icon name={item.icon} className="h-7 w-7" />
-            </span>
-            <h2 className="mb-2 flex flex-wrap items-center gap-2 text-2xl font-bold">
-              {item.title}
-              {item.comingSoon && (
-                <span className="rounded-full bg-ink px-2.5 py-0.5 text-xs font-semibold text-white">
-                  Coming soon
-                </span>
-              )}
-            </h2>
-            {item.paragraphs.map((p) => (
-              <p key={p} className="mb-3 text-muted">
-                {p}
-              </p>
-            ))}
-          </section>
-        ))}
-      </div>
+      <OfferingsHero />
+      <OfferingsFinder />
+      <OfferingsComing />
+      <section aria-labelledby="offerings-cta-title" className="bg-brand">
+        <div className="mx-auto max-w-3xl px-6 py-16 text-center lg:py-20">
+          <h2 id="offerings-cta-title" className="text-3xl font-extrabold tracking-tight md:text-5xl">
+            {offerings.cta.title}
+          </h2>
+          <p className="mt-3 text-lg text-ink/80">{offerings.cta.body}</p>
+          <StoreBadges tone="brand" className="mt-8 justify-center" />
+        </div>
+      </section>
     </>
   );
 }
