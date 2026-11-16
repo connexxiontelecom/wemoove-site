@@ -1,12 +1,13 @@
 "use client";
 
-import { AnimatePresence, animate, m, useInView, useReducedMotion } from "framer-motion";
+import { AnimatePresence, animate, m, useInView } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { MapTag } from "@/components/home/MapTag";
 import { AREAS, type Area } from "@/content/areas";
 import { home } from "@/content/home";
 import { DECOR_ROADS, EDGES, NODES, edgePoints, findRoute, fitViewBox, pointAt, toPath, type Point } from "@/lib/abujaMap";
-import { getQuote, type RideMode } from "@/lib/pricing";
+import type { RideMode } from "@/lib/ride";
 
 type RideMapProps = {
   pickup: Area;
@@ -33,9 +34,6 @@ const ROADS = [
   ...EDGES.map((e) => ({ d: toPath(edgePoints(e)), major: e.major })),
 ];
 
-/** Rough in-app ETA for the mockup only. */
-export const etaMinutes = (km: number) => Math.round(km * 1.6 + 3);
-
 /** Scale an element about its own anchor point. */
 const scaleAt = (x: number, y: number, k: number) => `translate(${x} ${y}) scale(${k}) translate(${-x} ${-y})`;
 
@@ -60,8 +58,7 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
     return () => observer.disconnect();
   }, [isCard]);
 
-  const quote = getQuote(pickup, destination);
-  const hasRoute = quote !== null;
+  const hasRoute = pickup !== destination;
   const shared = mode === "shared" && hasRoute;
   const route = useMemo(() => findRoute(pickup, destination), [pickup, destination]);
   const d = toPath(route);
@@ -229,15 +226,15 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
           })}
       </AnimatePresence>
 
-      {/* ETA chip */}
+      {/* Ride chip: which ride is on the map (no prices or ETAs, they depend on live conditions) */}
       {hasRoute && (
         <g transform={`translate(${chipX} ${chipY}) scale(${k})`}>
           <rect width="48" height="20" rx="4" className="fill-white stroke-road-edge" strokeWidth={0.8} />
           <text x="6" y="9" className="fill-ink text-[7px] font-bold">
-            {etaMinutes(quote.km)} {copy.minutes}
+            {copy.rideName}
           </text>
           <text x="6" y="16.5" className="fill-map-label text-[5.5px] font-semibold">
-            {quote.km} km
+            {shared ? copy.shared : copy.solo}
           </text>
         </g>
       )}

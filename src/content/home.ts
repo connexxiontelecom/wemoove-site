@@ -40,37 +40,52 @@ export const home = {
   },
 
   hero: {
-    eyebrow: "Now launching in Abuja",
+    eyebrow: "Live in Abuja · more cities soon",
     titleStart: "Ride solo.",
     titleEnd: "Or tag along and pay less.",
     subtitle:
       "Book a car to yourself, or share the trip with people heading your way. Same safe ride, smarter price.",
     driveLink: "Drive with WeMoove →",
-    estimator: {
-      title: "Estimate a Standard ride",
-      pickupLabel: "Pickup",
-      destinationLabel: "Destination",
+    chooser: {
+      title: "How do you want to ride?",
+      toggleLabel: "Ride type",
       solo: "Solo",
       shared: "Shared",
-      sameArea: "Pick a different destination",
-      savingsPrefix: "You save",
-      savingsSuffix: "by tagging along",
-      cta: "Get the app to book",
-      mapLabel: "Live route preview",
-      defaultPickup: "Wuse",
-      defaultDestination: "Gwarinpa",
+      modes: {
+        solo: {
+          headline: "The whole car, just for you.",
+          points: ["Straight to where you're going, no extra stops", "Your space and your privacy", "Best when you're in a hurry"],
+        },
+        shared: {
+          headline: "Share the ride. Pay less.",
+          points: ["Matched with riders heading your way", "The fare is split, so you pay less than riding Solo", "Fewer cars on Abuja's roads"],
+        },
+      },
+      cta: "Get the app",
+      fareNote: "You always see your fare in the app before you confirm.",
+      mapLabel: "Trips across Abuja",
     },
+    /** Sample trips the map cycles through. Areas must exist in src/content/areas.ts. */
+    showcaseRoutes: [
+      ["Wuse", "Gwarinpa"],
+      ["Maitama", "Jabi"],
+      ["Garki", "Lugbe"],
+      ["CBD", "Kubwa"],
+      ["Asokoro", "Wuse"],
+    ] as const,
     phone: {
       time: "9:41",
       rideName: "Standard",
       solo: "Solo",
       shared: "Shared",
-      soloSeats: "1 seat",
-      sharedSeats: "3 riders",
+      soloSeats: "Just you",
+      sharedSeats: "With riders your way",
       select: "Select ride",
       pickupTag: "Pickup",
       dropoffTag: "Drop-off",
-      minutes: "min",
+      soloBadge: "Whole car",
+      sharedBadge: "Pay less",
+      sameArea: "Where to?",
     },
   },
 

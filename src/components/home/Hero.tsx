@@ -2,13 +2,12 @@
 
 import { SectionLink } from "@/components/ui/SectionLink";
 import { useState } from "react";
-import { FareEstimator } from "@/components/home/FareEstimator";
 import { HeroPhone } from "@/components/home/HeroPhone";
+import { RideChooser } from "@/components/home/RideChooser";
 import { RideMap } from "@/components/home/RideMap";
 import { StoreBadges } from "@/components/ui/StoreBadges";
-import type { Area } from "@/content/areas";
 import { home } from "@/content/home";
-import type { RideMode } from "@/lib/pricing";
+import { useShowcaseRoute, type RideMode } from "@/lib/ride";
 
 const { hero } = home;
 
@@ -19,10 +18,9 @@ const rise = (i: number) => ({
 });
 
 export function Hero() {
-  // State lives here so the estimator and the phone mockup stay in sync.
-  const [pickup, setPickup] = useState<Area>(hero.estimator.defaultPickup);
-  const [destination, setDestination] = useState<Area>(hero.estimator.defaultDestination);
+  // State lives here so the chooser and the phone mockup stay in sync. The map tours sample Abuja trips.
   const [mode, setMode] = useState<RideMode>("shared");
+  const { pickup, destination } = useShowcaseRoute();
 
   return (
     <section id="hero" className="bg-dot-grid relative overflow-hidden">
@@ -48,24 +46,20 @@ export function Hero() {
           </p>
 
           <div className={`${rise(3).className} mt-8`} style={rise(3).style}>
-            <FareEstimator
-              pickup={pickup}
-              destination={destination}
+            <RideChooser
               mode={mode}
-              onPickupChange={setPickup}
-              onDestinationChange={setDestination}
               onModeChange={setMode}
               header={
                 // Phones only: the live map sits inside the card so it reacts right where people tap.
                 <div
                   role="img"
-                  aria-label={`${hero.estimator.mapLabel}: ${pickup} to ${destination}${mode === "shared" ? ", shared ride" : ""}.`}
+                  aria-label={`${hero.chooser.mapLabel}: ${pickup} to ${destination}${mode === "shared" ? ", shared ride" : ""}.`}
                   className="relative aspect-[16/10] bg-map md:hidden"
                 >
                   <RideMap pickup={pickup} destination={destination} mode={mode} variant="card" />
                   <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-ink shadow-sm">
                     <span className="h-1.5 w-1.5 rounded-full bg-route motion-safe:animate-pulse" aria-hidden="true" />
-                    {hero.estimator.mapLabel}
+                    {hero.chooser.mapLabel}
                   </span>
                 </div>
               }

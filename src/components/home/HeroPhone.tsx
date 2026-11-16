@@ -1,12 +1,13 @@
 "use client";
 
-import { AnimatePresence, m, useReducedMotion } from "framer-motion";
-import { RideMap, etaMinutes } from "@/components/home/RideMap";
+import { AnimatePresence, m } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion";
+import { RideMap } from "@/components/home/RideMap";
 import { Icon } from "@/components/ui/Icon";
 import { PhoneFrame } from "@/components/ui/PhoneFrame";
 import type { Area } from "@/content/areas";
 import { home } from "@/content/home";
-import { formatNaira, getQuote, type RideMode } from "@/lib/pricing";
+import type { RideMode } from "@/lib/ride";
 
 type HeroPhoneProps = {
   pickup: Area;
@@ -19,8 +20,7 @@ const copy = home.hero.phone;
 /** Phone mockup for tablet and desktop: app status bar, address bar, live map and a "Choose your ride" sheet. */
 export function HeroPhone({ pickup, destination, mode }: HeroPhoneProps) {
   const reduceMotion = useReducedMotion();
-  const quote = getQuote(pickup, destination);
-  const hasRoute = quote !== null;
+  const hasRoute = pickup !== destination;
   const shared = mode === "shared" && hasRoute;
 
   const label = hasRoute
@@ -53,7 +53,7 @@ export function HeroPhone({ pickup, destination, mode }: HeroPhoneProps) {
           <div className="mx-3 mt-4 flex items-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-semibold text-ink shadow-md shadow-ink/10">
             <span className="truncate">{pickup}</span>
             <span className="text-pin">→</span>
-            <span className="truncate">{hasRoute ? destination : "Where to?"}</span>
+            <span className="truncate">{hasRoute ? destination : copy.sameArea}</span>
           </div>
         </div>
 
@@ -75,28 +75,22 @@ export function HeroPhone({ pickup, destination, mode }: HeroPhoneProps) {
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block truncate whitespace-nowrap text-[12px] font-bold leading-tight text-ink md:text-[13px]">
-                      <span className="hidden md:inline">{copy.rideName} · </span>
                       {shared ? copy.shared : copy.solo}
                     </span>
                     <span className="block truncate whitespace-nowrap text-[10px] text-muted md:text-[11px]">
                       {shared ? copy.sharedSeats : copy.soloSeats}
-                      <span className="hidden md:inline">
-                        {" "}
-                        · {etaMinutes(quote.km)} {copy.minutes}
-                      </span>
                     </span>
                   </span>
-                  <span className="text-right leading-tight">
-                    {shared && (
-                      <span className="block text-[10px] text-muted line-through">{formatNaira(quote.solo)}</span>
-                    )}
-                    <span className={`block text-sm font-extrabold tabular-nums ${shared ? "text-save" : "text-ink"}`}>
-                      {formatNaira(shared ? quote.shared : quote.solo)}
-                    </span>
+                  <span
+                    className={`shrink-0 whitespace-nowrap rounded-full px-2 py-1 text-[10px] font-extrabold ${
+                      shared ? "bg-save/10 text-save" : "bg-ink text-white"
+                    }`}
+                  >
+                    {shared ? copy.sharedBadge : copy.soloBadge}
                   </span>
                 </div>
               ) : (
-                <p className="py-3 text-center text-sm font-bold text-ink">{home.hero.estimator.sameArea}</p>
+                <p className="py-3 text-center text-sm font-bold text-ink">{copy.sameArea}</p>
               )}
             </m.div>
           </AnimatePresence>

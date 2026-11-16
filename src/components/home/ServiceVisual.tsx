@@ -1,6 +1,7 @@
 "use client";
 
-import { m, useReducedMotion } from "framer-motion";
+import { m } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion";
 import Image from "next/image";
 import { BikeDeliveryScene } from "@/components/illustrations/BikeDeliveryScene";
 import { CarScene } from "@/components/illustrations/CarScene";

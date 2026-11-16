@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, m, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { ServiceVisual } from "@/components/home/ServiceVisual";
 import { Icon } from "@/components/ui/Icon";

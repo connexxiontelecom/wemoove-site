@@ -12,7 +12,7 @@ export const ride = {
     eyebrow: "Ride",
     title: "Get there your way, across Abuja.",
     body: "Have the car to yourself, tag along with riders heading your way and pay less, or step up to Premium or Executive. Your fare is always shown before you book.",
-    secondary: { label: "Estimate your fare", href: "#plan" },
+    secondary: { label: "Solo or Shared?", href: "#plan" },
     photo: {
       src: "/assets/img/services/standard.jpg",
       alt: "A smiling WeMoove driver with his arm on the open window of a silver Toyota Corolla on a tree-lined street in Abuja",
@@ -31,9 +31,8 @@ export const ride = {
 
   planner: {
     eyebrow: "Plan your trip",
-    title: "See your route and fare before you book.",
-    body: "Pick where you're starting and where you're going. Switch between Solo and Shared to see how much you save by tagging along.",
-    note: "Estimates are a guide. The app shows your exact fare before you confirm.",
+    title: "Your ride, your way.",
+    body: "Have the car to yourself, or tag along with riders heading your way and pay less. Switch between Solo and Shared to see the difference.",
   },
 
   safety: {

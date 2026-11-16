@@ -1,4 +1,4 @@
-/** Abuja areas offered in the fare estimator. Add or remove areas here (and in src/lib/pricing.ts). */
+/** Abuja areas drawn on the ride maps (see src/lib/abujaMap.ts for their positions). */
 export const AREAS = [
   "Wuse",
   "Maitama",

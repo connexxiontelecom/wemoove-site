@@ -1,11 +1,12 @@
 "use client";
 
-import { AnimatePresence, m, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion";
 import { useId, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { home } from "@/content/home";
 import { weeklyEarnings } from "@/lib/earnings";
-import { formatNaira } from "@/lib/pricing";
+import { formatNaira } from "@/lib/format";
 
 const copy = home.driveEarn;
 

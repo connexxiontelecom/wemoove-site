@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, m, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion";
 import { useCallback, useState } from "react";
 import { HowItWorksStep } from "@/components/home/HowItWorksStep";
 import { StepVisual } from "@/components/home/StepVisual";

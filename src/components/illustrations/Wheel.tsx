@@ -1,6 +1,7 @@
 "use client";
 
-import { m, useReducedMotion } from "framer-motion";
+import { m } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion";
 
 type WheelProps = { cx: number; cy: number; r: number };
 
