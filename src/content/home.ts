@@ -41,7 +41,7 @@ export const home = {
 
   hero: {
     eyebrow: "Live in Abuja · more cities soon",
-    titleStart: "Ride solo, or tag along and",
+    titleStart: "Ride solo, or Tag along and",
     titleEnd: "pay less.",
     subtitle:
       "Book a car to yourself, or share the trip with people heading your way. Same safe ride, smarter price.",
