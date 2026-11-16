@@ -4,13 +4,13 @@ import { AnimatePresence, m } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion";
 import { useId, useState } from "react";
 import { Card } from "@/components/ui/Card";
-import { home } from "@/content/home";
+import { drive } from "@/content/drive";
 import { weeklyEarnings } from "@/lib/earnings";
 import { formatNaira } from "@/lib/format";
 
-const copy = home.driveEarn;
+const copy = drive.earnings.calculator;
 
-/** Hours × days sliders with an animated weekly estimate. Used on the home page and /drive. */
+/** Hours × days sliders with an animated weekly estimate. Used on /drive only (no estimates on the home page). */
 export function EarningsCalculator({ className = "" }: { className?: string }) {
   const reduceMotion = useReducedMotion();
   const id = useId();

@@ -263,17 +263,22 @@ export const home = {
 
   driveEarn: {
     eyebrow: "Drive & Earn",
-    title: "Drive on your schedule. Earn on your terms.",
-    body: "Turn the trips you already make into income. Go online when it suits you and get Solo and Shared requests nearby.",
-    hoursLabel: "Hours per day",
-    daysLabel: "Days per week",
-    resultLabel: "Estimated weekly earnings",
-    resultSuffix: "/week",
-    disclaimer: "Estimate only. Actual earnings vary.",
+    title: "Got a car? Put it to work.",
+    body: "Turn the trips you already make into income. Go online when it suits you and get Solo and Tag along requests nearby.",
+    points: [
+      { icon: "map", title: "No shifts", body: "Go online when you're ready, offline when you're done." },
+      { icon: "wallet", title: "No haggling", body: "The app sets the fare before every trip." },
+      { icon: "user", title: "Know your rider", body: "Everyone books through the app, so you see who you're picking up." },
+    ] satisfies { icon: IconName; title: string; body: string }[],
     cta: "How to start driving",
-    defaultHours: 6,
-    defaultDays: 5,
+    photo: {
+      src: "/assets/img/services/standard.jpg",
+      alt: "A smiling driver leaning out of the window of a silver Toyota Corolla on a tree-lined street in Abuja",
+    },
+    startTitle: "Start in 3 steps",
+    startSteps: ["Switch to driver mode", "Add your car", "Get verified and go online"],
   },
+
 
   download: {
     title: "Your next ride is one tap away.",

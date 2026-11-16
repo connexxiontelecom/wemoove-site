@@ -51,6 +51,15 @@ export const drive = {
     eyebrow: "Earnings",
     title: "See what your week could look like.",
     body: "Move the sliders to match the hours you'd like to drive. Your real earnings depend on when and where you drive, and how many trips you take.",
+    calculator: {
+      hoursLabel: "Hours per day",
+      daysLabel: "Days per week",
+      resultLabel: "Estimated weekly earnings",
+      resultSuffix: "/week",
+      disclaimer: "Estimate only. Actual earnings vary.",
+      defaultHours: 6,
+      defaultDays: 5,
+    },
   },
 
   steps: {
