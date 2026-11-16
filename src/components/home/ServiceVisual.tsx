@@ -19,7 +19,7 @@ export function ServiceVisual({ service }: { service: MoreWayService }) {
         src={service.photo}
         alt={service.photoAlt ?? `${service.name}: ${service.tagline}`}
         fill
-        sizes="(min-width: 1024px) 60vw, 100vw"
+        sizes="(min-width: 1024px) 34vw, (min-width: 768px) 50vw, 100vw"
         className="object-cover"
       />
     );
