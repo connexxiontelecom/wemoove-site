@@ -8,7 +8,8 @@ import { AnimatePresence, m } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 import { home } from "@/content/home";
-import { useAutoMode, useShowcaseRoute } from "@/lib/ride";
+import { AUTO_MODE_MS, useAutoMode, useShowcaseRoute } from "@/lib/ride";
+import { Toggle } from "@/components/ui/Toggle";
 
 const { hero } = home;
 
@@ -69,12 +70,13 @@ export function Hero() {
         </div>
 
         <div className="order-3 lg:order-none lg:col-start-1 lg:row-start-2">
-          <div className={rise(3).className} style={rise(3).style} {...pauseProps}>
+          {/* Desktop only: the full Solo / Tag along cards. Smaller screens use the compact switch above the phones. */}
+          <div className={`${rise(3).className} hidden lg:block`} style={rise(3).style} {...pauseProps}>
             <RideChooser mode={mode} onModeChange={choose} autoplaying={autoplaying} />
           </div>
 
           <div
-            className={`${rise(4).className} mt-8 flex flex-wrap items-center gap-x-6 gap-y-4`}
+            className={`${rise(4).className} flex flex-wrap items-center gap-x-6 gap-y-4 lg:mt-8`}
             style={rise(4).style}
           >
             <StoreBadges />
@@ -85,7 +87,29 @@ export function Hero() {
         </div>
 
         {/* Solo: one phone, straight there. Tag along: the rider's and driver's apps (one phone that cuts between them on small screens). */}
-        <div className="order-2 flex min-h-[600px] justify-center motion-safe:animate-float-in lg:order-none md:min-h-[640px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:min-h-0 lg:items-center">
+        <div className="order-2 flex min-h-[590px] flex-col items-center gap-5 motion-safe:animate-float-in md:min-h-[640px] lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:min-h-0 lg:justify-center">
+          {/* Phones and tablets: compact switch (the full cards are desktop only) */}
+          <div className="w-full max-w-xs lg:hidden" {...pauseProps}>
+            <Toggle
+              id="hero-mode-compact"
+              label={hero.chooser.title}
+              options={[
+                { value: "solo", label: hero.chooser.options.solo.name },
+                { value: "shared", label: hero.chooser.options.shared.name },
+              ]}
+              value={mode}
+              onChange={choose}
+            />
+            <span className="mx-auto mt-2 block h-0.5 w-24 overflow-hidden rounded-full bg-ink/10" aria-hidden="true">
+              {autoplaying && (
+                <span
+                  key={mode}
+                  className="block h-full origin-left animate-grow rounded-full bg-ink"
+                  style={{ animationDuration: `${AUTO_MODE_MS[mode]}ms` }}
+                />
+              )}
+            </span>
+          </div>
           <AnimatePresence mode="wait" initial={false}>
             <m.div
               key={mode}
@@ -97,7 +121,7 @@ export function Hero() {
               {mode === "shared" ? (
                 <TagAlongDemo />
               ) : (
-                <HeroPhone pickup={pickup} destination={destination} mode={mode} />
+                <HeroPhone pickup={pickup} destination={destination} mode={mode} size="md" />
               )}
             </m.div>
           </AnimatePresence>

@@ -100,14 +100,14 @@ export function HeroPhone({
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-[13px] font-bold leading-tight text-ink">
-                  <span className="hidden md:inline">{copy.rideName} · </span>
+                  <span className="hidden lg:inline">{copy.rideName} · </span>
                   {copy.solo}
                 </span>
                 <span className="block truncate text-[11px] text-muted">{copy.soloSeats}</span>
               </span>
-              <span className="shrink-0 rounded-full bg-ink px-2 py-1 text-[10px] font-extrabold text-white">{copy.soloBadge}</span>
+              <span className="hidden shrink-0 rounded-full bg-ink px-2 py-1 text-[10px] font-extrabold text-white lg:inline">{copy.soloBadge}</span>
             </div>
-            <div className="mt-2.5 flex justify-around whitespace-nowrap text-[9.5px] font-semibold text-muted md:text-[10.5px]">
+            <div className="mt-2.5 flex justify-between gap-1 whitespace-nowrap px-0.5 text-[9.5px] font-semibold text-muted lg:justify-around lg:text-[10.5px]">
               {copy.soloPerks.map((perk) => (
                 <span key={perk} className="flex items-center gap-1">
                   <Icon name="check" className="h-3 w-3 text-ink" />

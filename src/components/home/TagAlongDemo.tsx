@@ -424,16 +424,6 @@ export function TagAlongDemo() {
     >
       {/* Small phones: one phone that cuts between the rider's and the driver's app */}
       <div className="flex flex-col items-center gap-3 md:hidden" aria-hidden="true">
-        <span className="flex rounded-full bg-white p-1 text-xs font-bold shadow-sm ring-1 ring-line">
-          {(["rider", "driver"] as const).map((who) => (
-            <span
-              key={who}
-              className={`rounded-full px-3 py-1.5 transition-colors duration-300 ${mobileWho === who ? "bg-ink text-white" : "text-muted"}`}
-            >
-              {demo.labels[who]}
-            </span>
-          ))}
-        </span>
         <PhoneFrame size="md">
           <AnimatePresence initial={false}>
             <Screen key={`${mobileWho}-${mobileScreen}`} id={`${mobileWho}-${mobileScreen}`}>
@@ -456,11 +446,11 @@ export function TagAlongDemo() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6, transition: { duration: 0.12 } }}
             transition={{ duration: 0.2 }}
-            className={`flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold ${
-              done ? "bg-ink text-white" : "bg-white text-ink ring-1 ring-line"
-            }`}
+            className="flex items-center gap-1.5 text-sm text-muted"
           >
-            {done && <Icon name="check" className="h-3.5 w-3.5 text-brand" />}
+            <span className="font-bold text-ink">{demo.labels[mobileWho]}</span>
+            <span aria-hidden="true">·</span>
+            {done && <Icon name="check" className="h-3.5 w-3.5 text-save" />}
             {badge}
           </m.span>
         </AnimatePresence>
