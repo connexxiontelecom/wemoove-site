@@ -70,37 +70,73 @@ export const home = {
       mapLabel: "Trips across Abuja",
     },
     /**
-     * Tag along on two phones (desktop), following the app: a driver lists a shared ride, a rider
-     * requests a seat, the driver accepts, then picks the rider up on the way. Illustrative preview, no prices.
+     * Tag along demo on two phones (desktop), following the app's Figma screens: the rider browses
+     * available shared rides, opens one, books a seat; the driver gets the request and accepts; then
+     * the car picks the rider up. Illustrative preview: prices from the app are left out on purpose.
      */
-    trip: {
+    demo: {
       start: "Maitama",
       pickup: "Wuse",
       destination: "Jabi",
-      leaves: "Leaves 12:30 PM",
-      tags: { start: "Start", you: "You", rider: "Rider" },
-      rider: {
-        title: "Shared ride",
-        requested: "Seat request sent",
-        booked: "Seat booked · driver on the way",
-        aboard: "You're in · riding together",
-        buttonRequested: "Waiting for driver…",
-        buttonBooked: "Seat booked",
-        buttonAboard: "On your way",
+      list: {
+        title: "Available shared rides",
+        search: "Search by name of area",
+        takeoff: "Take-off",
+        rides: [
+          { from: "Maitama", to: "Jabi", time: "12:30 PM", stop: null, seats: "2 seats" },
+          { from: "Maitama", to: "Jabi", time: "1:00 PM", stop: null, seats: "3 seats" },
+          { from: "Maitama", to: "Life Camp", time: "1:15 PM", stop: "Jabi", seats: "2 seats" },
+          { from: "Maitama", to: "Dakibiyu", time: "1:30 PM", stop: "Jabi", seats: "1 seat" },
+          { from: "Maitama", to: "Airport", time: "2:00 PM", stop: "Jabi", seats: "3 seats" },
+        ],
+      },
+      details: {
+        title: "Available ride details",
+        driver: "Bruce",
+        rating: "5.00",
+        plate: "ABC777DE",
+        car: "Toyota Camry · Red",
+        departure: "Departure: 12:30 PM",
+        pickupLabel: "Pickup: Wuse",
+        dropoffs: "Drop-off locations",
+        stops: ["Wuse", "Utako", "Jabi"],
+        seatsLabel: "Available seats: 2",
+        book: "Book ride",
+        offer: "Offer price",
+        sent: "Request sent · waiting for driver",
+        accepted: "Driver accepted · seat booked",
       },
       driver: {
-        title: "Rideshare request",
-        who: "Rider · 1 seat",
-        requested: "Wants a seat to Jabi",
-        booked: "Accepted · picking up in Wuse",
-        aboard: "1 rider aboard · next stop Jabi",
-        counter: "Counter",
-        accept: "Accept",
-        accepted: "Accepted",
+        title: "Rideshare requests",
+        empty: "Waiting for seat requests on your 12:30 PM ride",
+        incoming: "Incoming request",
+        rider: "Aisha",
+        rating: "5.00",
+        seats: "1 seat",
+        accept: "Accept request",
+        counter: "Counter offer",
+        accepted: "Request accepted",
       },
-      badge: { requested: "Seat request sent", booked: "Seat booked", aboard: "Riding together · paying less" },
+      trip: {
+        riderOnWay: "Seat booked · driver on the way",
+        riderAboard: "You're in · riding together",
+        driverOnWay: "Picking up Aisha in Wuse",
+        driverAboard: "Aisha aboard · next stop Jabi",
+        you: "You",
+        rider: "Aisha",
+        start: "Start",
+      },
+      badge: {
+        browse: "Browsing shared rides",
+        pick: "Picking a seat",
+        sent: "Request sent to driver",
+        booked: "Seat booked",
+        aboard: "Riding together · paying less",
+      },
+      labels: { rider: "Rider's app", driver: "Driver's app" },
       linkLabel: "Get the WeMoove app",
-      preview: "App preview: a rider requests a seat on a shared ride from Wuse to Jabi, the driver accepts, and picks them up on the way.",
+      preview:
+        "App preview: a rider browses available shared rides, books a seat on a ride from Maitama to Jabi, the driver accepts, and the car picks the rider up in Wuse.",
     },
     /** Sample trips the map cycles through. Areas must exist in src/content/areas.ts. */
     showcaseRoutes: [

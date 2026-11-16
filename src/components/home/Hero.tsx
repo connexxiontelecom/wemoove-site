@@ -4,7 +4,7 @@ import { SectionLink } from "@/components/ui/SectionLink";
 import { HeroPhone } from "@/components/home/HeroPhone";
 import { RideChooser } from "@/components/home/RideChooser";
 import { RideMap } from "@/components/home/RideMap";
-import { SharedTripPhones } from "@/components/home/SharedTripPhones";
+import { TagAlongDemo } from "@/components/home/TagAlongDemo";
 import { AnimatePresence, m } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion";
 import { StoreBadges } from "@/components/ui/StoreBadges";
@@ -108,7 +108,7 @@ export function Hero() {
               transition={{ duration: reduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
               {mode === "shared" ? (
-                <SharedTripPhones active />
+                <TagAlongDemo />
               ) : (
                 <HeroPhone pickup={pickup} destination={destination} mode={mode} />
               )}
