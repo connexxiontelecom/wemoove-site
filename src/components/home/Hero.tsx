@@ -3,7 +3,6 @@
 import { SectionLink } from "@/components/ui/SectionLink";
 import { HeroPhone } from "@/components/home/HeroPhone";
 import { RideChooser } from "@/components/home/RideChooser";
-import { RideMap } from "@/components/home/RideMap";
 import { TagAlongDemo } from "@/components/home/TagAlongDemo";
 import { AnimatePresence, m } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion";
@@ -27,8 +26,12 @@ export function Hero() {
 
   return (
     <section id="hero" className="bg-dot-grid relative overflow-hidden">
-      <div className="mx-auto grid min-h-[calc(100vh-72px)] max-w-7xl items-center gap-12 px-6 py-12 md:grid-cols-2 md:py-16 lg:gap-16 lg:px-8">
-        <div>
+      {/*
+        Desktop: intro and cards on the left, phones on the right.
+        Phones and tablets: intro, then the phones, then the cards (so the demo is seen first).
+      */}
+      <div className="mx-auto grid max-w-7xl gap-x-16 gap-y-10 px-6 py-12 md:py-16 lg:min-h-[calc(100vh-72px)] lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:px-8">
+        <div className="order-1 lg:order-none lg:col-start-1 lg:row-start-1 lg:self-end">
           <p {...rise(0)}>
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-sm font-bold text-ink ring-1 ring-line">
               <span className="h-2 w-2 rounded-full bg-brand" aria-hidden="true" />
@@ -63,27 +66,11 @@ export function Hero() {
           <p className={`${rise(2).className} mt-5 max-w-xl text-lg text-muted`} style={rise(2).style}>
             {hero.subtitle}
           </p>
+        </div>
 
-          <div className={`${rise(3).className} mt-8`} style={rise(3).style} {...pauseProps}>
-            <RideChooser
-              mode={mode}
-              onModeChange={choose}
-              autoplaying={autoplaying}
-              header={
-                // Phones only: the live map sits inside the card so it reacts right where people tap.
-                <div
-                  role="img"
-                  aria-label={`${hero.chooser.mapLabel}: ${pickup} to ${destination}${mode === "shared" ? ", shared ride" : ""}.`}
-                  className="relative aspect-[16/10] bg-map md:hidden"
-                >
-                  <RideMap pickup={pickup} destination={destination} mode={mode} variant="card" />
-                  <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-ink shadow-sm">
-                    <span className="h-1.5 w-1.5 rounded-full bg-route motion-safe:animate-pulse" aria-hidden="true" />
-                    {hero.chooser.mapLabel}
-                  </span>
-                </div>
-              }
-            />
+        <div className="order-3 lg:order-none lg:col-start-1 lg:row-start-2">
+          <div className={rise(3).className} style={rise(3).style} {...pauseProps}>
+            <RideChooser mode={mode} onModeChange={choose} autoplaying={autoplaying} />
           </div>
 
           <div
@@ -97,8 +84,8 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Solo: one phone, straight there. Tag along: two riders' phones, one shared car. */}
-        <div className="hidden justify-center motion-safe:animate-float-in md:flex md:justify-end lg:justify-center">
+        {/* Solo: one phone, straight there. Tag along: the rider's and driver's apps (one phone that cuts between them on small screens). */}
+        <div className="order-2 flex min-h-[600px] justify-center motion-safe:animate-float-in lg:order-none md:min-h-[640px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:min-h-0 lg:items-center">
           <AnimatePresence mode="wait" initial={false}>
             <m.div
               key={mode}

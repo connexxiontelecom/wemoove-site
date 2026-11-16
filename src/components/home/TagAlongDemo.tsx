@@ -412,6 +412,9 @@ export function TagAlongDemo() {
             ? demo.badge.pick
             : demo.badge.browse;
   const done = isAfter(step, "accepted");
+  // Small phones show the driver's app while the request comes in and is accepted.
+  const mobileWho: "rider" | "driver" = step === "sent" || step === "acceptTap" || step === "accepted" ? "driver" : "rider";
+  const mobileScreen = mobileWho === "driver" ? driverScreen : riderScreen;
 
   return (
     <a
@@ -419,8 +422,52 @@ export function TagAlongDemo() {
       aria-label={`${demo.linkLabel}. ${demo.preview}`}
       className="group relative flex items-start justify-center gap-5 rounded-[48px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand"
     >
+      {/* Small phones: one phone that cuts between the rider's and the driver's app */}
+      <div className="flex flex-col items-center gap-3 md:hidden" aria-hidden="true">
+        <span className="flex rounded-full bg-white p-1 text-xs font-bold shadow-sm ring-1 ring-line">
+          {(["rider", "driver"] as const).map((who) => (
+            <span
+              key={who}
+              className={`rounded-full px-3 py-1.5 transition-colors duration-300 ${mobileWho === who ? "bg-ink text-white" : "text-muted"}`}
+            >
+              {demo.labels[who]}
+            </span>
+          ))}
+        </span>
+        <PhoneFrame size="md">
+          <AnimatePresence initial={false}>
+            <Screen key={`${mobileWho}-${mobileScreen}`} id={`${mobileWho}-${mobileScreen}`}>
+              {mobileWho === "driver" ? (
+                <DriverRequests step={step} />
+              ) : mobileScreen === "list" ? (
+                <RideList tapping={step === "listTap"} />
+              ) : mobileScreen === "details" ? (
+                <RideDetails step={step} />
+              ) : (
+                <TripMap who="rider" progress={progress} aboard={aboard} />
+              )}
+            </Screen>
+          </AnimatePresence>
+        </PhoneFrame>
+        <AnimatePresence mode="wait" initial={false}>
+          <m.span
+            key={badge}
+            initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6, transition: { duration: 0.12 } }}
+            transition={{ duration: 0.2 }}
+            className={`flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold ${
+              done ? "bg-ink text-white" : "bg-white text-ink ring-1 ring-line"
+            }`}
+          >
+            {done && <Icon name="check" className="h-3.5 w-3.5 text-brand" />}
+            {badge}
+          </m.span>
+        </AnimatePresence>
+      </div>
+
       {/* Rider */}
-      <div className="flex flex-col items-center gap-3 transition-transform duration-300 group-hover:-translate-y-1" aria-hidden="true">
+      <div className="hidden flex-col items-center gap-3 transition-transform duration-300 group-hover:-translate-y-1 md:flex" aria-hidden="true">
         <PhoneFrame size="md">
           <AnimatePresence initial={false}>
             <Screen key={riderScreen} id={riderScreen}>
@@ -434,7 +481,7 @@ export function TagAlongDemo() {
       </div>
 
       {/* Driver */}
-      <div className="mt-16 hidden flex-col items-center gap-3 transition-transform delay-75 duration-300 group-hover:-translate-y-1 lg:flex" aria-hidden="true">
+      <div className="mt-16 hidden flex-col items-center gap-3 transition-transform delay-75 duration-300 group-hover:-translate-y-1 md:flex" aria-hidden="true">
         <PhoneFrame size="md">
           <AnimatePresence initial={false}>
             <Screen key={driverScreen} id={driverScreen}>
@@ -447,7 +494,7 @@ export function TagAlongDemo() {
       </div>
 
       {/* Status badge between the phones */}
-      <span className="pointer-events-none absolute left-1/2 top-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 lg:block" aria-hidden="true">
+      <span className="pointer-events-none absolute left-1/2 top-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:block" aria-hidden="true">
         <AnimatePresence mode="wait" initial={false}>
           <m.span
             key={badge}

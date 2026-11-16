@@ -103,7 +103,7 @@ export const home = {
         seatsLabel: "Available seats: 2",
         book: "Book ride",
         offer: "Offer price",
-        sent: "Request sent · waiting for driver",
+        sent: "Waiting for driver…",
         accepted: "Driver accepted · seat booked",
       },
       driver: {
