@@ -75,8 +75,8 @@ export const contact = {
   },
 
   emergency: {
-    title: "In an emergency, call 112 first.",
-    body: "112 is Nigeria's free emergency number for police, fire and ambulance.",
+    title: "In an emergency, use SOS or call 112.",
+    body: "On a trip, tap SOS in the app to call 112 and alert WeMoove with your live location. Or dial 112 directly.",
     cta: "Call 112",
     href: "tel:112",
   },

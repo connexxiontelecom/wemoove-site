@@ -17,7 +17,7 @@ export const safety = {
   pageName: "Safety",
   meta: {
     description:
-      "How WeMoove keeps you safe on every ride: verified drivers, driver and car details before pickup, live trip sharing, in-app reporting and round-the-clock support.",
+      "How WeMoove keeps you safe on every ride: verified drivers, driver and car details before pickup, live trip sharing, emergency SOS, trusted contacts, in-app reporting and round-the-clock support.",
   },
 
   hero: {
@@ -29,6 +29,7 @@ export const safety = {
       { label: "Before you ride", href: "#before" },
       { label: "On the way", href: "#during" },
       { label: "After you arrive", href: "#after" },
+      { label: "Emergency SOS", href: "#sos" },
       { label: "Safety tips", href: "#tips" },
       { label: "Get help", href: "#help" },
     ],
@@ -68,7 +69,7 @@ export const safety = {
         body: "Follow your trip on the map and let the people you trust follow along with you.",
         points: [
           { icon: "share", title: "Share your ride details", body: "Send your live trip to family or friends so they can follow you to your destination." },
-          { icon: "map", title: "Follow the route", body: "Watch your trip on the map from pickup to drop-off." },
+          { icon: "sos", title: "Emergency SOS", body: "One tap calls 112 and alerts WeMoove with your live location." },
           { icon: "flag", title: "Report the ride", body: "If anything feels wrong, report it from the trip screen and our team will step in." },
         ],
         screenshot: {
@@ -93,11 +94,27 @@ export const safety = {
     ] satisfies SafetyStage[],
   },
 
+  sos: {
+    eyebrow: "Emergency SOS",
+    title: "If something goes wrong, one tap gets help.",
+    body: "SOS sits at the top of the Safety screen in the app, on every trip.",
+    steps: [
+      { icon: "phone", title: "Calls 112", body: "Nigeria's free emergency line for police, fire and ambulance." },
+      { icon: "pin", title: "Alerts WeMoove", body: "Our team gets your live location so we can step in." },
+      { icon: "user", title: "Tells your trusted contacts", body: "The people you've chosen are notified when you use SOS." },
+    ] as { icon: IconName; title: string; body: string }[],
+    also: "On the same screen: share your live trip, manage trusted contacts and read safety tips.",
+    screenshot: {
+      src: "/assets/img/app/safety-sos.png",
+      alt: "The WeMoove Safety screen: an Emergency (SOS) button that calls 112 and alerts WeMoove with your live location, plus Share my trip, Trusted contacts and Safety tips",
+    },
+  },
+
   shared: {
     eyebrow: "Tagging along?",
     title: "Shared rides get the same protection.",
     body: "On a Shared ride, WeMoove matches you with riders heading your way. Every rider books through the app, so your driver and WeMoove know who is in the car at every stop.",
-    points: ["Same verified driver checks", "Share your trip and report a ride, just like Solo", "Ratings for every rider after the trip"],
+    points: ["Same verified driver checks", "Share your trip, use SOS and report a ride, just like Solo", "Ratings for every rider after the trip"],
   },
 
   tips: {
@@ -112,6 +129,7 @@ export const safety = {
           "Ask the driver who they are picking up, instead of saying your name first.",
           "Wear your seat belt, even on short trips.",
           "Share your trip with someone you trust.",
+          "Add trusted contacts so they're alerted if you ever use SOS.",
           "If something feels off, don't get in. Report it in the app.",
         ],
       },
@@ -136,8 +154,8 @@ export const safety = {
     callLabel: "Call support",
     emailLabel: "Email us",
     emergency: {
-      title: "In an emergency, call 112 first.",
-      body: "112 is Nigeria's free emergency number for police, fire and ambulance. Once you are safe, report the ride in the app so we can act.",
+      title: "In an emergency, use SOS or call 112.",
+      body: "On a trip, tap SOS in the app: it calls 112 and alerts WeMoove with your live location. You can also dial 112 directly, Nigeria's free emergency number.",
       cta: "Call 112",
       href: "tel:112",
     },

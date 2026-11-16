@@ -1,6 +1,7 @@
 import { SafetyHelp } from "@/components/safety/SafetyHelp";
 import { SafetyHero } from "@/components/safety/SafetyHero";
 import { SafetyJourney } from "@/components/safety/SafetyJourney";
+import { SafetySOS } from "@/components/safety/SafetySOS";
 import { SafetyShared } from "@/components/safety/SafetyShared";
 import { SafetyTips } from "@/components/safety/SafetyTips";
 import { StoreBadges } from "@/components/ui/StoreBadges";
@@ -18,6 +19,7 @@ export default function SafetyPage() {
     <>
       <SafetyHero />
       <SafetyJourney />
+      <SafetySOS />
       <SafetyShared />
       <SafetyTips />
       <SafetyHelp />
