@@ -52,7 +52,7 @@ export const home = {
         solo: { name: "Solo", short: "Just you", badge: "Whole car" },
         shared: { name: "Tag along", short: "With riders your way", badge: "Pay less" },
       },
-      legend: { you: "You", riders: "Riders going your way", driver: "Driver" },
+      legend: { you: "You" },
       modes: {
         solo: {
           points: ["Straight to where you're going, no extra stops", "Your space and your privacy", "Best when you're in a hurry"],
