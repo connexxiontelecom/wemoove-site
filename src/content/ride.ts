@@ -32,7 +32,7 @@ export const ride = {
   planner: {
     eyebrow: "Plan your trip",
     title: "Your ride, your way.",
-    body: "Have the car to yourself, or tag along with riders heading your way and pay less. Switch between Solo and Shared to see the difference.",
+    body: "Have the car to yourself, or tag along with riders heading your way and pay less. Pick Solo or Tag along to see who rides with you.",
   },
 
   safety: {

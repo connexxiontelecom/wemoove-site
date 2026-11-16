@@ -48,20 +48,21 @@ export const home = {
     driveLink: "Drive with WeMoove →",
     chooser: {
       title: "How do you want to ride?",
-      toggleLabel: "Ride type",
-      solo: "Solo",
-      shared: "Shared",
+      options: {
+        solo: { name: "Solo", short: "Just you", badge: "Whole car" },
+        shared: { name: "Tag along", short: "With riders your way", badge: "Pay less" },
+      },
+      legend: { you: "You", riders: "Riders going your way", driver: "Driver" },
       modes: {
         solo: {
-          headline: "The whole car, just for you.",
           points: ["Straight to where you're going, no extra stops", "Your space and your privacy", "Best when you're in a hurry"],
         },
         shared: {
-          headline: "Share the ride. Pay less.",
           points: ["Matched with riders heading your way", "The fare is split, so you pay less than riding Solo", "Fewer cars on Abuja's roads"],
         },
       },
-      cta: "Get the app",
+      ctaSolo: "Get the app to ride Solo",
+      ctaShared: "Get the app to Tag along",
       fareNote: "You always see your fare in the app before you confirm.",
       mapLabel: "Trips across Abuja",
     },
@@ -80,7 +81,7 @@ export const home = {
       shared: "Shared",
       soloSeats: "Just you",
       sharedSeats: "With riders your way",
-      select: "Select ride",
+      choose: "Choose",
       pickupTag: "Pickup",
       dropoffTag: "Drop-off",
       soloBadge: "Whole car",

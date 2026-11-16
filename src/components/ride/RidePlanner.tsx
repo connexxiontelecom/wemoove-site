@@ -28,7 +28,7 @@ export function RidePlanner() {
 
         <div data-reveal-stagger className="mt-12 grid items-center gap-8 lg:grid-cols-[minmax(0,28rem)_1fr]">
           <div className="order-2 text-ink lg:order-1">
-            <RideChooser mode={mode} onModeChange={setMode} headingLevel="h3" />
+            <RideChooser id="planner" mode={mode} onModeChange={setMode} headingLevel="h3" />
           </div>
           <div
             role="img"

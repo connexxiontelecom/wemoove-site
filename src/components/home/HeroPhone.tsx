@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, m } from "framer-motion";
+import { m } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion";
 import { RideMap } from "@/components/home/RideMap";
 import { Icon } from "@/components/ui/Icon";
@@ -60,42 +60,49 @@ export function HeroPhone({ pickup, destination, mode }: HeroPhoneProps) {
         {/* Bottom sheet, styled like "Choose your ride" */}
         <div className="absolute inset-x-0 bottom-0 z-10 rounded-t-3xl bg-white px-4 pb-5 pt-2 shadow-[0_-8px_24px_-6px] shadow-ink/15" aria-hidden="true">
           <div className="mx-auto mb-3 h-1 w-9 rounded-full bg-line" />
-          <AnimatePresence mode="wait" initial={false}>
-            <m.div
-              key={hasRoute ? mode : "none"}
-              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6, transition: { duration: reduceMotion ? 0 : 0.15 } }}
-              transition={{ duration: reduceMotion ? 0 : 0.22 }}
-            >
-              {hasRoute ? (
-                <div className="flex items-center gap-2 rounded-xl border-2 border-brand bg-paper p-2 md:gap-3 md:p-2.5">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/40 text-ink md:h-9 md:w-9">
-                    <Icon name={shared ? "share" : "car"} className="h-5 w-5" />
+          <div className="space-y-1.5">
+            {(["solo", "shared"] as const).map((value) => {
+              const selected = (value === "shared") === shared;
+              return (
+                <div
+                  key={value}
+                  className={`relative flex items-center gap-2 rounded-xl border-2 p-1.5 transition-colors duration-300 md:gap-2.5 md:p-2 ${
+                    selected ? "border-brand bg-paper" : "border-transparent"
+                  }`}
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/40 text-ink">
+                    <Icon name={value === "shared" ? "share" : "car"} className="h-4.5 w-4.5" />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block truncate whitespace-nowrap text-[12px] font-bold leading-tight text-ink md:text-[13px]">
-                      {shared ? copy.shared : copy.solo}
+                      {value === "shared" ? copy.shared : copy.solo}
                     </span>
                     <span className="block truncate whitespace-nowrap text-[10px] text-muted md:text-[11px]">
-                      {shared ? copy.sharedSeats : copy.soloSeats}
+                      {value === "shared" ? copy.sharedSeats : copy.soloSeats}
                     </span>
                   </span>
                   <span
                     className={`shrink-0 whitespace-nowrap rounded-full px-2 py-1 text-[10px] font-extrabold ${
-                      shared ? "bg-save/10 text-save" : "bg-ink text-white"
+                      value === "shared" ? "bg-save/10 text-save" : "bg-ink text-white"
                     }`}
                   >
-                    {shared ? copy.sharedBadge : copy.soloBadge}
+                    {value === "shared" ? copy.sharedBadge : copy.soloBadge}
                   </span>
+                  {selected && !reduceMotion && (
+                    <m.span
+                      key={`${value}-pop`}
+                      className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-brand"
+                      initial={{ opacity: 0.9, scale: 1 }}
+                      animate={{ opacity: 0, scale: 1.06 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  )}
                 </div>
-              ) : (
-                <p className="py-3 text-center text-sm font-bold text-ink">{copy.sameArea}</p>
-              )}
-            </m.div>
-          </AnimatePresence>
-          <div className={`mt-3 rounded-xl py-2.5 text-center text-[13px] font-bold ${hasRoute ? "bg-brand text-ink" : "bg-line text-muted"}`}>
-            {copy.select}
+              );
+            })}
+          </div>
+          <div className="mt-2.5 rounded-xl bg-brand py-2.5 text-center text-[13px] font-bold text-ink">
+            {copy.choose} {shared ? copy.shared : copy.solo}
           </div>
         </div>
       </PhoneFrame>
