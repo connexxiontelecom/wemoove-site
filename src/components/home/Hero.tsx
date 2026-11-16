@@ -1,13 +1,12 @@
 "use client";
 
 import { SectionLink } from "@/components/ui/SectionLink";
-import { useState } from "react";
 import { HeroPhone } from "@/components/home/HeroPhone";
 import { RideChooser } from "@/components/home/RideChooser";
 import { RideMap } from "@/components/home/RideMap";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 import { home } from "@/content/home";
-import { useShowcaseRoute, type RideMode } from "@/lib/ride";
+import { useAutoMode, useShowcaseRoute } from "@/lib/ride";
 
 const { hero } = home;
 
@@ -19,7 +18,7 @@ const rise = (i: number) => ({
 
 export function Hero() {
   // State lives here so the chooser and the phone mockup stay in sync. The map tours sample Abuja trips.
-  const [mode, setMode] = useState<RideMode>("shared");
+  const { mode, choose, autoplaying, pauseProps } = useAutoMode();
   const { pickup, destination } = useShowcaseRoute();
 
   return (
@@ -61,10 +60,11 @@ export function Hero() {
             {hero.subtitle}
           </p>
 
-          <div className={`${rise(3).className} mt-8`} style={rise(3).style}>
+          <div className={`${rise(3).className} mt-8`} style={rise(3).style} {...pauseProps}>
             <RideChooser
               mode={mode}
-              onModeChange={setMode}
+              onModeChange={choose}
+              autoplaying={autoplaying}
               header={
                 // Phones only: the live map sits inside the card so it reacts right where people tap.
                 <div

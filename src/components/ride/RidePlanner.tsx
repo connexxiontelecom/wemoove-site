@@ -1,18 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { RideChooser } from "@/components/home/RideChooser";
 import { RideMap } from "@/components/home/RideMap";
 import { home } from "@/content/home";
 import { ride } from "@/content/ride";
-import { useShowcaseRoute, type RideMode } from "@/lib/ride";
+import { useAutoMode, useShowcaseRoute } from "@/lib/ride";
 
 const { planner } = ride;
 const chooser = home.hero.chooser;
 
 /** Solo/Shared chooser beside a large map touring sample Abuja trips. No prices. */
 export function RidePlanner() {
-  const [mode, setMode] = useState<RideMode>("shared");
+  const { mode, choose, autoplaying, pauseProps } = useAutoMode();
   const { pickup, destination } = useShowcaseRoute();
 
   return (
@@ -27,8 +26,9 @@ export function RidePlanner() {
         </div>
 
         <div data-reveal-stagger className="mt-12 grid items-center gap-8 lg:grid-cols-[minmax(0,28rem)_1fr]">
-          <div className="order-2 text-ink lg:order-1">
-            <RideChooser id="planner" mode={mode} onModeChange={setMode} headingLevel="h3" />
+          <div className="order-2 text-ink lg:order-1" {...pauseProps}>
+            <RideChooser id="planner" mode={mode} onModeChange={choose}
+              autoplaying={autoplaying} headingLevel="h3" />
           </div>
           <div
             role="img"

@@ -7,7 +7,7 @@ import { Icon } from "@/components/ui/Icon";
 import { home } from "@/content/home";
 import { RideModeScene } from "@/components/illustrations/RideModeScene";
 import { useReducedMotion } from "@/lib/motion";
-import type { RideMode } from "@/lib/ride";
+import { AUTO_MODE_MS, type RideMode } from "@/lib/ride";
 
 type RideChooserProps = {
   mode: RideMode;
@@ -18,6 +18,8 @@ type RideChooserProps = {
   headingLevel?: "h2" | "h3";
   /** Keeps radio names unique when more than one chooser is on a page. */
   id?: string;
+  /** True while the chooser is flipping between the two cards on its own. */
+  autoplaying?: boolean;
 };
 
 const copy = home.hero.chooser;
@@ -26,7 +28,7 @@ const MODES: RideMode[] = ["solo", "shared"];
  * Solo vs Shared as two big picture cards, sold on what you get rather than a price.
  * No fares here on purpose: prices depend on live conditions the site can't know.
  */
-export function RideChooser({ mode, onModeChange, header, headingLevel: Heading = "h2", id = "hero" }: RideChooserProps) {
+export function RideChooser({ mode, onModeChange, header, headingLevel: Heading = "h2", id = "hero", autoplaying = false }: RideChooserProps) {
   const reduceMotion = useReducedMotion();
   const panel = copy.modes[mode];
   const name = `${id}-ride-mode`;
@@ -78,6 +80,16 @@ export function RideChooser({ mode, onModeChange, header, headingLevel: Heading 
                 </span>
                 <span className="mt-2 text-lg font-extrabold leading-tight">{option.name}</span>
                 <span className="text-sm leading-snug text-muted">{option.short}</span>
+                {/* Countdown to the next card while auto-playing */}
+                {active && autoplaying && (
+                  <span className="absolute inset-x-3 bottom-1.5 h-1 overflow-hidden rounded-full bg-ink/10" aria-hidden="true">
+                    <span
+                      key={mode}
+                      className="block h-full origin-left rounded-full bg-ink animate-grow"
+                      style={{ animationDuration: `${AUTO_MODE_MS}ms` }}
+                    />
+                  </span>
+                )}
               </label>
             );
           })}
@@ -85,7 +97,7 @@ export function RideChooser({ mode, onModeChange, header, headingLevel: Heading 
       </fieldset>
 
       {/* Fixed min-height keeps the card from jumping when the copy swaps. */}
-      <div className="mt-4 min-h-[6.75rem]" aria-live="polite">
+      <div className="mt-4 min-h-[6.75rem]" aria-live={autoplaying ? "off" : "polite"}>
         <AnimatePresence mode="wait" initial={false}>
           <m.ul
             key={mode}
