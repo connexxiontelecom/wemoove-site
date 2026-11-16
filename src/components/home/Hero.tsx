@@ -37,8 +37,24 @@ export function Hero() {
             style={rise(1).style}
           >
             {hero.titleStart}{" "}
-            <span className="box-decoration-clone bg-[linear-gradient(transparent_64%,var(--color-brand)_64%,var(--color-brand)_90%,transparent_90%)]">
+            <span className="relative inline-block whitespace-nowrap">
               {hero.titleEnd}
+              {/* Hand-drawn swoosh that draws itself in after the headline rises */}
+              <svg
+                viewBox="0 0 200 24"
+                preserveAspectRatio="none"
+                className="pointer-events-none absolute -bottom-3 left-0 h-[0.3em] w-full overflow-visible sm:-bottom-4"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 16 C 45 6, 95 3, 135 8 S 185 17, 196 9"
+                  pathLength={1}
+                  className="fill-none stroke-brand motion-safe:animate-draw"
+                  strokeWidth={7}
+                  strokeLinecap="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
             </span>
           </h1>
           <p className={`${rise(2).className} mt-5 max-w-xl text-lg text-muted`} style={rise(2).style}>

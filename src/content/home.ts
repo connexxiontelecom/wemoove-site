@@ -41,10 +41,10 @@ export const home = {
 
   hero: {
     eyebrow: "Live in Abuja · more cities soon",
-    titleStart: "Ride solo.",
-    titleEnd: "Or tag along and pay less.",
+    titleStart: "Move around Abuja",
+    titleEnd: "your way.",
     subtitle:
-      "Book a car to yourself, or share the trip with people heading your way. Same safe ride, smarter price.",
+      "Book a car all to yourself, or tag along with riders heading the same way and pay less. Same safe ride, either way.",
     driveLink: "Drive with WeMoove →",
     chooser: {
       title: "How do you want to ride?",
