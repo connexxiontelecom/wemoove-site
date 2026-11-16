@@ -7,7 +7,7 @@ import type { IconName } from "@/components/ui/Icon";
 
 /** An app screen (375×812 from Figma). `cardFocus` picks the part shown in short mobile crops. */
 export type Screenshot = { src: string; alt: string; cardFocus?: string };
-export type HowStep = { title: string; body: string; screenshot?: Screenshot };
+export type HowStep = { icon: IconName; title: string; body: string };
 export type MoreWayService = {
   id: string;
   name: string;
@@ -93,44 +93,29 @@ export const home = {
   howItWorks: {
     eyebrow: "How it works",
     title: "From tap to drop-off in four steps.",
-    steps: [
-      {
-        title: "Book",
-        body: "Set your pickup and destination, then choose your ride. On Standard, ride Solo or Shared. You see your fare before you confirm.",
-        screenshot: {
-          src: "/assets/img/app/choose-ride.jpg",
-          alt: "Choosing a ride in the WeMoove app: Executive, Premium, Standard, Bike Delivery and Truck Delivery",
-          cardFocus: "center 62%",
-        },
+    toggleLabel: "Show steps for",
+    modes: {
+      solo: {
+        label: "Solo",
+        summary: "The car to yourself, straight to where you're going.",
+        steps: [
+          { icon: "pin", title: "Set your trip", body: "Enter where you're going. Your pickup is set from your location, or pick another spot." },
+          { icon: "car", title: "Choose Solo", body: "Pick Standard, then Solo. You see your fare before you confirm." },
+          { icon: "user", title: "Meet your driver", body: "See their name, photo, rating, car and plate, and call or chat as they arrive." },
+          { icon: "star", title: "Ride, pay and rate", body: "Straight to your stop. Pay by card or wallet, then rate your driver." },
+        ],
       },
-      {
-        title: "Get matched",
-        body: "We match you with a nearby verified driver. On Shared, we also match riders heading your way.",
-        screenshot: {
-          src: "/assets/img/app/driver-found.jpg",
-          alt: "Driver found: the driver's name, rating, car and plate number, with call and chat buttons",
-          cardFocus: "center 88%",
-        },
+      shared: {
+        label: "Tag along",
+        summary: "Share the car with riders going your way, and pay less.",
+        steps: [
+          { icon: "pin", title: "Set your trip", body: "Enter where you're going. Your pickup is set from your location, or pick another spot." },
+          { icon: "share", title: "Choose Shared", body: "Pick Standard, then Shared. Your lower fare shows before you confirm." },
+          { icon: "user", title: "Get matched", body: "We pair you with a verified driver and riders heading the same way, on one route." },
+          { icon: "star", title: "Ride together, pay less", body: "Riders hop on and off along the route. Pay by card or wallet, then rate your driver." },
+        ],
       },
-      {
-        title: "Ride",
-        body: "Follow your trip on the map, share your ride details with someone you trust, or report the ride if anything feels wrong.",
-        screenshot: {
-          src: "/assets/img/app/driving.jpg",
-          alt: "Driving to destination screen with the route, driver details, and options to share ride details or report the ride",
-          cardFocus: "center 92%",
-        },
-      },
-      {
-        title: "Pay",
-        body: "Pay the fare you saw when you booked, by card or from your WeMoove wallet. No haggling, no surprises. Then rate your driver and add a tip if you like.",
-        screenshot: {
-          src: "/assets/img/app/ride-review.png",
-          alt: "Ride review screen with a star rating, a comment and tip options",
-          cardFocus: "center 42%",
-        },
-      },
-    ] satisfies HowStep[],
+    } satisfies Record<"solo" | "shared", { label: string; summary: string; steps: HowStep[] }>,
   },
 
   rideModes: {
