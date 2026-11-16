@@ -1,8 +1,7 @@
 "use client";
 
-import { m, type MotionValue } from "framer-motion";
+import type { MotionValue } from "framer-motion";
 import type { ReactNode } from "react";
-import { useReducedMotion } from "@/lib/motion";
 import { RideMap } from "@/components/home/RideMap";
 import { Icon } from "@/components/ui/Icon";
 import { PhoneFrame } from "@/components/ui/PhoneFrame";
@@ -44,13 +43,13 @@ export function HeroPhone({
   label: labelOverride,
   size = "lg",
 }: HeroPhoneProps) {
-  const reduceMotion = useReducedMotion();
   const hasRoute = pickup !== destination;
-  const shared = mode === "shared" && hasRoute;
 
-  const label = labelOverride ?? (hasRoute
-    ? `App preview: ${copy.rideName} ${shared ? copy.shared : copy.solo} ride from ${pickup} to ${destination}${shared ? `, ${copy.sharedSeats}` : ""}.`
-    : `App preview: pickup at ${pickup}.`);
+  const label =
+    labelOverride ??
+    (hasRoute
+      ? `App preview: booking a ${copy.rideName} ${copy.solo} ride from ${pickup} to ${destination}, ${copy.soloSeats}.`
+      : `App preview: pickup at ${pickup}.`);
 
   return (
     <div {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true })}>
@@ -92,54 +91,31 @@ export function HeroPhone({
         </div>
 
         {sheet ?? (
-        /* Bottom sheet, styled like "Choose your ride" */
-        <div className="absolute inset-x-0 bottom-0 z-10 rounded-t-3xl bg-white px-4 pb-5 pt-2 shadow-[0_-8px_24px_-6px] shadow-ink/15" aria-hidden="true">
-          <div className="mx-auto mb-3 h-1 w-9 rounded-full bg-line" />
-          <div className="space-y-1.5">
-            {(["solo", "shared"] as const).map((value) => {
-              const selected = (value === "shared") === shared;
-              return (
-                <div
-                  key={value}
-                  className={`relative flex items-center gap-2 rounded-xl border-2 p-1.5 transition-colors duration-300 md:gap-2.5 md:p-2 ${
-                    selected ? "border-brand bg-paper" : "border-transparent"
-                  }`}
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/40 text-ink">
-                    <Icon name={value === "shared" ? "share" : "car"} className="h-4.5 w-4.5" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate whitespace-nowrap text-[12px] font-bold leading-tight text-ink md:text-[13px]">
-                      {value === "shared" ? copy.shared : copy.solo}
-                    </span>
-                    <span className="block truncate whitespace-nowrap text-[10px] text-muted md:text-[11px]">
-                      {value === "shared" ? copy.sharedSeats : copy.soloSeats}
-                    </span>
-                  </span>
-                  <span
-                    className={`shrink-0 whitespace-nowrap rounded-full px-2 py-1 text-[10px] font-extrabold ${
-                      value === "shared" ? "bg-save/10 text-save" : "bg-ink text-white"
-                    }`}
-                  >
-                    {value === "shared" ? copy.sharedBadge : copy.soloBadge}
-                  </span>
-                  {selected && !reduceMotion && (
-                    <m.span
-                      key={`${value}-pop`}
-                      className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-brand"
-                      initial={{ opacity: 0.9, scale: 1 }}
-                      animate={{ opacity: 0, scale: 1.06 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  )}
-                </div>
-              );
-            })}
+          /* Solo booking sheet: one ride, the car to yourself */
+          <div className="absolute inset-x-0 bottom-0 z-10 rounded-t-3xl bg-white px-4 pb-5 pt-2 shadow-[0_-8px_24px_-6px] shadow-ink/15" aria-hidden="true">
+            <div className="mx-auto mb-3 h-1 w-9 rounded-full bg-line" />
+            <div className="flex items-center gap-2.5 rounded-xl border-2 border-brand bg-paper p-2">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand/40 text-ink">
+                <Icon name="car" className="h-5 w-5" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-[13px] font-bold leading-tight text-ink">
+                  {copy.rideName} · {copy.solo}
+                </span>
+                <span className="block truncate text-[11px] text-muted">{copy.soloSeats}</span>
+              </span>
+              <span className="shrink-0 rounded-full bg-ink px-2 py-1 text-[10px] font-extrabold text-white">{copy.soloBadge}</span>
+            </div>
+            <div className="mt-2.5 flex justify-around text-[10.5px] font-semibold text-muted">
+              {copy.soloPerks.map((perk) => (
+                <span key={perk} className="flex items-center gap-1">
+                  <Icon name="check" className="h-3 w-3 text-ink" />
+                  {perk}
+                </span>
+              ))}
+            </div>
+            <div className="mt-2.5 rounded-xl bg-brand py-2.5 text-center text-[13px] font-bold text-ink">{copy.bookSolo}</div>
           </div>
-          <div className="mt-2.5 rounded-xl bg-brand py-2.5 text-center text-[13px] font-bold text-ink">
-            {copy.choose} {shared ? copy.shared : copy.solo}
-          </div>
-        </div>
         )}
       </PhoneFrame>
     </div>
