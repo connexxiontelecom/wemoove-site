@@ -61,7 +61,7 @@ export const home = {
           points: ["Straight to where you're going, no extra stops", "Your space and your privacy", "Best when you're in a hurry"],
         },
         shared: {
-          points: ["Matched with riders heading your way", "The fare is split, so you pay less than riding Solo", "Fewer cars on Abuja's roads"],
+          points: ["Book a seat on a ride already heading your way", "Pay per seat, or offer your own price", "Rides leave at a set time, with stops on the way"],
         },
       },
       ctaSolo: "Get the app to ride Solo",
@@ -69,27 +69,38 @@ export const home = {
       fareNote: "You always see your fare in the app before you confirm.",
       mapLabel: "Trips across Abuja",
     },
-    /** Tag along story on two phones (desktop). Illustrative app preview, not real riders. */
+    /**
+     * Tag along on two phones (desktop), following the app: a driver lists a shared ride, a rider
+     * requests a seat, the driver accepts, then picks the rider up on the way. Illustrative preview, no prices.
+     */
     trip: {
-      pickup1: "Wuse",
-      pickup2: "Jabi",
-      destination: "Gwarinpa",
-      title: "Shared ride",
-      you: "You",
-      rider1Tag: "Rider 1",
-      rider2Tag: "Rider 2",
-      rider1: {
-        before: "Picking up 1 more rider",
-        after: "Riding together, paying less",
+      start: "Maitama",
+      pickup: "Wuse",
+      destination: "Jabi",
+      leaves: "Leaves 12:30 PM",
+      tags: { start: "Start", you: "You", rider: "Rider" },
+      rider: {
+        title: "Shared ride",
+        requested: "Seat request sent",
+        booked: "Seat booked · driver on the way",
+        aboard: "You're in · riding together",
+        buttonRequested: "Waiting for driver…",
+        buttonBooked: "Seat booked",
+        buttonAboard: "On your way",
       },
-      rider2: {
-        before: "Your car is on its way",
-        after: "You're in, riding together",
+      driver: {
+        title: "Rideshare request",
+        who: "Rider · 1 seat",
+        requested: "Wants a seat to Jabi",
+        booked: "Accepted · picking up in Wuse",
+        aboard: "1 rider aboard · next stop Jabi",
+        counter: "Counter",
+        accept: "Accept",
+        accepted: "Accepted",
       },
-      matchedBefore: "Matching riders going your way",
-      matchedAfter: "Matched · same car, pay less",
-      cta: "Get the app",
+      badge: { requested: "Seat request sent", booked: "Seat booked", aboard: "Riding together · paying less" },
       linkLabel: "Get the WeMoove app",
+      preview: "App preview: a rider requests a seat on a shared ride from Wuse to Jabi, the driver accepts, and picks them up on the way.",
     },
     /** Sample trips the map cycles through. Areas must exist in src/content/areas.ts. */
     showcaseRoutes: [
@@ -132,12 +143,12 @@ export const home = {
       },
       shared: {
         label: "Tag along",
-        summary: "Share the car with riders going your way, and pay less.",
+        summary: "Book a seat on a car already heading your way, and pay less.",
         steps: [
-          { icon: "pin", title: "Set your trip", body: "Enter where you're going. Your pickup is set from your location, or pick another spot." },
-          { icon: "share", title: "Choose Shared", body: "Pick Standard, then Shared. Your lower fare shows before you confirm." },
-          { icon: "user", title: "Get matched", body: "We pair you with a verified driver and riders heading the same way, on one route." },
-          { icon: "star", title: "Ride together, pay less", body: "Riders hop on and off along the route. Pay by card or wallet, then rate your driver." },
+          { icon: "map", title: "Find a shared ride", body: "Browse shared rides heading your way, with their take-off time and stops." },
+          { icon: "share", title: "Book or make an offer", body: "Book seats at the listed price, or send your own offer per seat." },
+          { icon: "user", title: "Driver confirms", body: "The driver accepts your booking or offer, or sends back a counter offer." },
+          { icon: "star", title: "Ride together, pay less", body: "Get picked up, ride to your stop, then rate your driver." },
         ],
       },
     } satisfies Record<"solo" | "shared", { label: string; summary: string; steps: HowStep[] }>,
@@ -152,18 +163,18 @@ export const home = {
     versusLabel: "Solo vs Tag along",
     cta: "Get the app",
     rows: [
-      { id: "price", label: "Fare", solo: "Full fare, just for you", shared: "Lower, split with riders" },
-      { id: "pickup", label: "Pickup", solo: "Usually the quickest", shared: "A little longer while we match" },
+      { id: "price", label: "Fare", solo: "Full fare, just for you", shared: "Per seat, or offer your own price" },
+      { id: "pickup", label: "Timing", solo: "Whenever you book", shared: "Rides leave at set times" },
       { id: "space", label: "Space", solo: "The whole car", shared: "Your own seat" },
-      { id: "route", label: "Route", solo: "Straight there", shared: "May stop for riders on the way" },
+      { id: "route", label: "Route", solo: "Straight there", shared: "Set route, with stops on the way" },
     ] satisfies VersusRow[],
     moments: [
-      { id: "late", icon: "car", label: "Running late", pick: "solo", rows: ["pickup", "route"], reason: "Quickest pickup and straight to your stop, no detours." },
-      { id: "commute", icon: "map", label: "Daily commute", pick: "shared", rows: ["price"], reason: "Same trip every day? Splitting the fare adds up fast." },
+      { id: "late", icon: "car", label: "Running late", pick: "solo", rows: ["pickup", "route"], reason: "Book when you need it and go straight to your stop." },
+      { id: "commute", icon: "map", label: "Daily commute", pick: "shared", rows: ["price"], reason: "Same trip every day? Paying per seat adds up fast." },
       { id: "call", icon: "phone", label: "Private call on the way", pick: "solo", rows: ["space"], reason: "The whole car to yourself, so you can talk freely." },
-      { id: "relaxed", icon: "star", label: "Not in a rush", pick: "shared", rows: ["price", "route"], reason: "Got a few extra minutes? Tag along and pay less." },
+      { id: "relaxed", icon: "star", label: "Not in a rush", pick: "shared", rows: ["price", "route"], reason: "Got time to spare? Book a seat on a ride that's leaving and pay less." },
       { id: "airport", icon: "briefcase", label: "Airport run", pick: "solo", rows: ["space", "route"], reason: "Room for you and your bags, and no stops before your flight." },
-      { id: "budget", icon: "wallet", label: "Saving this month", pick: "shared", rows: ["price"], reason: "Your own seat for a lower fare, every trip." },
+      { id: "budget", icon: "wallet", label: "Saving this month", pick: "shared", rows: ["price"], reason: "Pay per seat, or offer a price that works for you." },
     ] satisfies RideMoment[],
   },
 
@@ -185,7 +196,7 @@ export const home = {
         icon: "car",
         short: "Everyday rides, Solo or Shared",
         tagline: "Your everyday ride, your way.",
-        body: "Our everyday ride around Abuja. Have the car to yourself with Solo, or go Shared with people heading your way and pay less.",
+        body: "Our everyday ride around Abuja. Have the car to yourself with Solo, or book a seat on a shared ride heading your way and pay less.",
         points: ["Ride Solo, or go Shared and pay less", "Verified drivers on every trip", "Fare shown before you book"],
         scene: "standard",
         photo: "/assets/img/services/standard.jpg",
@@ -292,7 +303,7 @@ export const home = {
     body: "Turn the trips you already make into income. Go online when it suits you and get Solo and Tag along requests nearby.",
     points: [
       { icon: "map", title: "No shifts", body: "Go online when you're ready, offline when you're done." },
-      { icon: "wallet", title: "No haggling", body: "The app sets the fare before every trip." },
+      { icon: "wallet", title: "Prices agreed in the app", body: "Riders book or send an offer, and you accept or counter." },
       { icon: "user", title: "Know your rider", body: "Everyone books through the app, so you see who you're picking up." },
     ] satisfies { icon: IconName; title: string; body: string }[],
     cta: "How to start driving",

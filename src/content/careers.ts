@@ -62,7 +62,7 @@ export const careers = {
       {
         icon: "map",
         title: "Engineering & product",
-        body: "Build and improve the WeMoove app: booking, matching Shared rides, maps, payments and safety tools.",
+        body: "Build and improve the WeMoove app: booking, Shared ride seats and offers, maps, payments and safety tools.",
       },
       {
         icon: "shieldCheck",

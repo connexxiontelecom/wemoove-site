@@ -11,14 +11,14 @@ export const ride = {
   hero: {
     eyebrow: "Ride",
     title: "Get there your way, across Abuja.",
-    body: "Have the car to yourself, tag along with riders heading your way and pay less, or step up to Premium or Executive. Your fare is always shown before you book.",
+    body: "Have the car to yourself, tag along with riders heading your way and pay less, or step up to Premium or Executive. You always see the price before you ride.",
     secondary: { label: "Solo or Shared?", href: "#plan" },
     photo: {
       src: "/assets/img/services/standard.jpg",
       alt: "A smiling WeMoove driver with his arm on the open window of a silver Toyota Corolla on a tree-lined street in Abuja",
     },
     chips: [
-      { label: "Fare shown upfront", icon: "wallet" },
+      { label: "Price agreed in the app", icon: "wallet" },
       { label: "Verified drivers", icon: "shieldCheck" },
     ],
   },
@@ -32,7 +32,7 @@ export const ride = {
   planner: {
     eyebrow: "Plan your trip",
     title: "Your ride, your way.",
-    body: "Have the car to yourself, or tag along with riders heading your way and pay less. Pick Solo or Tag along to see who rides with you.",
+    body: "Have the car to yourself, or book a seat on a shared ride heading your way and pay less. Pick Solo or Tag along to see who rides with you.",
   },
 
   safety: {
@@ -56,11 +56,11 @@ export const ride = {
       },
       {
         q: "What's the difference between Solo and Shared?",
-        a: "On a Standard ride, Solo gives you the whole car. Shared matches you with riders heading your way, so you split the trip and pay a lower fare. Pickup can take a little longer on Shared while we match riders.",
+        a: "On a Standard ride, Solo gives you the whole car, whenever you book. Shared lets you book a seat on a ride already heading your way, with a set take-off time and stops along the route, so you pay less.",
       },
       {
         q: "How is my fare worked out?",
-        a: "The app shows your fare before you book, based on your trip and the ride you choose. It's fixed: no haggling with the driver.",
+        a: "On Solo, the app shows your fare before you book. On Shared, book at the listed seat price or send your own offer, and the driver can accept or counter. Either way, the price is agreed in the app before you ride.",
       },
       {
         q: "How can I pay?",

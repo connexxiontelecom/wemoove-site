@@ -32,7 +32,7 @@ export function useShowcaseRoute(paused = false): { pickup: Area; destination: A
 }
 
 /** How long each ride type stays selected while the chooser plays on its own (Tag along plays the full shared trip). */
-export const AUTO_MODE_MS: Record<RideMode, number> = { solo: 4500, shared: 10500 };
+export const AUTO_MODE_MS: Record<RideMode, number> = { solo: 4500, shared: 11500 };
 
 /**
  * Ride type that flips between Shared and Solo on its own so visitors see both.
@@ -69,19 +69,22 @@ export function useAutoMode(initial: RideMode = "shared") {
   return { mode, choose, autoplaying, pauseProps };
 }
 
+export type TripPhase = "requested" | "booked" | "aboard";
+
 /**
- * One shared clock for a Tag along trip shown on two phones: the car drives to the second pickup,
- * waits there a moment, then drives everyone to the drop-off. `passed` flips once the second rider is aboard.
- * Reduced motion: parked just after the pickup, so both phones show the "riding together" state.
+ * One shared clock for a Tag along trip shown on two phones. The car waits at the start while the
+ * rider's seat request goes to the driver ("requested"), sets off once it's accepted ("booked"),
+ * stops to pick the rider up, then drives on ("aboard").
+ * Reduced motion: parked just after the pickup.
  */
 export function useTripClock(active: boolean, viaT: number) {
   const reduced = useReducedMotion();
   const t = useMotionValue(0);
-  const [passed, setPassed] = useState(false);
+  const [phase, setPhase] = useState<TripPhase>("requested");
 
   useMotionValueEvent(t, "change", (v) => {
-    const next = v >= viaT;
-    setPassed((p) => (p === next ? p : next));
+    const next: TripPhase = v >= viaT ? "aboard" : v > 0.0005 ? "booked" : "requested";
+    setPhase((p) => (p === next ? p : next));
   });
 
   useEffect(() => {
@@ -91,15 +94,15 @@ export function useTripClock(active: boolean, viaT: number) {
       return;
     }
     t.set(0);
-    const controls = animate(t, [0, viaT, viaT, 1], {
-      duration: 10,
-      times: [0, 0.4, 0.55, 0.92],
+    const controls = animate(t, [0, 0, viaT, viaT, 1], {
+      duration: 11,
+      times: [0, 0.25, 0.55, 0.65, 0.95],
       ease: "easeInOut",
       repeat: Infinity,
-      repeatDelay: 1.5,
+      repeatDelay: 1.2,
     });
     return () => controls.stop();
   }, [active, reduced, viaT, t]);
 
-  return { progress: t, passed };
+  return { progress: t, phase };
 }

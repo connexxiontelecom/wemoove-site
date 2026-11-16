@@ -51,11 +51,11 @@ export const safety = {
         id: "before",
         step: "Before you ride",
         title: "Know exactly who is coming.",
-        body: "Every driver and vehicle is checked before their first trip. When you are matched, you see who is picking you up.",
+        body: "Every driver and vehicle is checked before their first trip. Once your ride is booked, you see who is picking you up.",
         points: [
           { icon: "user", title: "Driver details upfront", body: "Name, photo, rating, car and plate number, before the car arrives." },
           { icon: "phone", title: "Call or chat in the app", body: "Reach your driver from the trip screen to confirm your pickup spot." },
-          { icon: "wallet", title: "Fare fixed before you book", body: "No haggling at the roadside. You pay the price you saw." },
+          { icon: "wallet", title: "Price agreed before you ride", body: "Book at the listed price or agree an offer in the app, never at the roadside." },
         ],
         screenshot: {
           src: "/assets/img/app/driver-found.jpg",
@@ -113,7 +113,7 @@ export const safety = {
   shared: {
     eyebrow: "Tagging along?",
     title: "Shared rides get the same protection.",
-    body: "On a Shared ride, WeMoove matches you with riders heading your way. Every rider books through the app, so your driver and WeMoove know who is in the car at every stop.",
+    body: "On a Shared ride, you book a seat on a ride heading your way. Every rider books through the app, so your driver and WeMoove know who is in the car at every stop.",
     points: ["Same verified driver checks", "Share your trip, use SOS and report a ride, just like Solo", "Ratings for every rider after the trip"],
   },
 

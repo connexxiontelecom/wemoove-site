@@ -1,6 +1,6 @@
 /**
  * How It Works copy.
- * Rewritten for the Solo / Shared model: fares are shown upfront, nobody negotiates a price.
+ * Solo: the car to yourself, fare shown before you book. Shared: book a seat on a listed ride, or make an offer.
  */
 export type Step = { title: string; body: string };
 
@@ -14,7 +14,7 @@ export const howItWorks = {
     title: "How to use the WeMoove app",
     paragraphs: [
       "WeMoove is a ride sharing app that gets you from your location to your destination without struggling for buses or taxis at bus stops, or risking your valuables on the way. It is built with safety features to keep you safe and comfortable.",
-      "Ride Solo when you want the car to yourself, or ride Shared to tag along with people heading your way and split the fare. Either way, you see your fare before you book.",
+      "Ride Solo when you want the car to yourself, or ride Shared to book a seat on a ride already heading your way and pay less. Either way, the price is agreed in the app before you ride.",
       "WeMoove also gives private car owners an organised way to earn from their vehicle. Here is a quick guide for riders and drivers.",
     ],
   },
@@ -27,7 +27,7 @@ export const howItWorks = {
       },
       {
         title: "Choose your ride",
-        body: "Pick Standard, Premium or Executive. On Standard, ride Solo with the car to yourself, or Shared to split the fare with riders going your way. Your fare is shown before you book, and you pay by card or from your WeMoove wallet.",
+        body: "Pick Standard, Premium or Executive. On Standard, ride Solo with the car to yourself, or go Shared: pick a shared ride heading your way and book seats at the listed price or send your own offer. You pay by card or from your WeMoove wallet.",
       },
       {
         title: "Meet your driver",

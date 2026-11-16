@@ -70,8 +70,8 @@ export const about = {
     },
     principles: [
       { icon: "shieldCheck" as IconName, title: "Safety first", body: "Verified drivers, shared trip details and in-app reporting on every ride." },
-      { icon: "wallet" as IconName, title: "Fair, fixed fares", body: "You see the price before you book. No haggling at the roadside." },
-      { icon: "share" as IconName, title: "Better together", body: "Tag along with riders going your way and pay less." },
+      { icon: "wallet" as IconName, title: "Fair prices, agreed in the app", body: "See the price before you ride, or make an offer on a shared seat. No bargaining at the roadside." },
+      { icon: "share" as IconName, title: "Better together", body: "Book a seat on a ride going your way and pay less." },
     ],
   },
 

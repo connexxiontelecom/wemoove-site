@@ -14,7 +14,7 @@ export const drive = {
   pageName: "Drive with WeMoove",
   meta: {
     description:
-      "Drive with WeMoove in Abuja. Go online when it suits you, get Solo and Shared trip requests nearby, and earn with fixed, upfront fares. Sign up in the app.",
+      "Drive with WeMoove in Abuja. Go online when it suits you, get Solo and Shared trip requests nearby, and agree every fare in the app. Sign up in the app.",
   },
 
   hero: {
@@ -30,7 +30,7 @@ export const drive = {
       label: "New trip request",
       mode: "Shared",
       route: "Wuse → CBD",
-      riders: "2 riders · fare shown upfront",
+      riders: "2 riders · booked in the app",
     },
   },
 
@@ -39,8 +39,8 @@ export const drive = {
     title: "Built to make driving simpler and safer.",
     items: [
       { icon: "map", title: "Drive when it suits you", body: "No shifts. Go online when you're ready and offline when you're done." },
-      { icon: "share", title: "Solo and Shared trips", body: "Get requests for riders who want the car to themselves, and for riders heading the same way." },
-      { icon: "wallet", title: "Fixed, upfront fares", body: "The app sets the fare before the trip. No haggling with riders at the roadside." },
+      { icon: "share", title: "Solo and Shared trips", body: "Get requests from riders who want the car to themselves, and seat bookings on your shared rides." },
+      { icon: "wallet", title: "Prices agreed in the app", body: "Riders book at the listed price or send an offer, and you accept or counter. No bargaining at the roadside." },
       { icon: "user", title: "Know who you're picking up", body: "Every rider books through the app, so you see who you're picking up and where they're going." },
       { icon: "shieldCheck", title: "Safety tools for drivers too", body: "Share your trip details and report a rider from inside the app if anything feels wrong." },
       { icon: "star", title: "Two-way ratings", body: "You rate your riders after every trip, keeping the community accountable on both sides." },
@@ -112,11 +112,11 @@ export const drive = {
       },
       {
         q: "What is a Shared trip?",
-        a: "On a Shared trip you pick up riders who are heading the same way, along one route. Each rider books through the app and sees their fare before they book.",
+        a: "On a Shared ride, riders book seats on your route and you pick them up along the way. Each rider books and pays through the app.",
       },
       {
         q: "Who sets the fare?",
-        a: "The app sets every fare upfront, before the rider books. There's no negotiating with riders.",
+        a: "On Solo trips, the app shows the fare before the rider books. On Shared rides, riders can book at the listed seat price or send an offer, which you can accept or counter. Everything is agreed in the app before the trip.",
       },
       {
         q: "How much can I earn?",
