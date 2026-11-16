@@ -24,12 +24,15 @@ export type MoreWayService = {
   /** Describes the photo for screen readers. */
   photoAlt?: string;
 };
-export type ModeRow = { label: string; value: string };
-export type RideModeCard = {
-  id: "solo" | "shared";
-  name: string;
-  tagline: string;
-  rows: ModeRow[];
+export type VersusRow = { id: string; label: string; solo: string; shared: string };
+export type RideMoment = {
+  id: string;
+  icon: IconName;
+  label: string;
+  pick: "solo" | "shared";
+  /** Rows of the Solo vs Tag along table that explain the pick (highlighted). */
+  rows: string[];
+  reason: string;
 };
 export type SafetyFeature = { title: string; body: string; icon: IconName };
 
@@ -120,34 +123,26 @@ export const home = {
 
   rideModes: {
     eyebrow: "Choose your ride",
-    title: "Your trip, your choice.",
-    intro: "On a Standard ride, choose Solo or Shared.",
-    modeLabel: "Standard ride",
+    title: "Solo or Tag along? Pick by the moment.",
+    intro: "Both are Standard rides with verified drivers. Tap your kind of trip to see which one fits.",
+    momentsLabel: "What's the trip?",
+    bestPick: "Best pick",
+    versusLabel: "Solo vs Tag along",
     cta: "Get the app",
-    modes: [
-      {
-        id: "solo",
-        name: "Solo",
-        tagline: "Your car, your route. Best when you're in a hurry or need privacy.",
-        rows: [
-          { label: "Price", value: "Full fare, just for you" },
-          { label: "Seats", value: "The whole car" },
-          { label: "Best for", value: "Urgent trips and privacy" },
-          { label: "Wait time", value: "Usually the quickest pickup" },
-        ],
-      },
-      {
-        id: "shared",
-        name: "Shared",
-        tagline: "Split the fare with riders going your way. Best for daily commutes.",
-        rows: [
-          { label: "Price", value: "Lower fare, split with co-riders" },
-          { label: "Seats", value: "Your own seat in a shared car" },
-          { label: "Best for", value: "Daily commutes" },
-          { label: "Wait time", value: "A little longer while we match riders" },
-        ],
-      },
-    ] satisfies RideModeCard[],
+    rows: [
+      { id: "price", label: "Fare", solo: "Full fare, just for you", shared: "Lower, split with riders" },
+      { id: "pickup", label: "Pickup", solo: "Usually the quickest", shared: "A little longer while we match" },
+      { id: "space", label: "Space", solo: "The whole car", shared: "Your own seat" },
+      { id: "route", label: "Route", solo: "Straight there", shared: "May stop for riders on the way" },
+    ] satisfies VersusRow[],
+    moments: [
+      { id: "late", icon: "car", label: "Running late", pick: "solo", rows: ["pickup", "route"], reason: "Quickest pickup and straight to your stop, no detours." },
+      { id: "commute", icon: "map", label: "Daily commute", pick: "shared", rows: ["price"], reason: "Same trip every day? Splitting the fare adds up fast." },
+      { id: "call", icon: "phone", label: "Private call on the way", pick: "solo", rows: ["space"], reason: "The whole car to yourself, so you can talk freely." },
+      { id: "relaxed", icon: "star", label: "Not in a rush", pick: "shared", rows: ["price", "route"], reason: "Got a few extra minutes? Tag along and pay less." },
+      { id: "airport", icon: "briefcase", label: "Airport run", pick: "solo", rows: ["space", "route"], reason: "Room for you and your bags, and no stops before your flight." },
+      { id: "budget", icon: "wallet", label: "Saving this month", pick: "shared", rows: ["price"], reason: "Your own seat for a lower fare, every trip." },
+    ] satisfies RideMoment[],
   },
 
   moreWays: {

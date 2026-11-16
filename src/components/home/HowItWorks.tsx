@@ -50,15 +50,8 @@ export function HowItWorks() {
   const ridersAboard = shared && active === last;
 
   return (
-    <section id="how-it-works" aria-labelledby="how-title" className="relative overflow-hidden bg-night text-white">
-      {/* Soft glow that follows the mode colour */}
-      <div
-        aria-hidden="true"
-        className={`pointer-events-none absolute -top-40 right-[-10%] h-[28rem] w-[28rem] rounded-full blur-3xl transition-colors duration-700 ${
-          shared ? "bg-route/30" : "bg-brand/20"
-        }`}
-      />
-      <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+    <section id="how-it-works" aria-labelledby="how-title" className="bg-night text-white">
+      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p data-reveal className="font-bold text-brand">{howItWorks.eyebrow}</p>
@@ -112,9 +105,7 @@ export function HowItWorks() {
             />
             {/* Distance driven */}
             <span
-              className={`absolute top-1/2 h-3 -translate-y-1/2 rounded-full transition-[width,background-color] duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] ${
-                shared ? "bg-route" : "bg-brand"
-              }`}
+              className={`absolute top-1/2 h-3 -translate-y-1/2 rounded-full transition-[width,background-color] duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] bg-brand`}
               style={{ left: along(0), width: `calc(${progress} * (${ROAD_SPAN}))` }}
             />
             {/* Step stops */}
@@ -122,7 +113,7 @@ export function HowItWorks() {
               <span
                 key={i}
                 className={`absolute top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-4 ring-night transition-colors duration-500 ${
-                  i <= active ? (shared ? "bg-route" : "bg-brand") : "bg-white/25"
+                  i <= active ? "bg-brand" : "bg-white/25"
                 }`}
                 style={{ left: along(i / last) }}
               />
@@ -141,7 +132,7 @@ export function HowItWorks() {
                       exit={{ scale: 0, opacity: 0, y: 20, transition: { duration: 0.25, delay: reduceMotion ? 0 : 0.25 + i * 0.2 } }}
                       transition={{ type: "spring", stiffness: 420, damping: 18, delay: reduceMotion ? 0 : i * 0.12 }}
                     >
-                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-route shadow-lg ring-[3px] ring-route motion-safe:animate-bounce">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-ink ring-[3px] ring-night">
                         <Icon name="user" className="h-4 w-4" />
                       </span>
                     </m.span>
@@ -154,15 +145,13 @@ export function HowItWorks() {
               style={{ left: along(progress) }}
             >
               <span
-                className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-brand text-ink ring-[6px] ring-night transition-shadow duration-500 ${
-                  shared ? "shadow-[0_10px_34px_-2px] shadow-route/70" : "shadow-[0_10px_34px_-2px] shadow-brand/60"
-                }`}
+                className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-brand text-ink ring-[6px] ring-night"
               >
                 <Icon name="car" className="h-7 w-7" />
                 <AnimatePresence>
                   {ridersAboard && (
                     <m.span
-                      className="absolute -right-2.5 -top-2.5 flex h-6 min-w-6 items-center justify-center rounded-full bg-route px-1.5 text-xs font-extrabold text-white ring-2 ring-night"
+                      className="absolute -right-2.5 -top-2.5 flex h-6 min-w-6 items-center justify-center rounded-full bg-white px-1.5 text-xs font-extrabold text-ink ring-2 ring-night"
                       initial={reduceMotion ? false : { scale: 0 }}
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
@@ -194,7 +183,7 @@ export function HowItWorks() {
                 <span className="relative flex w-12 shrink-0 flex-col items-center lg:hidden" aria-hidden="true">
                   <span
                     className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full text-lg font-extrabold transition-colors duration-500 ${
-                      reached ? (shared ? "bg-route text-white" : "bg-brand text-ink") : "bg-white/10 text-white"
+                      reached ? "bg-brand text-ink" : "bg-white/10 text-white"
                     }`}
                   >
                     {i + 1}
@@ -202,7 +191,7 @@ export function HowItWorks() {
                   {i < last && (
                     <span className="relative -mb-4 mt-1 w-1 flex-1 overflow-hidden rounded-full bg-white/10">
                       <span
-                        className={`absolute inset-x-0 top-0 rounded-full transition-[height] duration-700 ${shared ? "bg-route" : "bg-brand"}`}
+                        className={`absolute inset-x-0 top-0 rounded-full transition-[height] duration-700 bg-brand`}
                         style={{ height: i < active ? "100%" : "0%" }}
                       />
                     </span>
@@ -220,34 +209,17 @@ export function HowItWorks() {
                       isActive ? "bg-white text-ink shadow-2xl shadow-black/40 lg:-translate-y-2" : "bg-white/[0.06] text-white ring-1 ring-white/10"
                     }`}
                   >
-                    {/* Big ghost number */}
-                    <span
-                      aria-hidden="true"
-                      className={`pointer-events-none absolute -right-1 -top-5 select-none text-[7rem] font-extrabold leading-none tracking-tighter transition-colors duration-500 ${
-                        isActive ? "text-ink/[0.07]" : "text-white/[0.05]"
-                      }`}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
                     <span className="relative flex flex-wrap items-center gap-3">
                       <span
                         className={`flex h-12 w-12 items-center justify-center rounded-2xl transition-colors duration-500 ${
-                          isActive ? (shared ? "bg-route text-white" : "bg-brand text-ink") : "bg-white/10 text-white"
+                          isActive ? "bg-brand text-ink" : "bg-white/10 text-white"
                         }`}
                       >
                         <Icon name={step.icon} className="h-6 w-6" />
                       </span>
                       {changed && (
                         <span
-                          className={`rounded-full px-2.5 py-1 text-xs font-extrabold transition-colors duration-500 ${
-                            isActive
-                              ? shared
-                                ? "bg-route/10 text-route"
-                                : "bg-brand/25 text-ink"
-                              : shared
-                                ? "bg-route/40 text-white"
-                                : "bg-brand/20 text-brand"
-                          }`}
+                          className={`text-sm font-semibold transition-colors duration-500 ${isActive ? "text-muted" : "text-white/60"}`}
                         >
                           {current.label}
                         </span>
