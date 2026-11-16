@@ -1,5 +1,6 @@
 "use client";
 
+import { animate, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { useEffect, useState } from "react";
 import type { Area } from "@/content/areas";
 import { home } from "@/content/home";
@@ -30,8 +31,8 @@ export function useShowcaseRoute(paused = false): { pickup: Area; destination: A
   return { pickup, destination };
 }
 
-/** How long each ride type stays selected while the chooser plays on its own. */
-export const AUTO_MODE_MS = 4000;
+/** How long each ride type stays selected while the chooser plays on its own (Tag along plays the full shared trip). */
+export const AUTO_MODE_MS: Record<RideMode, number> = { solo: 4500, shared: 10500 };
 
 /**
  * Ride type that flips between Shared and Solo on its own so visitors see both.
@@ -47,11 +48,11 @@ export function useAutoMode(initial: RideMode = "shared") {
 
   useEffect(() => {
     if (!autoplaying) return;
-    const id = window.setInterval(() => {
-      if (!document.hidden) setMode((m) => (m === "shared" ? "solo" : "shared"));
-    }, AUTO_MODE_MS);
-    return () => window.clearInterval(id);
-  }, [autoplaying]);
+    const id = window.setTimeout(() => {
+      setMode((m) => (document.hidden ? m : m === "shared" ? "solo" : "shared"));
+    }, AUTO_MODE_MS[mode]);
+    return () => window.clearTimeout(id);
+  }, [autoplaying, mode]);
 
   const choose = (next: RideMode) => {
     setUserChose(true);
@@ -66,4 +67,39 @@ export function useAutoMode(initial: RideMode = "shared") {
   };
 
   return { mode, choose, autoplaying, pauseProps };
+}
+
+/**
+ * One shared clock for a Tag along trip shown on two phones: the car drives to the second pickup,
+ * waits there a moment, then drives everyone to the drop-off. `passed` flips once the second rider is aboard.
+ * Reduced motion: parked just after the pickup, so both phones show the "riding together" state.
+ */
+export function useTripClock(active: boolean, viaT: number) {
+  const reduced = useReducedMotion();
+  const t = useMotionValue(0);
+  const [passed, setPassed] = useState(false);
+
+  useMotionValueEvent(t, "change", (v) => {
+    const next = v >= viaT;
+    setPassed((p) => (p === next ? p : next));
+  });
+
+  useEffect(() => {
+    if (!active) return;
+    if (reduced) {
+      t.set(Math.min(viaT + 0.05, 1));
+      return;
+    }
+    t.set(0);
+    const controls = animate(t, [0, viaT, viaT, 1], {
+      duration: 10,
+      times: [0, 0.4, 0.55, 0.92],
+      ease: "easeInOut",
+      repeat: Infinity,
+      repeatDelay: 1.5,
+    });
+    return () => controls.stop();
+  }, [active, reduced, viaT, t]);
+
+  return { progress: t, passed };
 }

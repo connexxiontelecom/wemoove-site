@@ -69,6 +69,28 @@ export const home = {
       fareNote: "You always see your fare in the app before you confirm.",
       mapLabel: "Trips across Abuja",
     },
+    /** Tag along story on two phones (desktop). Illustrative app preview, not real riders. */
+    trip: {
+      pickup1: "Wuse",
+      pickup2: "Jabi",
+      destination: "Gwarinpa",
+      title: "Shared ride",
+      you: "You",
+      rider1Tag: "Rider 1",
+      rider2Tag: "Rider 2",
+      rider1: {
+        before: "Picking up 1 more rider",
+        after: "Riding together, paying less",
+      },
+      rider2: {
+        before: "Your car is on its way",
+        after: "You're in, riding together",
+      },
+      matchedBefore: "Matching riders going your way",
+      matchedAfter: "Matched · same car, pay less",
+      cta: "Get the app",
+      linkLabel: "Get the WeMoove app",
+    },
     /** Sample trips the map cycles through. Areas must exist in src/content/areas.ts. */
     showcaseRoutes: [
       ["Wuse", "Gwarinpa"],

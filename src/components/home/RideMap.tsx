@@ -1,12 +1,12 @@
 "use client";
 
-import { AnimatePresence, animate, m, useInView } from "framer-motion";
+import { AnimatePresence, animate, m, useInView, type MotionValue } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { MapTag } from "@/components/home/MapTag";
 import { AREAS, type Area } from "@/content/areas";
 import { home } from "@/content/home";
-import { DECOR_ROADS, EDGES, NODES, edgePoints, findRoute, fitViewBox, pointAt, toPath, type Point } from "@/lib/abujaMap";
+import { DECOR_ROADS, EDGES, NODES, edgePoints, findRoute, findRouteVia, fitViewBox, pointAt, toPath, type Point } from "@/lib/abujaMap";
 import type { RideMode } from "@/lib/ride";
 
 type RideMapProps = {
@@ -18,6 +18,14 @@ type RideMapProps = {
    * "card": a compact 16:10 map that pans and zooms to fit each trip (mobile hero).
    */
   variant: "phone" | "card";
+  /** A Tag along pickup on the way: the car stops here for a second rider. */
+  via?: Area;
+  /** Drive the car from an outside clock (0–1 along the route) so several maps stay in sync. */
+  progress?: MotionValue<number>;
+  /** True once the car has picked up the rider at `via` (hides the waiting rider). */
+  viaPassed?: boolean;
+  /** Override the map tag labels. */
+  tags?: { pickup?: string; via?: string; dropoff?: string };
 };
 
 const copy = home.hero.phone;
@@ -37,7 +45,7 @@ const ROADS = [
 /** Scale an element about its own anchor point. */
 const scaleAt = (x: number, y: number, k: number) => `translate(${x} ${y}) scale(${k}) translate(${-x} ${-y})`;
 
-export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
+export function RideMap({ pickup, destination, mode, variant, via, progress, viaPassed = false, tags }: RideMapProps) {
   const reduceMotion = useReducedMotion();
   const svgRef = useRef<SVGSVGElement>(null);
   const carRef = useRef<SVGGElement>(null);
@@ -60,7 +68,10 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
 
   const hasRoute = pickup !== destination;
   const shared = mode === "shared" && hasRoute;
-  const route = useMemo(() => findRoute(pickup, destination), [pickup, destination]);
+  const route = useMemo(
+    () => (via ? findRouteVia(pickup, via, destination).route : findRoute(pickup, destination)),
+    [pickup, via, destination],
+  );
   const d = toPath(route);
   const from = NODES[pickup];
   const to = NODES[destination];
@@ -116,6 +127,10 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
       const pt = pointAt(route, t);
       car.setAttribute("transform", `translate(${pt.x} ${pt.y}) rotate(${pt.angle}) scale(${k})`);
     };
+    if (progress) {
+      place(progress.get());
+      return progress.on("change", place);
+    }
     place(0);
     if (reduceMotion || !inView) return;
     const controls = animate(0, 1, {
@@ -127,7 +142,7 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
       onUpdate: place,
     });
     return () => controls.stop();
-  }, [route, hasRoute, reduceMotion, inView, k]);
+  }, [route, hasRoute, reduceMotion, inView, k, progress]);
 
   return (
     <m.svg
@@ -206,6 +221,7 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
       {/* Co-riders on Shared */}
       <AnimatePresence>
         {shared &&
+          !via &&
           RIDER_STOPS.map((t) => {
             const pt = pointAt(route, t);
             return (
@@ -227,7 +243,7 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
       </AnimatePresence>
 
       {/* Ride chip: which ride is on the map (no prices or ETAs, they depend on live conditions) */}
-      {hasRoute && (
+      {hasRoute && !via && (
         <g transform={`translate(${chipX} ${chipY}) scale(${k})`}>
           <rect width="48" height="20" rx="4" className="fill-white stroke-road-edge" strokeWidth={0.8} />
           <text x="6" y="9" className="fill-ink text-[7px] font-bold">
@@ -253,12 +269,36 @@ export function RideMap({ pickup, destination, mode, variant }: RideMapProps) {
         )}
         <circle cx={from.x} cy={from.y} r={4.5} className="fill-white stroke-route" strokeWidth={2.5} />
       </g>
-      <MapTag at={from} label={copy.pickupTag} below={pickupBelow} scale={k} />
+      <MapTag at={from} label={tags?.pickup ?? copy.pickupTag} below={pickupBelow} scale={k} />
+
+      {/* Tag along stop: a rider waits here until the car picks them up */}
+      {via && (
+        <g>
+          <circle cx={NODES[via].x} cy={NODES[via].y} r={4} className="fill-white stroke-route" strokeWidth={2} />
+          <AnimatePresence>
+            {!viaPassed && (
+              <m.g
+                key="waiting"
+                initial={reduceMotion ? false : { scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+                transition={{ type: "spring", stiffness: 420, damping: 18 }}
+                style={{ transformBox: "fill-box", transformOrigin: "center" }}
+              >
+                <circle cx={NODES[via].x - 13} cy={NODES[via].y} r={7} className="fill-white stroke-route" strokeWidth={2.5} />
+                <circle cx={NODES[via].x - 13} cy={NODES[via].y - 1.6} r={1.9} className="fill-ink" />
+                <path d={`M${NODES[via].x - 16.2} ${NODES[via].y + 3.6}a3.2 3.2 0 0 1 6.4 0`} className="fill-ink" />
+              </m.g>
+            )}
+          </AnimatePresence>
+          <MapTag at={NODES[via]} label={tags?.via ?? copy.pickupTag} below={NODES[via].y < 110} scale={k} />
+        </g>
+      )}
 
       {hasRoute && (
         <g>
           <circle cx={to.x} cy={to.y} r={4.5 * k} className="fill-ink stroke-white" strokeWidth={1.5 * k} />
-          <MapTag at={to} label={copy.dropoffTag} below={dropBelow} scale={k} />
+          <MapTag at={to} label={tags?.dropoff ?? copy.dropoffTag} below={dropBelow} scale={k} />
         </g>
       )}
 

@@ -61,7 +61,7 @@ export function edgePoints(e: Edge): Point[] {
   return [NODES[e.from], ...e.via, NODES[e.to]];
 }
 
-function length(points: Point[]): number {
+export function routeLength(points: Point[]): number {
   let total = 0;
   for (let i = 1; i < points.length; i++) {
     total += Math.hypot(points[i].x - points[i - 1].x, points[i].y - points[i - 1].y);
@@ -87,7 +87,7 @@ export function findRoute(from: Area, to: Area): Point[] {
       const next = e.from === current ? e.to : e.from;
       if (!unvisited.has(next)) continue;
       const pts = e.from === current ? edgePoints(e) : [...edgePoints(e)].reverse();
-      const d = dist.get(current)! + length(pts);
+      const d = dist.get(current)! + routeLength(pts);
       if (d < dist.get(next)!) {
         dist.set(next, d);
         prev.set(next, { node: current, points: pts });
@@ -108,7 +108,7 @@ export function findRoute(from: Area, to: Area): Point[] {
 
 /** Position and heading (degrees) at fraction t (0–1) along a polyline. */
 export function pointAt(points: Point[], t: number): { x: number; y: number; angle: number } {
-  const total = length(points) || 1;
+  const total = routeLength(points) || 1;
   let remaining = Math.min(Math.max(t, 0), 1) * total;
   for (let i = 1; i < points.length; i++) {
     const a = points[i - 1];
@@ -148,4 +148,12 @@ export function fitViewBox(points: Point[], aspect: number, minWidth = 130): Vie
   const cx = (minX + maxX) / 2;
   const cy = (minY + maxY) / 2;
   return { x: cx - w / 2, y: cy - h / 2, w, h };
+}
+
+/** Route from `from` to `to` that stops at `via` on the way, plus how far along (0–1) the stop is. */
+export function findRouteVia(from: Area, via: Area, to: Area): { route: Point[]; viaT: number } {
+  const first = findRoute(from, via);
+  const second = findRoute(via, to);
+  const route = [...first, ...second.slice(1)];
+  return { route, viaT: routeLength(first) / (routeLength(route) || 1) };
 }

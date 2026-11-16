@@ -4,6 +4,9 @@ import { SectionLink } from "@/components/ui/SectionLink";
 import { HeroPhone } from "@/components/home/HeroPhone";
 import { RideChooser } from "@/components/home/RideChooser";
 import { RideMap } from "@/components/home/RideMap";
+import { SharedTripPhones } from "@/components/home/SharedTripPhones";
+import { AnimatePresence, m } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 import { home } from "@/content/home";
 import { useAutoMode, useShowcaseRoute } from "@/lib/ride";
@@ -18,6 +21,7 @@ const rise = (i: number) => ({
 
 export function Hero() {
   // State lives here so the chooser and the phone mockup stay in sync. The map tours sample Abuja trips.
+  const reduceMotion = useReducedMotion();
   const { mode, choose, autoplaying, pauseProps } = useAutoMode();
   const { pickup, destination } = useShowcaseRoute();
 
@@ -93,8 +97,23 @@ export function Hero() {
           </div>
         </div>
 
+        {/* Solo: one phone, straight there. Tag along: two riders' phones, one shared car. */}
         <div className="hidden justify-center motion-safe:animate-float-in md:flex md:justify-end lg:justify-center">
-          <HeroPhone pickup={pickup} destination={destination} mode={mode} />
+          <AnimatePresence mode="wait" initial={false}>
+            <m.div
+              key={mode}
+              initial={reduceMotion ? false : { opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -10, scale: 0.98, transition: { duration: 0.2 } }}
+              transition={{ duration: reduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {mode === "shared" ? (
+                <SharedTripPhones active />
+              ) : (
+                <HeroPhone pickup={pickup} destination={destination} mode={mode} />
+              )}
+            </m.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

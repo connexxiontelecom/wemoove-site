@@ -86,7 +86,7 @@ export function RideChooser({ mode, onModeChange, header, headingLevel: Heading 
                     <span
                       key={mode}
                       className="block h-full origin-left rounded-full bg-ink animate-grow"
-                      style={{ animationDuration: `${AUTO_MODE_MS}ms` }}
+                      style={{ animationDuration: `${AUTO_MODE_MS[mode]}ms` }}
                     />
                   </span>
                 )}

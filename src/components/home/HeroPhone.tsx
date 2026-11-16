@@ -1,6 +1,7 @@
 "use client";
 
-import { m } from "framer-motion";
+import { m, type MotionValue } from "framer-motion";
+import type { ReactNode } from "react";
 import { useReducedMotion } from "@/lib/motion";
 import { RideMap } from "@/components/home/RideMap";
 import { Icon } from "@/components/ui/Icon";
@@ -13,25 +14,58 @@ type HeroPhoneProps = {
   pickup: Area;
   destination: Area;
   mode: RideMode;
+  /** Tag along trip with a second pickup on the way (see RideMap). */
+  via?: Area;
+  progress?: MotionValue<number>;
+  viaPassed?: boolean;
+  tags?: { pickup?: string; via?: string; dropoff?: string };
+  /** Address bar text, when it differs from the map's start and end. */
+  address?: [string, string];
+  /** Replaces the "Choose your ride" sheet. */
+  sheet?: ReactNode;
+  /** Replaces the screen-reader description. */
+  label?: string;
+  size?: "lg" | "md";
 };
 
 const copy = home.hero.phone;
 
 /** Phone mockup for tablet and desktop: app status bar, address bar, live map and a "Choose your ride" sheet. */
-export function HeroPhone({ pickup, destination, mode }: HeroPhoneProps) {
+export function HeroPhone({
+  pickup,
+  destination,
+  mode,
+  via,
+  progress,
+  viaPassed,
+  tags,
+  address,
+  sheet,
+  label: labelOverride,
+  size = "lg",
+}: HeroPhoneProps) {
   const reduceMotion = useReducedMotion();
   const hasRoute = pickup !== destination;
   const shared = mode === "shared" && hasRoute;
 
-  const label = hasRoute
+  const label = labelOverride ?? (hasRoute
     ? `App preview: ${copy.rideName} ${shared ? copy.shared : copy.solo} ride from ${pickup} to ${destination}${shared ? `, ${copy.sharedSeats}` : ""}.`
-    : `App preview: pickup at ${pickup}.`;
+    : `App preview: pickup at ${pickup}.`);
 
   return (
-    <div role="img" aria-label={label}>
-      <PhoneFrame>
+    <div {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true })}>
+      <PhoneFrame size={size}>
         <div className="absolute inset-0">
-          <RideMap pickup={pickup} destination={destination} mode={mode} variant="phone" />
+          <RideMap
+            pickup={pickup}
+            destination={destination}
+            mode={mode}
+            variant="phone"
+            via={via}
+            progress={progress}
+            viaPassed={viaPassed}
+            tags={tags}
+          />
         </div>
 
         {/* Status bar and address bar, like the app */}
@@ -51,13 +85,14 @@ export function HeroPhone({ pickup, destination, mode }: HeroPhoneProps) {
             </span>
           </div>
           <div className="mx-3 mt-4 flex items-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-semibold text-ink shadow-md shadow-ink/10">
-            <span className="truncate">{pickup}</span>
+            <span className="truncate">{address ? address[0] : pickup}</span>
             <span className="text-pin">→</span>
-            <span className="truncate">{hasRoute ? destination : copy.sameArea}</span>
+            <span className="truncate">{address ? address[1] : hasRoute ? destination : copy.sameArea}</span>
           </div>
         </div>
 
-        {/* Bottom sheet, styled like "Choose your ride" */}
+        {sheet ?? (
+        /* Bottom sheet, styled like "Choose your ride" */
         <div className="absolute inset-x-0 bottom-0 z-10 rounded-t-3xl bg-white px-4 pb-5 pt-2 shadow-[0_-8px_24px_-6px] shadow-ink/15" aria-hidden="true">
           <div className="mx-auto mb-3 h-1 w-9 rounded-full bg-line" />
           <div className="space-y-1.5">
@@ -105,6 +140,7 @@ export function HeroPhone({ pickup, destination, mode }: HeroPhoneProps) {
             {copy.choose} {shared ? copy.shared : copy.solo}
           </div>
         </div>
+        )}
       </PhoneFrame>
     </div>
   );
