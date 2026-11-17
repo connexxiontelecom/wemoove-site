@@ -1,8 +1,7 @@
 "use client";
 
 import { AnimatePresence, m, useInView } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { TagAlongDemo, walkthroughStage, type Step } from "@/components/home/TagAlongDemo";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { Toggle } from "@/components/ui/Toggle";
 import { home } from "@/content/home";
@@ -37,15 +36,11 @@ export function HowItWorks() {
   const progress = active / last;
 
   // The car drives itself from step to step while the section is on screen.
-  // Tag along: the app walkthrough below drives the steps, so the timer only runs for Solo.
-  const followWalkthrough = mode === "shared";
-  const onWalkthroughStep = useCallback((step: Step) => setActive(walkthroughStage(step)), []);
-
   useEffect(() => {
-    if (followWalkthrough || reduceMotion || hovering || !inView) return;
+    if (reduceMotion || hovering || !inView) return;
     const id = window.setTimeout(() => setActive((a) => (a + 1) % (last + 1)), active === last ? STEP_MS * 1.6 : STEP_MS);
     return () => window.clearTimeout(id);
-  }, [active, hovering, inView, reduceMotion, last, followWalkthrough]);
+  }, [active, hovering, inView, reduceMotion, last]);
 
   const switchMode = (next: RideMode) => {
     setMode(next);
@@ -180,7 +175,6 @@ export function HowItWorks() {
                 key={i}
                 className="relative flex gap-4 lg:block"
                 onMouseEnter={() => {
-                  if (followWalkthrough) return;
                   setHovering(true);
                   setActive(i);
                 }}
@@ -242,14 +236,6 @@ export function HowItWorks() {
             );
           })}
         </ol>
-
-        {/* Tag along: the full app walkthrough, in step with the cards above */}
-        {followWalkthrough && (
-          <div className="mt-16 flex flex-col items-center lg:mt-20">
-            <p className="mb-8 text-center text-sm font-bold text-white/70">{howItWorks.walkthroughLabel}</p>
-            <TagAlongDemo variant="walkthrough" tone="dark" onStepChange={onWalkthroughStep} />
-          </div>
-        )}
       </div>
     </section>
   );

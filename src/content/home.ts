@@ -179,7 +179,6 @@ export const home = {
     eyebrow: "How it works",
     title: "From tap to drop-off in four steps.",
     toggleLabel: "Show steps for",
-    walkthroughLabel: "See it in the app: a rider books a seat, the driver accepts",
     modes: {
       solo: {
         label: "Solo",
