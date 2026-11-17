@@ -646,7 +646,6 @@ export function TagAlongDemo({
   // On a dark section, a faint edge keeps the dark phone bezels from melting into the background.
   const frameEdge =
     tone === "dark" ? "block rounded-[45px] bg-white/20 p-px" : "contents";
-  const captionStrong = tone === "dark" ? "text-white" : "text-ink";
 
   const riderScreen =
     step === "list" || step === "listTap"
@@ -668,9 +667,11 @@ export function TagAlongDemo({
             ? demo.badge.pick
             : demo.badge.browse;
   const done = isAfter(step, "accepted");
-  // Small phones show the driver's app while the request comes in and is accepted.
+  // Small phones have room for one phone, so it cuts between the two apps:
+  // the driver's app while the request comes in and is accepted, and again once the rider is picked
+  // up (driving on to the drop-off). Otherwise the rider's app.
   const mobileWho: "rider" | "driver" =
-    step === "sent" || step === "acceptTap" || step === "accepted"
+    step === "sent" || step === "acceptTap" || step === "accepted" || (step === "drive" && aboard)
       ? "driver"
       : "rider";
   const mobileScreen = mobileWho === "driver" ? driverScreen : riderScreen;
@@ -686,6 +687,19 @@ export function TagAlongDemo({
         className="flex flex-col items-center gap-3 md:hidden"
         aria-hidden="true"
       >
+        {/* Whose app is on screen */}
+        <span className="flex rounded-full bg-white p-1 text-xs font-bold shadow-sm ring-1 ring-line">
+          {(["rider", "driver"] as const).map((who) => (
+            <span
+              key={who}
+              className={`rounded-full px-3 py-1.5 transition-colors duration-300 ${
+                mobileWho === who ? "bg-ink text-white" : "text-muted"
+              }`}
+            >
+              {demo.labels[who]}
+            </span>
+          ))}
+        </span>
         <span className={frameEdge}>
           <PhoneFrame size="md">
             <AnimatePresence initial={false}>
@@ -693,7 +707,9 @@ export function TagAlongDemo({
                 key={`${mobileWho}-${mobileScreen}`}
                 id={`${mobileWho}-${mobileScreen}`}
               >
-                {mobileWho === "driver" ? (
+                {mobileWho === "driver" && mobileScreen === "map" ? (
+                  <TripMap who="driver" progress={progress} aboard={aboard} />
+                ) : mobileWho === "driver" ? (
                   <DriverRequests step={step} />
                 ) : mobileScreen === "list" ? (
                   <RideList tapping={step === "listTap"} />
@@ -715,10 +731,6 @@ export function TagAlongDemo({
             transition={{ duration: 0.2 }}
             className={`flex items-center gap-1.5 text-sm ${caption}`}
           >
-            <span className={`font-bold ${captionStrong}`}>
-              {demo.labels[mobileWho]}
-            </span>
-            <span aria-hidden="true">·</span>
             {done && <Icon name="check" className="h-3.5 w-3.5 text-save" />}
             {badge}
           </m.span>
