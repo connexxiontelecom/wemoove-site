@@ -13,6 +13,13 @@ import { Toggle } from "@/components/ui/Toggle";
 
 const { hero } = home;
 
+/**
+ * What the hero shows on Tag along.
+ * "settled": calm two-phone moment after booking (the full walkthrough lives in How it works).
+ * "walkthrough": the full scripted flow in the hero, as before. Switch back by changing this one value.
+ */
+const HERO_TAG_ALONG: "settled" | "walkthrough" = "settled";
+
 /** Entrance: CSS only, so text is visible before JavaScript finishes loading. 80ms stagger. */
 const rise = (i: number) => ({
   className: "motion-safe:animate-rise",
@@ -119,7 +126,7 @@ export function Hero() {
               transition={{ duration: reduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
               {mode === "shared" ? (
-                <TagAlongDemo />
+                <TagAlongDemo variant={HERO_TAG_ALONG} />
               ) : (
                 <HeroPhone pickup={pickup} destination={destination} mode={mode} size="md" />
               )}

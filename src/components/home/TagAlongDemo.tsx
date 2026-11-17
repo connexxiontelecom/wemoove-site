@@ -24,7 +24,27 @@ const STEPS = [
   { id: "accepted", at: 6.4 },
   { id: "drive", at: 7.6 },
 ] as const;
-type Step = (typeof STEPS)[number]["id"];
+export type Step = (typeof STEPS)[number]["id"];
+
+/** Which of the four How it works steps (0–3) a walkthrough moment belongs to. */
+export function walkthroughStage(step: Step): number {
+  if (step === "list" || step === "listTap") return 0;
+  if (step === "details" || step === "bookTap") return 1;
+  if (step === "drive") return 3;
+  return 2;
+}
+
+type TagAlongDemoProps = {
+  /**
+   * "walkthrough": the full scripted flow (browse → book → driver accepts → pickup), with taps.
+   * "settled": the calm moment after booking: both phones on the map, only the car moving.
+   */
+  variant?: "walkthrough" | "settled";
+  /** Colours for the captions: "dark" when the demo sits on a dark section. */
+  tone?: "light" | "dark";
+  /** Called whenever the walkthrough moves to a new moment (used to sync How it works). */
+  onStepChange?: (step: Step) => void;
+};
 const LOOP = 15.5;
 const DRIVE = { start: 8.0, reachPickup: 10.6, leavePickup: 11.4, arrive: 14.6 };
 /** Reduced motion: one still frame, the car just past the pickup. */
@@ -75,7 +95,7 @@ function Screen({ id, children }: { id: string; children: ReactNode }) {
   return (
     <m.div
       key={id}
-      className="absolute inset-0 flex flex-col bg-white"
+      className="absolute inset-0 flex flex-col bg-white text-ink"
       initial={reduceMotion ? false : { x: "30%", opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { x: "-20%", opacity: 0 }}
@@ -371,10 +391,11 @@ function TripMap({
  * Book ride. Driver: the request comes in → Accept. Then both phones follow the same car to the
  * rider's pickup and on to the drop-off. The whole scene links to the app download.
  */
-export function TagAlongDemo() {
+export function TagAlongDemo({ variant = "walkthrough", tone = "light", onStepChange }: TagAlongDemoProps) {
   const reduceMotion = useReducedMotion();
-  const clock = useMotionValue(reduceMotion ? STILL_AT : 0);
-  const [step, setStep] = useState<Step>(reduceMotion ? "drive" : "list");
+  const settled = variant === "settled";
+  const clock = useMotionValue(reduceMotion ? STILL_AT : settled ? DRIVE.start : 0);
+  const [step, setStep] = useState<Step>(reduceMotion || settled ? "drive" : "list");
   const { viaT } = useMemo(() => findRouteVia(demo.start, demo.pickup, demo.destination), []);
   const progress = useTransform(
     clock,
@@ -396,10 +417,30 @@ export function TagAlongDemo() {
       clock.set(STILL_AT);
       return;
     }
+    if (settled) {
+      // Only the drive: the car heads to the pickup, collects the rider and carries on, on a loop.
+      clock.set(DRIVE.start);
+      const controls = animate(clock, [DRIVE.start, DRIVE.arrive], {
+        duration: DRIVE.arrive - DRIVE.start,
+        ease: "linear",
+        repeat: Infinity,
+        repeatDelay: 1.2,
+      });
+      return () => controls.stop();
+    }
     clock.set(0);
     const controls = animate(clock, LOOP, { duration: LOOP, ease: "linear", repeat: Infinity });
     return () => controls.stop();
-  }, [reduceMotion, clock]);
+  }, [reduceMotion, settled, clock]);
+
+  useEffect(() => {
+    onStepChange?.(step);
+  }, [step, onStepChange]);
+
+  const caption = tone === "dark" ? "text-white/70" : "text-muted";
+  // On a dark section, a faint edge keeps the dark phone bezels from melting into the background.
+  const frameEdge = tone === "dark" ? "block rounded-[45px] bg-white/20 p-px" : "contents";
+  const captionStrong = tone === "dark" ? "text-white" : "text-ink";
 
   const riderScreen = step === "list" || step === "listTap" ? "list" : step === "drive" ? "map" : "details";
   const driverScreen = step === "drive" ? "map" : "requests";
@@ -428,6 +469,7 @@ export function TagAlongDemo() {
     >
       {/* Small phones: one phone that cuts between the rider's and the driver's app */}
       <div className="flex flex-col items-center gap-3 md:hidden" aria-hidden="true">
+        <span className={frameEdge}>
         <PhoneFrame size="md">
           <AnimatePresence initial={false}>
             <Screen key={`${mobileWho}-${mobileScreen}`} id={`${mobileWho}-${mobileScreen}`}>
@@ -443,6 +485,7 @@ export function TagAlongDemo() {
             </Screen>
           </AnimatePresence>
         </PhoneFrame>
+        </span>
         <AnimatePresence mode="wait" initial={false}>
           <m.span
             key={badge}
@@ -450,9 +493,9 @@ export function TagAlongDemo() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6, transition: { duration: 0.12 } }}
             transition={{ duration: 0.2 }}
-            className="flex items-center gap-1.5 text-sm text-muted"
+            className={`flex items-center gap-1.5 text-sm ${caption}`}
           >
-            <span className="font-bold text-ink">{demo.labels[mobileWho]}</span>
+            <span className={`font-bold ${captionStrong}`}>{demo.labels[mobileWho]}</span>
             <span aria-hidden="true">·</span>
             {done && <Icon name="check" className="h-3.5 w-3.5 text-save" />}
             {badge}
@@ -462,6 +505,7 @@ export function TagAlongDemo() {
 
       {/* Rider */}
       <div className="hidden flex-col items-center gap-3 transition-transform duration-300 group-hover:-translate-y-1 md:flex" aria-hidden="true">
+        <span className={frameEdge}>
         <PhoneFrame size="md">
           <AnimatePresence initial={false}>
             <Screen key={riderScreen} id={riderScreen}>
@@ -471,11 +515,13 @@ export function TagAlongDemo() {
             </Screen>
           </AnimatePresence>
         </PhoneFrame>
-        <span className="text-xs font-bold text-muted">{demo.labels.rider}</span>
+        </span>
+        <span className={`text-xs font-bold ${caption}`}>{demo.labels.rider}</span>
       </div>
 
       {/* Driver */}
       <div className="mt-16 hidden flex-col items-center gap-3 transition-transform delay-75 duration-300 group-hover:-translate-y-1 md:flex" aria-hidden="true">
+        <span className={frameEdge}>
         <PhoneFrame size="md">
           <AnimatePresence initial={false}>
             <Screen key={driverScreen} id={driverScreen}>
@@ -484,7 +530,8 @@ export function TagAlongDemo() {
             </Screen>
           </AnimatePresence>
         </PhoneFrame>
-        <span className="text-xs font-bold text-muted">{demo.labels.driver}</span>
+        </span>
+        <span className={`text-xs font-bold ${caption}`}>{demo.labels.driver}</span>
       </div>
 
       {/* Status badge between the phones */}
