@@ -126,6 +126,20 @@ export const home = {
         rider: "Aisha",
         start: "Start",
       },
+      /** Driver's app while driving: navigation banner, stops and the next action. */
+      driverNav: {
+        online: "Online",
+        ride: "Shared ride · 12:30 PM",
+        toPickup: { head: "Head to Wuse", sub: "Pick up Aisha" },
+        toDrop: { head: "Head to Jabi", sub: "Drop off Aisha" },
+        seats: "1 of 2 seats booked",
+        stops: [
+          { place: "Wuse", note: "Pick up Aisha" },
+          { place: "Jabi", note: "Drop-off" },
+        ],
+        arrived: "Arrived at pickup",
+        start: "Start trip to Jabi",
+      },
       badge: {
         browse: "Browsing shared rides",
         pick: "Picking a seat",
