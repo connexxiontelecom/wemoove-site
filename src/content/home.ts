@@ -118,7 +118,7 @@ export const home = {
         accepted: "Request accepted",
       },
       trip: {
-        riderOnWay: "Seat booked · driver on the way",
+        riderOnWay: "Seat booked · pickup in Wuse",
         riderAboard: "You're in · riding together",
         driverOnWay: "Picking up Aisha in Wuse",
         driverAboard: "Aisha aboard · next stop Jabi",

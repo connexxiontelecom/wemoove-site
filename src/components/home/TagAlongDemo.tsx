@@ -259,8 +259,12 @@ function DriverRequests({ step }: { step: Step }) {
               <div className="h-1 rounded-t-2xl bg-brand" />
               <p className="border-b border-line px-4 py-3 text-[13px] font-extrabold">{d.incoming}</p>
               <div className="mx-4 mt-3 rounded-lg bg-paper py-2 text-center text-[10.5px] font-semibold ring-1 ring-line">
-                {demo.pickup} <span className="text-brand-strong">→</span> {demo.destination}
+                {demo.start} <span className="text-brand-strong">→</span> {demo.destination}
               </div>
+              <p className="mx-4 mt-2 flex items-center gap-1.5 text-[10px] text-muted">
+                <Icon name="pin" className="h-3 w-3 text-route" />
+                {demo.details.pickupLabel}
+              </p>
               <div className="flex items-center justify-between px-4 py-3">
                 <span className="flex items-center gap-2">
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-route text-white">
@@ -328,7 +332,7 @@ function TripMap({
       <div className="absolute inset-x-0 top-0 z-10">
         <StatusBar />
         <div className="mx-3 mt-4 flex items-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-semibold text-ink shadow-md shadow-ink/10">
-          <span>{rider ? demo.pickup : demo.start}</span>
+          <span>{demo.start}</span>
           <span className="text-pin">→</span>
           <span>{demo.destination}</span>
         </div>
