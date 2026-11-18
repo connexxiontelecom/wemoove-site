@@ -680,7 +680,7 @@ export function TagAlongDemo({
     <a
       href="#download"
       aria-label={`${demo.linkLabel}. ${demo.preview}`}
-      className="group relative flex shrink-0 items-start justify-center gap-5 rounded-[48px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand lg:origin-center lg:scale-[0.84] lg:gap-0 xl:scale-100"
+      className="group relative flex shrink-0 items-start justify-center gap-5 rounded-[48px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand lg:origin-center lg:scale-[0.8] lg:gap-4 xl:scale-100"
     >
       {/* Small phones: one phone that cuts between the rider's and the driver's app */}
       <div
@@ -764,7 +764,7 @@ export function TagAlongDemo({
 
       {/* Driver */}
       <div
-        className="mt-16 hidden flex-col items-center gap-3 transition-transform delay-75 duration-300 group-hover:-translate-y-1 md:flex lg:-ml-6"
+        className="mt-16 hidden flex-col items-center gap-3 transition-transform delay-75 duration-300 group-hover:-translate-y-1 md:flex"
         aria-hidden="true"
       >
         <span className={frameEdge}>

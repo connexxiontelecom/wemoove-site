@@ -19,7 +19,8 @@ export function PhoneFrame({ children, size = "lg", className = "" }: PhoneFrame
       className={`relative shrink-0 rounded-[44px] bg-night p-2.5 shadow-2xl shadow-ink/40 ring-1 ring-ink/40 ${sizes[size]} ${className}`}
     >
       <div className="absolute left-1/2 top-4 z-20 h-5 w-20 -translate-x-1/2 rounded-full bg-night" aria-hidden="true" />
-      <div className="relative h-full w-full overflow-hidden rounded-[34px] bg-map">{children}</div>
+      {/* clip-path as well as overflow-hidden: Chrome can skip rounded-corner clipping for animated (GPU) children */}
+      <div className="relative h-full w-full overflow-hidden rounded-[34px] bg-map [clip-path:inset(0_round_34px)]">{children}</div>
     </div>
   );
 }
