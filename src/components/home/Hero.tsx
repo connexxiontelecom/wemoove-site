@@ -18,7 +18,7 @@ const { hero } = home;
  * "settled": calm two-phone moment after booking (the full walkthrough lives in How it works).
  * "walkthrough": the full scripted flow in the hero, as before. Switch back by changing this one value.
  */
-const HERO_TAG_ALONG: "settled" | "walkthrough" = "settled";
+const HERO_TAG_ALONG: "settled" | "walkthrough" = "walkthrough";
 
 /** Entrance: CSS only, so text is visible before JavaScript finishes loading. 80ms stagger. */
 const rise = (i: number) => ({

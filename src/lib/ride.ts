@@ -31,7 +31,7 @@ export function useShowcaseRoute(paused = false): { pickup: Area; destination: A
 }
 
 /** How long each ride type stays selected while the chooser plays on its own (Tag along plays one drive in the hero; use 15500 for the full walkthrough). */
-export const AUTO_MODE_MS: Record<RideMode, number> = { solo: 4500, shared: 9000 };
+export const AUTO_MODE_MS: Record<RideMode, number> = { solo: 4500, shared: 15500 };
 
 /**
  * Ride type that flips between Shared and Solo on its own so visitors see both.
