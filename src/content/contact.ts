@@ -74,13 +74,6 @@ export const contact = {
     note: "Nothing is stored on this website. Your message is sent from your own email.",
   },
 
-  emergency: {
-    title: "In an emergency, use SOS or call 112.",
-    body: "On a trip, tap SOS in the app to call 112 and alert WeMoove with your live location. Or dial 112 directly.",
-    cta: "Call 112",
-    href: "tel:112",
-  },
-
   office: {
     eyebrow: "Our office",
     title: "Come say hello.",

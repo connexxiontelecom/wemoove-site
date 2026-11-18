@@ -17,7 +17,7 @@ export const safety = {
   pageName: "Safety",
   meta: {
     description:
-      "How WeMoove keeps you safe on every ride: verified drivers, driver and car details before pickup, live trip sharing, emergency SOS, trusted contacts, in-app reporting and round-the-clock support.",
+      "How WeMoove keeps you safe on every ride: verified drivers, driver and car details before pickup, live trip sharing, a panic button, in-app reporting and round-the-clock support.",
   },
 
   hero: {
@@ -29,7 +29,7 @@ export const safety = {
       { label: "Before you ride", href: "#before" },
       { label: "On the way", href: "#during" },
       { label: "After you arrive", href: "#after" },
-      { label: "Emergency SOS", href: "#sos" },
+      { label: "Panic button", href: "#sos" },
       { label: "Safety tips", href: "#tips" },
       { label: "Get help", href: "#help" },
     ],
@@ -69,7 +69,7 @@ export const safety = {
         body: "Follow your trip on the map and let the people you trust follow along with you.",
         points: [
           { icon: "share", title: "Share your ride details", body: "Send your live trip to family or friends so they can follow you to your destination." },
-          { icon: "sos", title: "Emergency SOS", body: "One tap calls 112 and alerts WeMoove with your live location." },
+          { icon: "sos", title: "Panic button", body: "Hold SOS to alert our safety team, who can follow your trip live." },
           { icon: "flag", title: "Report the ride", body: "If anything feels wrong, report it from the trip screen and our team will step in." },
         ],
         screenshot: {
@@ -95,26 +95,53 @@ export const safety = {
   },
 
   sos: {
-    eyebrow: "Emergency SOS",
-    title: "If something goes wrong, one tap gets help.",
-    body: "SOS sits at the top of the Safety screen in the app, on every trip.",
-    steps: [
-      { icon: "phone", title: "Calls 112", body: "Nigeria's free emergency line for police, fire and ambulance." },
-      { icon: "pin", title: "Alerts WeMoove", body: "Our team gets your live location so we can step in." },
-      { icon: "user", title: "Tells your trusted contacts", body: "The people you've chosen are notified when you use SOS." },
-    ] as { icon: IconName; title: string; body: string }[],
-    also: "On the same screen: share your live trip, manage trusted contacts and read safety tips.",
-    screenshot: {
-      src: "/assets/img/app/safety-sos.png",
-      alt: "The WeMoove Safety screen: an Emergency (SOS) button that calls 112 and alerts WeMoove with your live location, plus Share my trip, Trusted contacts and Safety tips",
-    },
+    eyebrow: "Panic button",
+    title: "If something feels wrong, hold SOS.",
+    body: "Every trip has a panic button. Open the section for you to see what happens when it's used.",
+    groups: [
+      {
+        id: "passengers",
+        label: "For passengers",
+        summary: "Hold the SOS button on your trip screen to alert our safety team.",
+        steps: [
+          { icon: "sos", title: "Hold SOS", body: "The red SOS button sits on your trip screen. Hold it for a moment, so it can't go off by accident." },
+          { icon: "shieldCheck", title: "Panic mode turns on", body: "Our safety team is alerted straight away." },
+          { icon: "map", title: "We follow your trip live", body: "The team can see your trip live and hear what's happening through your phone. Stay online." },
+        ],
+        screens: [
+          { src: "/assets/img/app/panic/passenger-idle.jpg", label: "Hold in an emergency", alt: "Passenger trip screen with a red SOS button and the hint: Hold in an emergency" },
+          { src: "/assets/img/app/panic/passenger-holding.jpg", label: "Keep holding", alt: "The SOS button filling up while held, with the message: Keep holding, 1 second" },
+          { src: "/assets/img/app/panic/passenger-activated.jpg", label: "Panic mode on", alt: "Panic mode activated: our safety team has been alerted, can see your trip live and hear what's happening through your phone" },
+        ],
+      },
+      {
+        id: "drivers",
+        label: "For drivers",
+        summary: "When panic mode is on, the trip is locked until the destination.",
+        steps: [
+          { icon: "flag", title: "Ending the trip is paused", body: "While panic mode is on, the driver can't end the trip or go offline." },
+          { icon: "map", title: "Continue to the destination", body: "The app keeps the driver on the route to the passenger's drop-off." },
+          { icon: "phone", title: "Support steps in", body: "WeMoove support contacts the driver if needed." },
+        ],
+        screens: [
+          { src: "/assets/img/app/panic/driver-locked.jpg", label: "End trip locked", alt: "Driver trip screen with the end trip slider locked: Ending trip is unavailable" },
+          { src: "/assets/img/app/panic/driver-locked-sheet.jpg", label: "Why it's locked", alt: "You can't end this trip right now: ending the trip and going offline are paused for this ride. Continue to the destination. WeMoove support will contact you if needed." },
+        ],
+      },
+    ] as {
+      id: string;
+      label: string;
+      summary: string;
+      steps: { icon: IconName; title: string; body: string }[];
+      screens: { src: string; label: string; alt: string }[];
+    }[],
   },
 
   shared: {
     eyebrow: "Tagging along?",
     title: "Shared rides get the same protection.",
     body: "On a Shared ride, you book a seat on a ride heading your way. Every rider books through the app, so your driver and WeMoove know who is in the car at every stop.",
-    points: ["Same verified driver checks", "Share your trip, use SOS and report a ride, just like Solo", "Ratings for every rider after the trip"],
+    points: ["Same verified driver checks", "Share your trip, use the panic button and report a ride, just like Solo", "Ratings for every rider after the trip"],
   },
 
   tips: {
@@ -129,7 +156,7 @@ export const safety = {
           "Ask the driver who they are picking up, instead of saying your name first.",
           "Wear your seat belt, even on short trips.",
           "Share your trip with someone you trust.",
-          "Add trusted contacts so they're alerted if you ever use SOS.",
+          "Know where the SOS button is on your trip screen before you need it.",
           "If something feels off, don't get in. Report it in the app.",
         ],
       },
@@ -153,12 +180,6 @@ export const safety = {
     body: "Questions or safety concerns, during or after a trip: our support team is here to help.",
     callLabel: "Call support",
     emailLabel: "Email us",
-    emergency: {
-      title: "In an emergency, use SOS or call 112.",
-      body: "On a trip, tap SOS in the app: it calls 112 and alerts WeMoove with your live location. You can also dial 112 directly, Nigeria's free emergency number.",
-      cta: "Call 112",
-      href: "tel:112",
-    },
   },
 
   cta: {

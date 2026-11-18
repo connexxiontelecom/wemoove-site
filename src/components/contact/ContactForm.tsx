@@ -5,7 +5,7 @@ import { Icon } from "@/components/ui/Icon";
 import { contact } from "@/content/contact";
 import { site } from "@/content/site";
 
-const { form, emergency } = contact;
+const { form } = contact;
 const field =
   "mt-1.5 block min-h-12 w-full rounded-xl border border-line bg-white px-3.5 font-medium text-ink placeholder:text-muted/70 focus-visible:border-ink";
 
@@ -35,20 +35,6 @@ export function ContactForm() {
           </h2>
           <p data-reveal className="mt-4 text-lg text-white/80">{form.body}</p>
 
-          <div data-reveal className="mt-10 rounded-3xl bg-pin p-6 sm:p-8">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-pin">
-              <Icon name="sos" className="h-6 w-6" />
-            </span>
-            <h3 className="mt-5 text-xl font-extrabold">{emergency.title}</h3>
-            <p className="mt-2 text-white">{emergency.body}</p>
-            <a
-              href={emergency.href}
-              className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-5 font-semibold text-ink transition-[scale] active:scale-[0.97]"
-            >
-              <Icon name="phone" />
-              {emergency.cta}
-            </a>
-          </div>
         </div>
 
         <form data-reveal="right" onSubmit={onSubmit} className="rounded-3xl bg-white p-6 text-ink shadow-2xl shadow-ink/40 sm:p-8">

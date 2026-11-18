@@ -323,21 +323,21 @@ export const home = {
         icon: "share",
       },
       {
-        title: "Emergency SOS",
-        body: "One tap calls 112 and alerts WeMoove with your live location.",
+        title: "Panic button",
+        body: "Hold SOS on your trip screen and our safety team follows your trip live.",
         icon: "sos",
       },
       {
-        title: "Trusted contacts",
-        body: "Pick the people who get notified when you use SOS.",
-        icon: "user",
+        title: "Rated rides",
+        body: "Riders and drivers rate each other after every trip, keeping the community accountable.",
+        icon: "star",
       },
     ] satisfies SafetyFeature[],
     /** [APP_SCREENSHOT] slots: set `src` to a real screenshot in /public to replace a placeholder. */
     screenshots: [
       {
-        alt: "The WeMoove Safety screen: an Emergency (SOS) button that calls 112 and alerts WeMoove with your live location, plus Share my trip, Trusted contacts and Safety tips",
-        src: "/assets/img/app/safety-sos.png",
+        alt: "Panic mode activated on a WeMoove trip: our safety team has been alerted and can see the trip live",
+        src: "/assets/img/app/panic/passenger-activated.jpg",
       },
       {
         alt: "Driver found screen showing the driver's name, rating, car and plate number",
