@@ -38,7 +38,7 @@ export const ride = {
   safety: {
     title: "Safe on every ride, Solo or Shared.",
     link: "More about safety",
-    href: "/safety",
+    href: "/safety/passengers",
     points: [
       { icon: "user", title: "Know your driver", body: "Name, photo, rating, car and plate number before pickup." },
       { icon: "share", title: "Share your trip", body: "Let someone you trust follow your ride live." },

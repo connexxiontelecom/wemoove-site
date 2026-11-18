@@ -1,9 +1,8 @@
 import { Icon } from "@/components/ui/Icon";
-import { safety } from "@/content/safety";
+import type { SafetyPageContent } from "@/content/safety";
 
-const { tips } = safety;
-
-export function SafetyTips() {
+export function SafetyTips({ content }: { content: SafetyPageContent }) {
+  const { tips } = content;
   return (
     <section id="tips" aria-labelledby="tips-title" className="scroll-mt-24 bg-white">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
@@ -14,7 +13,7 @@ export function SafetyTips() {
           </h2>
         </div>
 
-        <div data-reveal-stagger className="mt-12 grid gap-6 md:grid-cols-2">
+        <div data-reveal-stagger className={`mt-12 grid gap-6 ${tips.groups.length > 1 ? "md:grid-cols-2" : ""}`}>
           {tips.groups.map((group, g) => (
             <div key={group.title} className={`rounded-3xl p-6 sm:p-8 ${g === 0 ? "bg-night text-white" : "border border-line bg-paper"}`}>
               <h3 className="flex items-center gap-3 text-xl font-bold">
@@ -23,7 +22,7 @@ export function SafetyTips() {
                 </span>
                 {group.title}
               </h3>
-              <ol className="mt-6 grid gap-4">
+              <ol className={`mt-6 grid gap-4 ${tips.groups.length === 1 ? "md:grid-cols-2 md:gap-x-10" : ""}`}>
                 {group.tips.map((tip, i) => (
                   <li key={tip} className="flex gap-4">
                     <span

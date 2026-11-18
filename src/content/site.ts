@@ -5,7 +5,8 @@ import type { IconName } from "@/components/ui/Icon";
  * Values in [SQUARE_BRACKETS] are PLACEHOLDERS that must be replaced before launch.
  */
 
-export type NavLink = { label: string; href: string };
+/** `children` turns the item into a dropdown; `href` is then the section it belongs to. */
+export type NavLink = { label: string; href: string; children?: { label: string; href: string; description?: string }[] };
 export type FooterItem = { label: string; href?: string; comingSoon?: boolean };
 /** `href: null` hides the icon until the account exists. */
 export type SocialLink = { label: string; href: string | null; icon: IconName };
@@ -45,7 +46,14 @@ export const site = {
   nav: [
     { label: "Ride", href: "/ride" },
     { label: "Drive & Earn", href: "/drive" },
-    { label: "Safety", href: "/safety" },
+    {
+      label: "Safety",
+      href: "/safety",
+      children: [
+        { label: "For passengers", href: "/safety/passengers", description: "Panic button, trip sharing and tips" },
+        { label: "For drivers", href: "/safety/drivers", description: "Know who you pick up, panic mode, tips" },
+      ],
+    },
     { label: "About", href: "/about" },
   ] satisfies NavLink[],
 
@@ -76,7 +84,8 @@ export const site = {
       {
         title: "Support",
         items: [
-          { label: "Safety", href: "/safety" },
+          { label: "Passenger safety", href: "/safety/passengers" },
+          { label: "Driver safety", href: "/safety/drivers" },
           { label: "Privacy Policy", href: "/privacy-policy" },
           { label: "Contact", href: "/contact" },
         ],
@@ -85,5 +94,5 @@ export const site = {
   },
 
   /** Every public page, used for sitemap.xml. */
-  routes: ["/", "/ride", "/drive", "/about", "/how-it-works", "/our-offerings", "/careers", "/contact", "/safety", "/privacy-policy"],
+  routes: ["/", "/ride", "/drive", "/about", "/how-it-works", "/our-offerings", "/careers", "/contact", "/safety/passengers", "/safety/drivers", "/privacy-policy"],
 } as const;

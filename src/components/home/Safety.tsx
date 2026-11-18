@@ -23,7 +23,7 @@ export function Safety() {
             ))}
           </ul>
 
-          <Link href="/safety" className="mt-8 inline-flex min-h-11 items-center font-bold text-white underline underline-offset-4">
+          <Link href="/safety/passengers" className="mt-8 inline-flex min-h-11 items-center font-bold text-white underline underline-offset-4">
             {safety.link} →
           </Link>
         </div>

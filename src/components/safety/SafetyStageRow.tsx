@@ -33,12 +33,14 @@ export function SafetyStageRow({ stage, index }: SafetyStageRowProps) {
         </ul>
       </div>
 
-      <div data-reveal="zoom" className={`relative mx-auto ${flip ? "md:order-1" : ""}`}>
-        <div className="absolute inset-6 -z-10 rounded-full bg-brand/30 blur-3xl" aria-hidden="true" />
-        <PhoneFrame size="md">
-          <Image src={stage.screenshot.src} alt={stage.screenshot.alt} fill sizes="262px" className="object-cover object-top" />
-        </PhoneFrame>
-      </div>
+      {stage.screenshot && (
+        <div data-reveal="zoom" className={`relative mx-auto ${flip ? "md:order-1" : ""}`}>
+          <div className="absolute inset-6 -z-10 rounded-full bg-brand/30 blur-3xl" aria-hidden="true" />
+          <PhoneFrame size="md">
+            <Image src={stage.screenshot.src} alt={stage.screenshot.alt} fill sizes="262px" className="object-cover object-top" />
+          </PhoneFrame>
+        </div>
+      )}
     </li>
   );
 }

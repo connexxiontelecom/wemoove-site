@@ -1,7 +1,5 @@
 import { Icon } from "@/components/ui/Icon";
-import { safety } from "@/content/safety";
-
-const { shared } = safety;
+import type { SafetyPageContent } from "@/content/safety";
 const RIDERS = [
   { x: 70, y: 98 },
   { x: 182, y: 58 },
@@ -9,7 +7,7 @@ const RIDERS = [
 ];
 
 /** Shared rides callout with a small route diagram: one car, riders picked up along the way. */
-export function SafetyShared() {
+export function SafetyShared({ shared }: { shared: NonNullable<SafetyPageContent["shared"]> }) {
   return (
     <section aria-labelledby="shared-title" className="bg-brand/15">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 md:grid-cols-2 lg:px-8 lg:py-20">

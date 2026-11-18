@@ -91,7 +91,7 @@ export const drive = {
     title: "Safety works both ways.",
     body: "Riders book through the app, trips are tracked from pickup to drop-off, and you can report any rider who makes you feel unsafe.",
     link: "How we keep everyone safe",
-    href: "/safety",
+    href: "/safety/drivers",
   },
 
   faq: {

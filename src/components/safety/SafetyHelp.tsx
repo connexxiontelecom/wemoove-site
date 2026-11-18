@@ -1,11 +1,11 @@
 import { Icon } from "@/components/ui/Icon";
-import { safety } from "@/content/safety";
+import type { SafetyPageContent } from "@/content/safety";
 import { site } from "@/content/site";
 
-const { help } = safety;
 const action = "inline-flex min-h-12 items-center gap-2 rounded-full px-5 font-semibold transition-colors";
 
-export function SafetyHelp() {
+export function SafetyHelp({ content }: { content: SafetyPageContent }) {
+  const { help } = content;
   return (
     <section id="help" aria-labelledby="help-title" className="scroll-mt-24 bg-paper">
       <div data-reveal-stagger className="mx-auto max-w-4xl px-6 py-20 lg:px-8 lg:py-24">

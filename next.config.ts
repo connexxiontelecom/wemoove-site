@@ -16,11 +16,13 @@ const nextConfig: NextConfig = {
       },
     },
   },
-  // Every URL from the Express site is kept as-is, so no redirects are needed yet.
-  // If a URL ever changes, add a permanent redirect here, for example:
-  // { source: "/old-path", destination: "/new-path", permanent: true }
+  // Every other URL from the Express site is kept as-is. Add a permanent redirect here if one changes.
   async redirects() {
-    return [];
+    return [
+      // Safety is split into /safety/passengers and /safety/drivers. Temporary (307), so /safety
+      // can become an overview page later without browsers having cached the redirect.
+      { source: "/safety", destination: "/safety/passengers", permanent: false },
+    ];
   },
 };
 

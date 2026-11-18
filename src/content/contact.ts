@@ -56,7 +56,7 @@ export const contact = {
         icon: "shieldCheck",
         title: "A safety concern",
         body: "Report the ride in the app so we can act. See how we keep every trip safe.",
-        link: { label: "Safety at WeMoove", href: "/safety" },
+        link: { label: "Safety at WeMoove", href: "/safety/passengers" },
       },
     ] satisfies ContactTopic[],
   },
