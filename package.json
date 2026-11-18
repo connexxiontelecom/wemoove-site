@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
     "start": "node .next/standalone/server.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:static": "STATIC_EXPORT=1 next build"
   },
   "dependencies": {
     "framer-motion": "^14.13.0",

@@ -17,17 +17,24 @@ are placeholders that must be replaced before launch.
 
 ## Production build and cPanel deployment
 
-`npm run build` creates a self-contained server in `.next/standalone/` (with `public/` and
-static files copied in). `npm start` runs it locally.
+The cPanel server only has Node.js 16, and Next.js 16 needs 20.9+, so the live site is deployed as a
+**static export**: plain HTML/CSS/JS that Apache serves directly, with no Node.js app.
 
-On cPanel ("Setup Node.js App"):
+```bash
+NEXT_PUBLIC_SITE_URL=https://wemooveinc.com npm run build:static   # writes out/
+cd out && zip -qr ../wemoove-site-static.zip .                       # includes .htaccess
+```
 
-1. Run `npm run build` (locally or on the server).
-2. Upload the contents of `.next/standalone/` as the application root.
-3. Set the application startup file to `server.js`.
-4. Add `NEXT_PUBLIC_SITE_URL` (the live domain, e.g. https://example.com) as an environment variable.
-   Note that `NEXT_PUBLIC_*` values are baked in at build time, so set it before building too.
-5. Restart the app. cPanel sets `PORT` automatically.
+Upload the zip to the domain's document root in cPanel File Manager and extract it. `public/.htaccess`
+(copied into `out/`) handles https, the `/safety` redirect, trailing slashes, caching and the 404 page.
+For the main domain, unregister the old Express app in **Application Manager** first, or Passenger keeps
+answering instead of Apache.
+
+What the static export can't do: on-the-fly image resizing (images are served as-is) and server
+redirects (done in `.htaccess` instead). The footer year is set at build time, so rebuild each January.
+
+`npm run build` still makes the Node.js server build (`.next/standalone/`, start with `node server.js`),
+used by Vercel and by any host with Node 20.9+.
 
 ## Brand assets
 

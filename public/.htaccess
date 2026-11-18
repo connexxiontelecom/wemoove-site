@@ -1,0 +1,38 @@
+# Apache rules for the static export on cPanel (STATIC_EXPORT=1 npm run build:static).
+# Ignored by the Node.js server build and by Vercel.
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Send http:// and www. to https://wemooveinc.com
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+  # Safety is split into passengers and drivers (temporary, like the server build's redirect).
+  RewriteRule ^safety/?$ /safety/passengers/ [R=302,L]
+
+  # Pages live in folders (about/index.html): add the trailing slash, e.g. /about -> /about/
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.*[^/])$ /$1/ [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Built JS/CSS have hashed names, so they can be cached for a year.
+  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  # Pages should always be checked for a newer version.
+  <FilesMatch "\.(html|txt)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/javascript application/json image/svg+xml
+</IfModule>
